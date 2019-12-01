@@ -1,5 +1,5 @@
 /// <reference path="../../typings/index.d.ts" />
 
-class Player {
+class Handler {
     
 }
