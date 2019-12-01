@@ -1,5 +1,3 @@
-// import * as THREE from './js/three.js';
-// /home/durianpeople/Project/Web/FP-GRAFKOM/Frontend/typings/index.d.ts
 /// <reference path="./typings/index.d.ts" />
 /// <reference path="js/objects/Drawable.js" />
 /// <reference path="js/objects/Player.js" />
