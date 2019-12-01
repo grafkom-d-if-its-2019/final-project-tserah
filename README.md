@@ -1,6 +1,8 @@
- 
-
 # Snake 3D
+
+## Diagram
+
+![Main](Main.jpg)
 
 ## Developer notes
 
