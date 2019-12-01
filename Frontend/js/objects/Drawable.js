@@ -16,7 +16,6 @@ class Drawable {
     getMesh() {
         return new THREE.Mesh(this.geometry, this.material);
     }
-    ThetaH
 }
 
 var a = new Drawable();
