@@ -1,10 +1,5 @@
+/// <reference path="../../typings/index.d.ts" />
 
-
-/**
- * @typedef {Object} THREE
- * @typedef {Object} THREE.Material
- * @typedef {Object} THREE.Geometry
- */
 class Drawable {
     /**
      * 
