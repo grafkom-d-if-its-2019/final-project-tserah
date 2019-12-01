@@ -17,6 +17,3 @@ class Drawable {
         return new THREE.Mesh(this.geometry, this.material);
     }
 }
-
-var a = new Drawable();
-a.mater
