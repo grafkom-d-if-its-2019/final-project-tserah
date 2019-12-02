@@ -25,7 +25,7 @@ class Handler {
      * @param {Drawable} drawable 
      */
     static removeDrawable(drawable) { // TODO: implement
-        let selectedMesh = this.scene.getObjectById(drawable.id);
+        var selectedMesh = this.scene.getObjectById(drawable.id);
         this.scene.remove(selectedMesh);
     }
 

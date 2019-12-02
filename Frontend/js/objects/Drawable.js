@@ -17,6 +17,7 @@ class Drawable extends THREE.Mesh {
         /** @type {THREE.Mesh} */
         super(geometry, material);
         this.name = uuidv4();
+        Handler.registerDrawable(this);
     }
 
     /**
@@ -33,5 +34,11 @@ class Drawable extends THREE.Mesh {
      */
     onCollide(drawable) { // Implementasikan fungsi ini di child
         throw Error("Unimplemented function!");
+    }
+
+
+    destroy() {
+        Handler.removeDrawable(this);
+        return null;
     }
 }

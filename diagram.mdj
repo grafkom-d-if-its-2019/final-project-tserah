@@ -2130,13 +2130,30 @@
 											"height": 13,
 											"text": "+onCollide(drawable)",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFuxr9mbDS5aDY=",
+											"_parent": {
+												"$ref": "AAAAAAFuvZCk++alXy4="
+											},
+											"model": {
+												"$ref": "AAAAAAFuxr9mFzSw4YA="
+											},
+											"font": "Arial;13;0",
+											"left": 693,
+											"top": 770,
+											"width": 193.9970703125,
+											"height": 13,
+											"text": "+destroy()",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 688,
 									"top": 720,
 									"width": 203.9970703125,
-									"height": 53
+									"height": 68
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -4190,6 +4207,15 @@
 								}
 							],
 							"isAbstract": true
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFuxr9mFzSw4YA=",
+							"_parent": {
+								"$ref": "AAAAAAFuvZCk+uacT/4="
+							},
+							"name": "destroy",
+							"isLeaf": true
 						}
 					],
 					"isAbstract": true
