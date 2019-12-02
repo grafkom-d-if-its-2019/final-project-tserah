@@ -5,11 +5,14 @@
 
 class Handler {
 
+    static collisionSemaphore;
+
     /** @type {THREE.Scene} */
     static scene;
 
     static init() {
         this.scene = new THREE.Scene();
+        this.collisionSemaphore = false;
     }
 
     /**
@@ -30,7 +33,7 @@ class Handler {
     }
 
     /**
-     * @returns {Drawable}
+     * @returns {Drawable[]}
      */
     static getDrawables() {
         return this.scene.children;
@@ -47,5 +50,19 @@ class Handler {
      */
     static animate(renderer, camera) {
         new Drawer(renderer, camera);
+    }
+
+    static checkCollision() {
+        if (!this.collisionSemaphore) {
+            this.collisionSemaphore = true;
+            this.getDrawables().forEach(drawable => {
+                this.getDrawables().forEach(against => {
+                    if (drawable!==against) {
+                        drawable.collideWith(against);
+                    }
+                });
+            });
+            this.collisionSemaphore = false;
+        }
     }
 }

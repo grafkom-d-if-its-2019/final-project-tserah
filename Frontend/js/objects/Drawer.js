@@ -16,6 +16,7 @@ class Drawer {
 
     animate() {
         requestAnimationFrame(this.animate);
+        Handler.checkCollision();
         this.renderer.render(Handler.scene, this.camera);
     }
 

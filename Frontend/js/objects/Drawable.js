@@ -25,7 +25,20 @@ class Drawable extends THREE.Mesh {
      * @param {Drawable} drawable 
      */
     collideWith(drawable) { // TODO: implement
+        this.geometry.computeBoundingBox();
+        drawable.geometry.computeBoundingBox();
+        this.updateMatrixWorld();
+        drawable.updateMatrixWorld();
 
+        var box1 = this.geometry.boundingBox.clone();
+        box1.applyMatrix4(this.matrixWorld);
+      
+        var box2 = drawable.geometry.boundingBox.clone();
+        box2.applyMatrix4(drawable.matrixWorld);
+
+        if (box1.intersectsBox(box2)) {
+            this.onCollide(drawable);
+        }
     }
 
     /**
