@@ -39,7 +39,7 @@ class Handler {
         return this.scene.children;
     }
 
-    static generateFood() {
+    static generateFood() { // nunggu food
         this.drawables.push(new Food(new Positioning())); // TODO: implement
     }
 
