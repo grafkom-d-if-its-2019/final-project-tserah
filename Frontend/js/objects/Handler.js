@@ -5,9 +5,6 @@
 
 class Handler {
 
-    /** @type {Drawable[]} */
-    static drawables = new Array();
-
     /** @type {THREE.Scene} */
     static scene;
 
@@ -20,7 +17,6 @@ class Handler {
      * @param {Drawable} drawable 
      */
     static registerDrawable(drawable) {
-        this.drawables.push(drawable);
         this.scene.add(drawable);
     }
 
@@ -29,11 +25,15 @@ class Handler {
      * @param {Drawable} drawable 
      */
     static removeDrawable(drawable) { // TODO: implement
-        let index = this.drawables.indexOf(drawable);
-        if (index !== -1) this.drawables.splice(index, 1);
         let selectedMesh = this.scene.getObjectById(drawable.id);
         this.scene.remove(selectedMesh);
+    }
 
+    /**
+     * @returns {Drawable}
+     */
+    static getDrawables() {
+        return this.scene.children;
     }
 
     static generateFood() {
