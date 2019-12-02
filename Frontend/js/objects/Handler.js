@@ -24,8 +24,8 @@ class Handler {
         this.scene.add(drawable);
     }
 
-    static removeDrawable(drawable) {
-        
+    static removeDrawable(drawable) { // TODO: implement
+
     }
 
     static generateFood() {
