@@ -30,8 +30,8 @@ class Snake {
                 bodyMember.rotateZ(this.player.positioning.orientation - this._positioning_stack[index]);
                 this._positioning_stack[index] = this.player.positioning;
             } else {
-                bodyMember.position.x = this._positioning_stack[index-1];
-                bodyMember.position.y = this._positioning_stack[index-1];
+                bodyMember.position.x = this._positioning_stack[index-1].x;
+                bodyMember.position.y = this._positioning_stack[index-1].y;
                 bodyMember.rotateZ(this._positioning_stack[index-1] - this._positioning_stack[index]);
                 this._positioning_stack[index] = this._positioning_stack[index-1];
             }
@@ -39,6 +39,20 @@ class Snake {
     }
 
     appendBody() {
-
+        this.body.push(new SnakeBody(this));
+        this._positioning_stack = new Array();
+        last_index = this._positioning_stack.length - 1;
+        position = new Positioning(this._positioning_stack[last_index].x, this._positioning_stack[last_index].y);
+        this._positioning_stack.push(position);
     }
+
+    onCollideWithFood(){
+        
+    }
+
+    onCollideWithSnake(){
+        
+    }
+
+    
 }
