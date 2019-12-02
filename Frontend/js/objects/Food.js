@@ -8,6 +8,6 @@ class Food extends Drawable {
      * @param {Positioning} positioning 
      */
     constructor(positioning) {
-        // super(something, something);
+        super(null, null); // TODO: implement
     }
 }

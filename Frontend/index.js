@@ -16,5 +16,14 @@ camera.position.z = 5;
 
 var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x00ff00}));
 
-// Handler.registerDrawable(testDrawable);
-// Handler.animate(renderer, camera);
+Handler.init();
+Handler.registerDrawable(testDrawable);
+Handler.animate(renderer, camera);
+
+function rotate() {
+    testDrawable.rotateZ(20);
+}
+
+function remove() {
+    Handler.removeDrawable(testDrawable);
+}

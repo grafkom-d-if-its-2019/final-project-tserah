@@ -9,6 +9,6 @@ class SnakeBody extends Drawable {
      */
     constructor(snake) {
         this.snake = snake;
-        // super(something, something);
+        super(null, null); // TODO: implement
     }
 }

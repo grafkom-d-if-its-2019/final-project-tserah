@@ -10,6 +10,7 @@ class Drawer {
     constructor(renderer, camera) {
         this.renderer = renderer;
         this.camera = camera;
+        this.animate = this.animate.bind(this);
         this.animate();
     }
 
@@ -17,4 +18,5 @@ class Drawer {
         requestAnimationFrame(this.animate);
         this.renderer.render(Handler.scene, this.camera);
     }
+
 }

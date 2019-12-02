@@ -24,7 +24,15 @@ class Handler {
         this.scene.add(drawable);
     }
 
+    /**
+     * 
+     * @param {Drawable} drawable 
+     */
     static removeDrawable(drawable) { // TODO: implement
+        let index = this.drawables.indexOf(drawable);
+        if (index !== -1) this.drawables.splice(index, 1);
+        let selectedMesh = this.scene.getObjectById(drawable.id);
+        this.scene.remove(selectedMesh);
 
     }
 

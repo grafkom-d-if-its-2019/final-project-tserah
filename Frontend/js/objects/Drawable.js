@@ -13,7 +13,8 @@ class Drawable extends THREE.Mesh {
      * @param {THREE.Material} material 
      * @param {THREE.Geometry|THREE.BufferGeometry} geometry 
      */
-    construct(geometry, material) {
+    constructor(geometry, material) {
+        /** @type {THREE.Mesh} */
         super(geometry, material);
         this.name = uuidv4();
     }
