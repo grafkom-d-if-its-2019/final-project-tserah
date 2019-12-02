@@ -7,13 +7,6 @@ class Drawable {
      * @param {THREE.Geometry} geometry 
      */
     construct(material, geometry) {
-        /** @type {THREE.Material} */
-        this.material = material;
-        /** @type {THREE.Geometry} */
-        this.geometry = geometry;
-    }
-
-    getMesh() {
-        return new THREE.Mesh(this.geometry, this.material);
+        this.mesh = new THREE.Mesh(geometry, material);
     }
 }

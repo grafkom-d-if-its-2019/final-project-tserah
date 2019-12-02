@@ -16,3 +16,4 @@ Kalau mau autocomplete dari kelas lain, tambahkan line di atas dan ganti path-ny
 
 Usahakan setiap class, method, attribute, dan variabel didokumentasikan dengan standar JSDoc (https://devdocs.io/jsdoc/)
 
+Kalau ada perubahan, silahkan ubah readme ini.
