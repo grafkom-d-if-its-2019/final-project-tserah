@@ -4,32 +4,40 @@
 /// <reference path="./Food.js" />
 
 class Handler {
-    /** @type {Player[]} */
-    static players = new Array();
-
-    /** @type {Food[]} */
-    static foods = new Array();
 
     /** @type {Drawable[]} */
-    static otherDrawables = new Array();
+    static drawables = new Array();
+
+    /** @type {THREE.Scene} */
+    static scene;
+
+    static init() {
+        this.scene = new THREE.Scene();
+    }
 
     /**
      * 
      * @param {Drawable} drawable 
      */
     static registerDrawable(drawable) {
-        this.otherDrawables.push(drawable);
+        this.drawables.push(drawable);
+        this.scene.add(drawable);
+    }
+
+    static removeDrawable(drawable) {
+        
+    }
+
+    static generateFood() {
+        this.drawables.push(new Food(new Positioning())); // TODO: implement
     }
 
     /**
      * 
-     * @param {Player} player 
+     * @param {THREE.WebGLREnderer} renderer 
+     * @param {THREE.Camera} camera 
      */
-    static registerPlayer(player) {
-        this.players.push(player);
-    }
-
-    static generateFood() {
-        this.foods.push(new Food(new Positioning())); // TODO: implement
+    static animate(renderer, camera) {
+        new Drawer(renderer, camera);
     }
 }
