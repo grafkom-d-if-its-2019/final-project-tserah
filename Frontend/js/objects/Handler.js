@@ -33,6 +33,8 @@ class Handler {
     }
 
     /**
+     * Ambil semua Drawable yang didaftarkan ke Handler
+     * 
      * @returns {Drawable[]}
      */
     static getDrawables() {
@@ -52,7 +54,7 @@ class Handler {
         new Drawer(renderer, camera);
     }
 
-    static checkCollision() {
+    static checkCollision() { // TODO: fix semaphore
         if (!this.collisionSemaphore) {
             this.collisionSemaphore = true;
             this.getDrawables().forEach(drawable => {
