@@ -15,3 +15,6 @@ var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHe
 camera.position.z = 5;
 
 var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x00ff00}));
+
+// Handler.registerDrawable(testDrawable);
+// Handler.animate(renderer, camera);
