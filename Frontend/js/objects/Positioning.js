@@ -6,7 +6,7 @@ class Positioning {
      * @param {Number} orientation 
      * @param {Number} speed 
      */
-    construct(x, y, orientation, speed) {
+    constructor(x, y, orientation, speed) {
         this.x = x;
         this.y = y;
         this.orientation = orientation;

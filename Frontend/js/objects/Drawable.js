@@ -1,13 +1,21 @@
 /// <reference path="../../typings/index.d.ts" />
 
-class Drawable {
+
+function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}
+
+class Drawable extends THREE.Mesh {
     /**
      * 
      * @param {THREE.Material} material 
-     * @param {THREE.Geometry} geometry 
+     * @param {THREE.Geometry|THREE.BufferGeometry} geometry 
      */
-    construct(material, geometry) {
-        this.mesh = new THREE.Mesh(geometry, material);
+    construct(geometry, material) {
+        super(geometry, material);
+        this.name = uuidv4();
     }
 
     /**

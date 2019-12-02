@@ -5,10 +5,10 @@
 class SnakeBody extends Drawable {
     /**
      * 
-     * @param {Snake} parent 
+     * @param {Snake} snake 
      */
-    constructor(parent) {
-        this.parent = parent;
+    constructor(snake) {
+        this.snake = snake;
         // super(something, something);
     }
 }
