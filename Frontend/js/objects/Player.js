@@ -9,75 +9,19 @@ class Player {
     constructor(name) {
         this.name = name;
         this.snake = new Snake(this);
-        this.camera = new THREE.PerspectiveCamera(); // TODO: benerin
-        this.positioning = new Positioning(0, 0, 90, 1); // TODO: benerin
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // TODO: benerin
+        this.positioning = new Positioning(0, 0, 90, 0.05); // TODO: benerin
 
-        this.keyActions = {
-            'backward': {
-                enabled: true,
-                action: () => {
-                    // Snake mudur
-                    keyActions.forward.enabled = false; // Disable forward action
-                    keyActions.left.enabled = true;
-                    keyActions.right.enabled = true;
-                    keyActions.pause.enabled = true;
-                },
-
-            },
-
-            'forward': {
-                enabled: true,
-                action: () => {
-                    keyActions.backward.enabled = false;
-                    keyActions.left.enabled = true;
-                    keyActions.right.enabled = true;
-                    keyActions.pause.enabled = true;
-                }
-            },
-
-            'left': {
-                enabled: true,
-                action: () => {
-                    keyActions.backward.enabled = true;
-                    keyActions.forward.enabled = true;
-                    keyActions.right.enabled = false;
-                    keyActions.pause.enabled = true;
-                }
-            },
-
-            'right': {
-                enabled: true,
-                action: () => {
-                    keyActions.backward.enabled = true;
-                    keyActions.forward.enabled = true;
-                    keyActions.left.enabled = false;
-                    keyActions.pause.enabled = true;
-                }
-            }
-        }
-
-        this.keys = {
-            // event.code
-            'ArrowDown': 'backward', // up key
-            'ArrowUp': 'forward', // down key
-            'ArrowRight': 'right', // -> key
-            'ArrowLeft': 'left', // <- key
-            'keyW': 'up', // W key
-            'keyS': 'down', // S key
-            'Escape': 'pause' // spacebar
-        }
-
-        this.onKeyPressUp = this.onKeyPressUp.bind(this);
     }
 
-    onKeyPressUp(e) {
-        let keyAction = keyAction[keys[e.code]];
-        if(keyAction && keyAction.enabled){
-            keyAction.action();
-        }
-    }
+    // Mengatur movement
+    move(){
+        // X,Y baru
+        this.positioning.x += this.positioning.speed * Math.cos(this.positioning.orientation);
+        this.positioning.y += this.positioning.speed * Math.sin(this.positioning.orientation);
 
-    
+        this.snake.move();
+    }
 
 
 }

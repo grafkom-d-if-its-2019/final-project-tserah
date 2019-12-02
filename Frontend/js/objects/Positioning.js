@@ -3,7 +3,7 @@ class Positioning {
      * 
      * @param {Number} x 
      * @param {Number} y 
-     * @param {Number} orientation 
+     * @param {Number} orientation (degree)
      * @param {Number} speed 
      */
     constructor(x, y, orientation, speed) {
