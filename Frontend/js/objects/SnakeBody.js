@@ -10,5 +10,6 @@ class SnakeBody extends Drawable {
     constructor(snake) {
         this.snake = snake;
         // super(something, something);
+        
     }
 }

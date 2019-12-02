@@ -25,14 +25,14 @@ class Snake {
     move() {
         this.body.forEach((bodyMember, index) => {
             if (index==0) {
-                bodyMember.mesh.position.x = this.player.positioning.x;
-                bodyMember.mesh.position.y = this.player.positioning.y;
-                bodyMember.mesh.rotateZ(this.player.positioning.orientation - this._positioning_stack[index]);
+                bodyMember.position.x = this.player.positioning.x;
+                bodyMember.position.y = this.player.positioning.y;
+                bodyMember.rotateZ(this.player.positioning.orientation - this._positioning_stack[index]);
                 this._positioning_stack[index] = this.player.positioning;
             } else {
-                bodyMember.mesh.position.x = this._positioning_stack[index-1];
-                bodyMember.mesh.position.y = this._positioning_stack[index-1];
-                bodyMember.mesh.rotateZ(this._positioning_stack[index-1] - this._positioning_stack[index]);
+                bodyMember.position.x = this._positioning_stack[index-1];
+                bodyMember.position.y = this._positioning_stack[index-1];
+                bodyMember.rotateZ(this._positioning_stack[index-1] - this._positioning_stack[index]);
                 this._positioning_stack[index] = this._positioning_stack[index-1];
             }
         });
