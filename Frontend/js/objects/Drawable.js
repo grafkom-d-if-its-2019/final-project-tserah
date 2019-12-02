@@ -9,4 +9,20 @@ class Drawable {
     construct(material, geometry) {
         this.mesh = new THREE.Mesh(geometry, material);
     }
+
+    /**
+     * 
+     * @param {Drawable} drawable 
+     */
+    collideWith(drawable) { // TODO: implement
+
+    }
+
+    /**
+     * 
+     * @param {Drawable} drawable 
+     */
+    onCollide(drawable) { // Implementasikan fungsi ini di child
+        throw Error("Unimplemented function!");
+    }
 }
