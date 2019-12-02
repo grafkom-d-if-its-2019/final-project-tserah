@@ -57,5 +57,7 @@ class Snake {
     this.appendBody();
   }
 
-  onCollideWithSnake() {}
+  onCollideWithSnake() {
+    this.player.onDie();
+  }
 }
