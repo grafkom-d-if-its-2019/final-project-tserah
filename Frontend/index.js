@@ -5,6 +5,7 @@
 /// <reference path="js/objects/Food.js" />
 /// <reference path="js/objects/Handler.js" />
 /// <reference path="js/objects/SnakeBody.js" />
+// import io from 'socket.io-client';
 
 Handler.init();
 var keyActions = {
@@ -66,10 +67,18 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // Global camera
-camera.position.z = 5;
+// var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // Global camera
+// camera.position.z = 5;
 
-var player = new Player('a');
+// Handle client socket
+// var socket = io('http://localhost:8000');
+
+var userId = 'abc';
+// socket.on('connect', ()=>{
+//     userId = socket.id;
+// });
+
+var player = new Player(userId);
 
 Handler.animate(renderer, player.camera);
 
