@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import Drawable from './Drawable';
 import Viewport from './Drawer';
-// import Food from './Food';
+import Food from './Food';
+import Positioning from './Positioning';
 
 console.log("Handler");
 export default class Handler {

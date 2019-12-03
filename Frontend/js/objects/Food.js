@@ -2,9 +2,7 @@ import * as THREE from 'three';
 import Drawable from './Drawable';
 import Positioning from './Positioning';
 
-console.log("Food");
-
-class Food extends Drawable {
+export default class Food extends Drawable {
     /**
      * 
      * @param {Positioning} positioning 
@@ -13,5 +11,3 @@ class Food extends Drawable {
         super(null, null); // TODO: implement
     }
 }
-
-export default Food;
