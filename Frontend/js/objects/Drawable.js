@@ -1,13 +1,6 @@
 import * as THREE from 'three';
 import Handler from './Handler';
 
-console.log("Drawable");
-
-function uuidv4() { // Generate uuid
-    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    );
-}
 
 export default class Drawable extends THREE.Mesh {
     /**
@@ -15,10 +8,10 @@ export default class Drawable extends THREE.Mesh {
      * @param {THREE.Material} material 
      * @param {THREE.Geometry|THREE.BufferGeometry} geometry 
      */
-    constructor(geometry, material) {
+    constructor(geometry, material, isInvisible = false) {
         /** @type {THREE.Mesh} */
         super(geometry, material);
-        this.name = uuidv4();
+        this.isInvisible = isInvisible;
         Handler.registerDrawable(this);
     }
 
@@ -38,7 +31,7 @@ export default class Drawable extends THREE.Mesh {
         var box2 = drawable.geometry.boundingBox.clone();
         box2.applyMatrix4(drawable.matrixWorld);
 
-        if (box1.intersectsBox(box2)) {
+        if (box1.intersectsBox(box2) && !this.isInvisible && !drawable.isInvisible) {
             this.onCollide(drawable);
         }
     }

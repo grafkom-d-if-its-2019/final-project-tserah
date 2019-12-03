@@ -1,23 +1,24 @@
 import * as THREE from 'three';
 import Drawable from './Drawable';
-import Viewport from './Drawer';
-// import Food from './Food';
+import Viewport from './Viewport';
+import Food from './Food';
+import Positioning from './Positioning';
 
-console.log("Handler");
 export default class Handler {
-
+    
     static collisionSemaphore;
-
+    
     /** @type {THREE.Scene} */
     static scene;
-
+    
     /** @type {THREE.WebGLRenderer} */
     static renderer;
-
+    
     /** @type {Viewport[]} */
     static drawers;
-
+    
     static init() {
+        console.log("Handler");
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(window.innerWidth, window.innerHeight);

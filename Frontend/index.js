@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import Drawable from './js/objects/Drawable';
 import Handler from './js/objects/Handler';
-import Viewport from './js/objects/Drawer';
+import Drawable from './js/objects/Drawable';
+import Viewport from './js/objects/Viewport';
 
 Handler.init();
 
@@ -18,6 +18,9 @@ Handler.registerDrawer(new Viewport(0, 0, 0.5, 1, camera2));
 
 var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x00ff00}));
 console.log(testDrawable);
+var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x0000ff}), true);
+objectB.position.x = -3;
+console.log(objectB);
 
 function rotate() {
     testDrawable.rotateZ(20);
