@@ -10,14 +10,6 @@ class Drawer {
     constructor(renderer, camera) {
         this.renderer = renderer;
         this.camera = camera;
-        this.animate = this.animate.bind(this);
-        this.animate();
-    }
-
-    animate() {
-        requestAnimationFrame(this.animate);
-        Handler.checkCollision();
-        this.renderer.render(Handler.scene, this.camera);
     }
 
 }

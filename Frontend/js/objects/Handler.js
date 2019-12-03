@@ -2,6 +2,7 @@
 /// <reference path="./Drawable.js" />
 /// <reference path="./Player.js" />
 /// <reference path="./Food.js" />
+/// <reference path="./Drawer.js" />
 
 class Handler {
 
@@ -10,9 +11,23 @@ class Handler {
     /** @type {THREE.Scene} */
     static scene;
 
+    /** @type {Drawer[]} */
+    static drawers;
+
     static init() {
         this.scene = new THREE.Scene();
         this.collisionSemaphore = false;
+        this.drawers = new Array();
+        this.animate = this.animate.bind(this);
+        this.animate();
+    }
+
+    static animate() {
+        requestAnimationFrame(this.animate);
+        this.checkCollision();
+        this.drawers.forEach(drawer => {
+            drawer.renderer.render(this.scene, drawer.camera);
+        });
     }
 
     /**
@@ -41,22 +56,20 @@ class Handler {
         return this.scene.children;
     }
 
+    /**
+     * 
+     * @param {Drawer} drawer 
+     */
+    static registerDrawer(drawer) {
+        this.drawers.push(drawer);
+    }
+
     static generateFood() { // nunggu food
         this.drawables.push(new Food(new Positioning())); // TODO: implement
     }
 
-    /**
-     * 
-     * @param {THREE.WebGLREnderer} renderer 
-     * @param {THREE.Camera} camera 
-     */
-    static animate(renderer, camera) {
-        new Drawer(renderer, camera);
-    }
-
     static checkCollision() { // TODO: fix semaphore
-        if (!this.collisionSemaphore) {
-            this.collisionSemaphore = true;
+        if (this.collisionSemaphore = !this.collisionSemaphore) {
             this.getDrawables().forEach(drawable => {
                 this.getDrawables().forEach(against => {
                     if (drawable!==against) {
