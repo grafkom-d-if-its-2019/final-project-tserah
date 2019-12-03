@@ -9,7 +9,7 @@
 Kalau mau autocomplete dari Threejs, tambahkan ini ke file:
 
 ```js
-/// <reference path="../../typings/index.d.ts" />
+import * as THREE from 'three';
 ```
 
 Kalau mau autocomplete dari kelas lain, tambahkan line di atas dan ganti path-nya

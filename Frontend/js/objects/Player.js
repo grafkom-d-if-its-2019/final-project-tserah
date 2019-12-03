@@ -1,5 +1,5 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="./Positioning.js" />
+import * as THREE from 'three';
+import Positioning from './Positioning';
 
 class Player {
     /**

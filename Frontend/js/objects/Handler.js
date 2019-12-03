@@ -1,11 +1,11 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="./Drawable.js" />
-/// <reference path="./Player.js" />
-/// <reference path="./Food.js" />
-/// <reference path="./Drawer.js" />
+import * as THREE from 'three';
+import Drawable from './Drawable';
+import Drawer from './Drawer';
+// import Food from './Food';
 
-class Handler {
-
+console.log("Handler");
+export default class Handler {
+    
     static collisionSemaphore;
 
     /** @type {THREE.Scene} */
@@ -81,5 +81,3 @@ class Handler {
         }
     }
 }
-
-export default Handler;

@@ -1,5 +1,4 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="./Handler.js" />
+import * as THREE from 'three';
 
 class Drawer {
     /**

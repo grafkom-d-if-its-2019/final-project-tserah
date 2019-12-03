@@ -1,6 +1,6 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="./Drawable.js" />
-/// <reference path="./Snake.js" />
+import * as THREE from 'three';
+import Drawable from './Drawable';
+import Snake from './Snake';
 
 class SnakeBody extends Drawable {
     /**

@@ -1,6 +1,8 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="./Drawable.js" />
-/// <reference path="./Positioning.js" />
+import * as THREE from 'three';
+import Drawable from './Drawable';
+import Positioning from './Positioning';
+
+console.log("Food");
 
 class Food extends Drawable {
     /**

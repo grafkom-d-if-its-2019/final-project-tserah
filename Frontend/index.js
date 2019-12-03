@@ -1,10 +1,7 @@
-/// <reference path="./typings/index.d.ts" />
-/// <reference path="js/objects/Drawable.js" />
-/// <reference path="js/objects/Player.js" />
-/// <reference path="js/objects/Snake.js" />
-/// <reference path="js/objects/Food.js" />
-/// <reference path="js/objects/Handler.js" />
-/// <reference path="js/objects/SnakeBody.js" />
+import * as THREE from 'three';
+import Drawable from './js/objects/Drawable';
+import Player from './js/objects/Player';
+import Handler from './js/objects/Handler';
 // import io from 'socket.io-client';
 
 Handler.init();

@@ -1,5 +1,7 @@
-/// <reference path="../../typings/index.d.ts" />
+import * as THREE from 'three';
+import Handler from './Handler';
 
+console.log("Drawable");
 
 function uuidv4() { // Generate uuid
     return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
@@ -7,7 +9,7 @@ function uuidv4() { // Generate uuid
     );
 }
 
-class Drawable extends THREE.Mesh {
+export default class Drawable extends THREE.Mesh {
     /**
      * 
      * @param {THREE.Material} material 
@@ -55,5 +57,3 @@ class Drawable extends THREE.Mesh {
         return null;
     }
 }
-
-export default Drawable;

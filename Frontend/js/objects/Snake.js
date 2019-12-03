@@ -1,7 +1,7 @@
-/// <reference path="../../typings/index.d.ts" />
-/// <reference path="./Player.js" />
-/// <reference path="./SnakeBody.js" />
-/// <reference path="./Positioning.js" />
+import * as THREE from 'three';
+import Player from './Player';
+import SnakeBody from './SnakeBody';
+import Positioning from './Positioning';
 
 const LEFT = 0;
 const UP = 1;
