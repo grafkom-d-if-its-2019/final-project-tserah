@@ -68,12 +68,12 @@ document.body.appendChild(renderer.domElement);
 // camera.position.z = 5;
 
 // Handle client socket
-// var socket = io('http://localhost:8000');
+var socket = io('http://localhost:8000');
 
 var userId = 'abc';
-// socket.on('connect', ()=>{
-//     userId = socket.id;
-// });
+socket.on('connect', ()=>{
+    userId = socket.id;
+});
 
 var player = new Player(userId);
 
