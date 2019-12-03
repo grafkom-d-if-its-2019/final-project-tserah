@@ -79,7 +79,8 @@ export default class Handler {
     }
 
     static generateFood() { // nunggu food
-        this.drawables.push(new Food(new Positioning())); // TODO: implement
+        // this.drawables.push(new Food(new Positioning())); // TODO: implement
+        
     }
 
     static checkCollision() { // TODO: fix semaphore
