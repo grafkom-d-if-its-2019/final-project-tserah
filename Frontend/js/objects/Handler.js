@@ -4,6 +4,17 @@ import Viewport from './Viewport';
 import Food from './Food';
 import Positioning from './Positioning';
 
+function removeArr(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax= arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
+
 export default class Handler {
 
     /** @type {THREE.Scene} */
@@ -20,6 +31,9 @@ export default class Handler {
 
     static lastAnimatedTimestamp;
 
+    /** @type {Function[]} */
+    static frameRefreshCallbacks;
+
     static init() {
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer();
@@ -30,6 +44,8 @@ export default class Handler {
         this.animate = this.animate.bind(this);
         this.lastAnimatedTimestamp = performance.now();
         this.framerate = 0;
+        /** @type {Function[]} */
+        this.frameRefreshCallbacks = new Array();
         this.animate();
     }
 
@@ -38,6 +54,9 @@ export default class Handler {
         this.lastAnimatedTimestamp = performance.now();
         requestAnimationFrame(this.animate);
         this.checkCollision();
+        this.frameRefreshCallbacks.forEach(callback => {
+            callback();
+        });
         this.drawers.forEach(drawer => {
             let left = Math.floor(window.innerWidth * drawer.viewport_left);
             let bottom = Math.floor(window.innerHeight * drawer.viewport_bottom);
@@ -77,19 +96,30 @@ export default class Handler {
     }
 
     /**
+     * Daftarkan Viewport ke Handler
      * 
      * @param {Viewport} drawer 
      */
-    static registerDrawer(drawer) {
+    static registerViewport(drawer) {
         this.drawers.push(drawer);
     }
 
+    static registerFrameCallback(callback) {
+        if (callback instanceof Function) {
+            this.frameRefreshCallbacks.push(callback);
+        }
+    }
+
+    static removeFrameCallback(callback) {
+        removeArr(this.frameRefreshCallbacks, callback);
+    }
+
     static generateFood() { // nunggu food
-        // this.drawables.push(new Food(new Positioning())); // TODO: implement
+        this.drawables.push(new Food(new Positioning())); // TODO: implement
 
     }
 
-    static checkCollision() { // TODO: fix semaphore
+    static checkCollision() {
         this.getDrawables().forEach(drawable => {
             this.getDrawables().forEach(against => {
                 if (drawable !== against) {

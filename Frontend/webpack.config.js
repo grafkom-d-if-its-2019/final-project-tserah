@@ -3,6 +3,7 @@ const path = require('path');
 const WebpackBar = require('webpackbar');
 
 module.exports = {
+    mode: 'development',
     entry: './index.js',
     module: {
         rules: [
@@ -13,6 +14,7 @@ module.exports = {
             }
         ]
     },
+    devtool: 'inline-source-map',
     resolve: {
         extensions: ['*', '.js']
     },
