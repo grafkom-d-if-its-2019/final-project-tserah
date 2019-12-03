@@ -1,85 +1,23 @@
 import * as THREE from 'three';
 import Drawable from './js/objects/Drawable';
-import Player from './js/objects/Player';
 import Handler from './js/objects/Handler';
-// import io from 'socket.io-client';
+import Viewport from './js/objects/Drawer';
 
 Handler.init();
-var keyActions = {
-    'backward': {
-        enabled: true,
-        action: () => {
-            // Snake mudur
-            keyActions.forward.enabled = false; // Disable forward action
-            keyActions.left.enabled = true;
-            keyActions.right.enabled = true;
-            keyActions.pause.enabled = true;
-        },
 
-    },
+var camera1 = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+camera1.position.z = 5;
 
-    'forward': {
-        enabled: true,
-        action: () => {
-            keyActions.backward.enabled = false;
-            keyActions.left.enabled = true;
-            keyActions.right.enabled = true;
-            keyActions.pause.enabled = true;
-        }
-    },
+var camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+camera2.position.z = 5;
+camera2.position.x = 2;
 
-    'left': {
-        enabled: true,
-        action: () => {
-            keyActions.backward.enabled = true;
-            keyActions.forward.enabled = true;
-            keyActions.right.enabled = false;
-            keyActions.pause.enabled = true;
-        }
-    },
 
-    'right': {
-        enabled: true,
-        action: () => {
-            keyActions.backward.enabled = true;
-            keyActions.forward.enabled = true;
-            keyActions.left.enabled = false;
-            keyActions.pause.enabled = true;
-        }
-    }
-}
+Handler.registerDrawer(new Viewport(0.5, 0, 0.5, 1, camera1));
+Handler.registerDrawer(new Viewport(0, 0, 0.5, 1, camera2));
 
-var keys = {
-    // event.code
-    'ArrowDown': 'backward', // up key
-    'ArrowUp': 'forward', // down key
-    'ArrowRight': 'right', // -> key
-    'ArrowLeft': 'left', // <- key
-    'keyW': 'up', // W key
-    'keyS': 'down', // S key
-    'Escape': 'pause' // spacebar
-}
-
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-// var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // Global camera
-// camera.position.z = 5;
-
-// Handle client socket
-var socket = io('http://localhost:8000');
-
-var userId = 'abc';
-socket.on('connect', ()=>{
-    userId = socket.id;
-});
-
-var player = new Player(userId);
-
-Handler.animate(renderer, player.camera);
-
-var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
+var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x00ff00}));
+console.log(testDrawable);
 
 function rotate() {
     testDrawable.rotateZ(20);
@@ -88,12 +26,3 @@ function rotate() {
 function remove() {
     testDrawable = testDrawable.destroy();
 }
-
-function onKeyPressUp(e) {
-    let keyAction = keyAction[keys[e.code]];
-    if (keyAction && keyAction.enabled) {
-        keyAction.action();
-    }
-}
-
-// function 
