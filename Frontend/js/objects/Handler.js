@@ -5,20 +5,22 @@ import Food from './Food';
 import Positioning from './Positioning';
 
 export default class Handler {
-    
-    static collisionSemaphore;
-    
+
     /** @type {THREE.Scene} */
     static scene;
-    
+
     /** @type {THREE.WebGLRenderer} */
     static renderer;
-    
+
     /** @type {Viewport[]} */
     static drawers;
-    
+
+    /** @type {Number} */
+    static framerate;
+
+    static lastAnimatedTimestamp;
+
     static init() {
-        console.log("Handler");
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -26,10 +28,14 @@ export default class Handler {
         this.collisionSemaphore = false;
         this.drawers = new Array();
         this.animate = this.animate.bind(this);
+        this.lastAnimatedTimestamp = performance.now();
+        this.framerate = 0;
         this.animate();
     }
 
     static animate() {
+        this.framerate = 1000 / (performance.now() - this.lastAnimatedTimestamp);
+        this.lastAnimatedTimestamp = performance.now();
         requestAnimationFrame(this.animate);
         this.checkCollision();
         this.drawers.forEach(drawer => {
@@ -80,19 +86,16 @@ export default class Handler {
 
     static generateFood() { // nunggu food
         // this.drawables.push(new Food(new Positioning())); // TODO: implement
-        
+
     }
 
     static checkCollision() { // TODO: fix semaphore
-        if (this.collisionSemaphore = !this.collisionSemaphore) {
-            this.getDrawables().forEach(drawable => {
-                this.getDrawables().forEach(against => {
-                    if (drawable !== against) {
-                        drawable.collideWith(against);
-                    }
-                });
+        this.getDrawables().forEach(drawable => {
+            this.getDrawables().forEach(against => {
+                if (drawable !== against) {
+                    drawable.collideWith(against);
+                }
             });
-            this.collisionSemaphore = false;
-        }
+        });
     }
 }
