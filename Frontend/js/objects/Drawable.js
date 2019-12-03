@@ -55,3 +55,5 @@ class Drawable extends THREE.Mesh {
         return null;
     }
 }
+
+export default Drawable;

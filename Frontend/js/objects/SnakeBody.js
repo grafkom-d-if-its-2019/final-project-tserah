@@ -12,3 +12,5 @@ class SnakeBody extends Drawable {
         super(null, null); // TODO: implement
     }
 }
+
+export default SnakeBody;

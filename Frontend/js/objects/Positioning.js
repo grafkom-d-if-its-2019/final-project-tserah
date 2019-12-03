@@ -13,3 +13,5 @@ class Positioning {
         this.speed = speed;
     }
 }
+
+export default Positioning;

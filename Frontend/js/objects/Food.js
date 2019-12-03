@@ -11,3 +11,5 @@ class Food extends Drawable {
         super(null, null); // TODO: implement
     }
 }
+
+export default Food;
