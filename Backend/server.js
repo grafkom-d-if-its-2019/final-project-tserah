@@ -9,23 +9,37 @@ var app = http.createServer(function (req, res) {
 }).listen(8000);
 
 var io = socketIO.listen(app);
-io.sockets.on('connection', (socket)=>{
-    function log(){
-        var array = ['----From Server----'];
+io.sockets.on('connection', (socket) => {
+    function log() {
+        var array = ['[----From Server----]'];
         array.push.apply(array, arguments);
         socket.emit('log', array);
     };
 
-    socket.on('getRoom', (room)=>{
-        log('Create or join room '+room);
+    socket.on('getRoom', (room) => {
+        log('Create or join room ' + room);
         var clientInRoom = socket.adapter.rooms[room];
-        var numClients = clientInRoom ? Number(clientInRoom.sockets).length : 0;
+        var numClients = clientInRoom ? Object.keys(clientInRoom.sockets).length : 0;
         log('Room ' + room + ' now has ' + numClients + ' client(s)');
         // TODO: limit user
-    });
+        if (numClients === 0) {
+            socket.join(room);
+            log('Client ID ' + socket.id + ' create room ' + room);
+        } else if (numClients == 1) {
+            // Broadcast to user in 'room'
+            io.sockets.in(room).emit('join', room);
 
-    socket.on('connect', ()=>{
-        log('Create User ID: '+ socket.id);
+            // Join the room
+            socket.join(room);
+            log('Client ID ' + socket.id + ' join the room ' + room);
+            socket.emit('joined', room, socket.id);
+
+            // Tell the user in 'room' to ready
+            io.sockets.in(room).emit('ready');
+        } else {
+            socket.emit('full', room);
+            log('Room is full');
+        }
     });
 
 });
