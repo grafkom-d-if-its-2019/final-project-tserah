@@ -4,6 +4,10 @@
 
 ![Main](Main.jpg)
 
+## Ukuran
+
+Ukuran radius `Food` dan `SnakeBody` adalah 1. Ukuran map 50x50.
+
 ## Developer notes
 
 Setiap pull, jalankan di folder `Frontend`:
