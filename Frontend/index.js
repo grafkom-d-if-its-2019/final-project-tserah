@@ -40,6 +40,7 @@ function main() {// Flag ready
 
 
 function testObjects() {
+    document.addEventListener('keyup', onKeyPressUp, false);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera1.position.z = 5;
 
@@ -57,6 +58,66 @@ function testObjects() {
     console.log(objectB);
     
     window.Handler = Handler;
+
+    // Key map
+    var keys = {
+        'KeyW': 'forward',
+        'KeyS': 'backward',
+        'KeyA': 'left',
+        'KeyD': 'right'
+    };
+
+    var keyActions = {
+        // Decrease speed?
+        'backward': {
+            enabled: true,
+            action: function () {
+                // snake.back();
+                console.log('mundur');
+                keyActions.forward.enabled = false;
+                keyActions.left.enabled = true;
+                keyActions.right.enabled = true;
+            }
+        },
+        // Increase speed
+        'forward': {
+            enabled: true,
+            action: function () {
+                // snake.forward();
+                console.log('maju');
+                keyActions.backward.enabled = false;
+                keyActions.left.enabled = true;
+                keyActions.right.enabled = true;
+            }
+        },
+        'right': {
+            enabled: true,
+            action: function () {
+                // snake.right();
+                console.log('kanan');
+                keyActions.left.enabled = false;
+                keyActions.forward.enabled = true;
+                keyActions.backward.enabled = true;
+            }
+        },
+        'left': {
+            enabled: true,
+            action: function () {
+                // snake.left();
+                console.log('kiri');
+                keyActions.right.enabled = false;
+                keyActions.backward.enabled = true;
+                keyActions.forward.enabled = true;
+            }
+        },
+    };
+
+    function onKeyPressUp(e) {
+        var keyAction = keyActions[keys[e.code]];
+        if (keyAction && keyAction.enabled) {
+            keyAction.action();
+        }
+    }
 
     // Controller Camera
     let control = new OrbitControls(camera1, Handler.renderer.domElement);
