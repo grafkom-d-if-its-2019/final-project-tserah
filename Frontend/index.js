@@ -3,6 +3,7 @@ import Handler from './js/objects/Handler';
 import Drawable from './js/objects/Drawable';
 import Viewport from './js/objects/Viewport';
 import io from 'socket.io-client';
+import Wall from './js/objects/Wall';
 
 Handler.init();
 
@@ -82,4 +83,17 @@ function test2() {
     window.Handler = Handler;
 }
 
-test2();
+function test3() {
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+    window.camera = camera;
+
+    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
+    window.Handler = Handler;
+
+    var wall = new Wall(50, 50, X_AXIS);
+    window.wall = wall;
+    window.Wall = Wall;
+}
+
+test3();
