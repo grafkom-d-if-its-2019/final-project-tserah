@@ -26,7 +26,7 @@ export default class Handler {
     /** @type {Viewport[]} */
     static drawers;
 
-    /** @type {Number} */
+    /** @type {Number} FPS */
     static framerate;
 
     static lastAnimatedTimestamp;
@@ -122,7 +122,7 @@ export default class Handler {
     static checkCollision() {
         this.getDrawables().forEach(drawable => {
             this.getDrawables().forEach(against => {
-                if (drawable !== against) {
+                if (drawable !== against && drawable instanceof Drawable && against instanceof Drawable) {
                     drawable.collideWith(against);
                 }
             });
