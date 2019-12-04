@@ -3,10 +3,10 @@ import * as THREE from 'three';
 export default class Viewport {
     /**
      * 
-     * @param {Number} viewport_left Jarak viewport dari kiri
-     * @param {Number} viewport_bottom Jarak viewport dari bawah
-     * @param {Number} viewport_width Lebar viewport
-     * @param {Number} viewport_height Tinggi viewport
+     * @param {Number} viewport_left Jarak viewport dari kiri (0-1)
+     * @param {Number} viewport_bottom Jarak viewport dari bawah (0-1)
+     * @param {Number} viewport_width Lebar viewport (0-1)
+     * @param {Number} viewport_height Tinggi viewport (0-1)
      * @param {THREE.PerspectiveCamera} camera Camera
      */
     constructor(viewport_left, viewport_bottom, viewport_width, viewport_height, camera) {
