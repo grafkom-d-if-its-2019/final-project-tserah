@@ -10,7 +10,7 @@ class Player {
         this.name = name;
         this.snake = new Snake(this);
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // TODO: benerin
-        this.positioning = new Positioning(0, 0, 90, 0.05); // TODO: benerin
+        this.positioning = new Positioning(0, 0, 90, 0.05);
     }
 
     // Mengatur movement

@@ -34,6 +34,8 @@ export default class Handler {
     /** @type {Function[]} */
     static frameRefreshCallbacks;
 
+    static controller;
+
     static init() {
         this.scene = new THREE.Scene();
         this.renderer = new THREE.WebGLRenderer();

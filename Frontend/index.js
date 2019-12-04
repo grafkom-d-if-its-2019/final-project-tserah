@@ -5,6 +5,7 @@ import Viewport from './js/objects/Viewport';
 import io from 'socket.io-client';
 import Wall from './js/objects/Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 Handler.init();
 
@@ -54,6 +55,15 @@ function testObjects() {
     var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
     objectB.position.x = -3;
     console.log(objectB);
+    
+    window.Handler = Handler;
+
+    // Controller
+    let control = new OrbitControls(camera1, Handler.renderer.domElement);
+    // TODO: pisah controller pake 2 canvas?
+    let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
+    // Handler.controller = control;
+    window.control = control;
 
     function rotate() {
         testDrawable.rotateZ(20);
@@ -93,7 +103,6 @@ function test3() {
 
     var wall = new Wall(50, 50, X_AXIS);
     window.wall = wall;
-    window.Wall = Wall;
 }
 
-test3();
+testObjects();
