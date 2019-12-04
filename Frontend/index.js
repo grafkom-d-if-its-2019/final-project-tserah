@@ -58,7 +58,7 @@ function testObjects() {
     
     window.Handler = Handler;
 
-    // Controller
+    // Controller Camera
     let control = new OrbitControls(camera1, Handler.renderer.domElement);
     // TODO: pisah controller pake 2 canvas?
     let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
