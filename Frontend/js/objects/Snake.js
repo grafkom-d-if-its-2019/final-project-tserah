@@ -3,10 +3,6 @@ import Player from './Player';
 import SnakeBody from './SnakeBody';
 import Positioning from './Positioning';
 
-const LEFT = 0;
-const UP = 1;
-const RIGHT = 2;
-const DOWN = 3;
 class Snake {
   /**
    *
