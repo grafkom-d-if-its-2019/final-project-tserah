@@ -24,7 +24,7 @@ export default class Handler {
     static renderer;
 
     /** @type {Viewport[]} */
-    static drawers;
+    static viewports;
 
     /** @type {Number} FPS */
     static framerate;
@@ -40,7 +40,7 @@ export default class Handler {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(this.renderer.domElement);
         this.collisionSemaphore = false;
-        this.drawers = new Array();
+        this.viewports = new Array();
         this.animate = this.animate.bind(this);
         this.lastAnimatedTimestamp = performance.now();
         this.framerate = 0;
@@ -57,7 +57,7 @@ export default class Handler {
         this.frameRefreshCallbacks.forEach(callback => {
             callback();
         });
-        this.drawers.forEach(drawer => {
+        this.viewports.forEach(drawer => {
             let left = Math.floor(window.innerWidth * drawer.viewport_left);
             let bottom = Math.floor(window.innerHeight * drawer.viewport_bottom);
             let width = Math.floor(window.innerWidth * drawer.viewport_width);
@@ -101,7 +101,7 @@ export default class Handler {
      * @param {Viewport} drawer 
      */
     static registerViewport(drawer) {
-        this.drawers.push(drawer);
+        this.viewports.push(drawer);
     }
 
     static registerFrameCallback(callback) {
