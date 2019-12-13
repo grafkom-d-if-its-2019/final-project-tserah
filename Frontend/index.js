@@ -101,7 +101,7 @@ var keyActions = {
     },
 };
 
-function onKeyPressUp(e) {
+function onKeyPressDown(e) {
     var keyAction = keyActions[keys[e.code]];
     if (keyAction && keyAction.enabled) {
         keyAction.action();
@@ -110,7 +110,7 @@ function onKeyPressUp(e) {
 
 
 function testObjects() {
-    document.addEventListener('keyup', onKeyPressUp, false);
+    document.addEventListener('keydown', onKeyPressDown, false);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
