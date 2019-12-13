@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import Wall from './js/objects/Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import Player from './js/objects/Player';
 
 Handler.init();
 
@@ -51,11 +52,14 @@ function testObjects() {
     Handler.registerViewport(new Viewport(0.5, 0, 0.5, 1, camera1));
     Handler.registerViewport(new Viewport(0, 0, 0.5, 1, camera2));
 
-    var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
-    console.log(testDrawable);
-    var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
-    objectB.position.x = -3;
-    console.log(objectB);
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    var player = new Player('test', geometry, material);
+    // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
+    // console.log(testDrawable);
+    // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
+    // objectB.position.x = -3;
+    // console.log(objectB);
     
     window.Handler = Handler;
 
@@ -77,6 +81,7 @@ function testObjects() {
                 keyActions.forward.enabled = false;
                 keyActions.left.enabled = true;
                 keyActions.right.enabled = true;
+                player.backward();
             }
         },
         // Increase speed
@@ -88,6 +93,7 @@ function testObjects() {
                 keyActions.backward.enabled = false;
                 keyActions.left.enabled = true;
                 keyActions.right.enabled = true;
+                player.forward();
             }
         },
         'right': {
@@ -98,6 +104,7 @@ function testObjects() {
                 keyActions.left.enabled = false;
                 keyActions.forward.enabled = true;
                 keyActions.backward.enabled = true;
+                player.right();
             }
         },
         'left': {
@@ -108,6 +115,7 @@ function testObjects() {
                 keyActions.right.enabled = false;
                 keyActions.backward.enabled = true;
                 keyActions.forward.enabled = true;
+                player.left();
             }
         },
     };
@@ -122,7 +130,7 @@ function testObjects() {
     // Controller Camera
     let control = new OrbitControls(camera1, Handler.renderer.domElement);
     // TODO: pisah controller pake 2 canvas?
-    let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
+    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
     // Handler.controller = control;
     window.control = control;
 
