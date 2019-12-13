@@ -8,15 +8,35 @@ class Snake {
 	 *
 	 * @param {Player} player
 	 */
-	constructor(player) {
+	constructor(player, geometry, material) {
 		/** @type {SnakeBody[]} */
 		this.body = new Array();
 		this.player = player;
-		this.body.push(new SnakeBody(this));
+		this.body.push(new SnakeBody(this, geometry, material));
 		/** @type {Positioning[]} */
 		this._positioning_stack = new Array();
 		this._positioning_stack.push(this.player.positioning);
 	}
+
+	forward() {
+		this.body[0].translateZ(-1);
+	}
+
+	backward() {
+		this.body[0].translateZ(1);
+	}
+
+	right() {
+		this.body[0].translateX(1);
+		this.body[0].rotateY(-1);
+	}
+
+	left() {
+		this.body[0].translateX(-1);
+		this.body[0].rotateY(1);
+	}
+
+
 
 	move() {
 		this.body.forEach((bodyMember, index) => {
