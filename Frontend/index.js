@@ -159,3 +159,4 @@ function contohMapDenganTembok() {
 }
 
 testObjects();
+// coba();
