@@ -18,24 +18,30 @@ class Player {
     move() {
         // X,Y baru
         this.positioning.x += this.positioning.speed * Math.cos(this.positioning.orientation);
-        this.positioning.y += this.positioning.speed * Math.sin(this.positioning.orientation);
+        this.positioning.z += this.positioning.speed * Math.sin(this.positioning.orientation);
 
         // this.snake.move();
+        this.snake.forward(this.positioning.x);
     }
 
-    forward(object) {
-        this.snake.forward();
+    forward() {
+        this.positioning.x += this.positioning.speed * Math.cos(this.positioning.orientation);
+        this.positioning.z += this.positioning.speed * Math.sin(this.positioning.orientation);
+
+        console.log(this.positioning.x, this.positioning.z);
+
+        this.snake.forward(this.positioning.x);
     }
 
-    left(object) {
+    left() {
         this.snake.left();
     }
 
-    right(object) {
+    right() {
         this.snake.right();
     }
 
-    backward(object) {
+    backward() {
         this.snake.backward();
     }
 

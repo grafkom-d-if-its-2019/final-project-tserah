@@ -58,6 +58,7 @@ function testObjects() {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     var player = new Player('test', geometry, material);
+    window.player = player;
     // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
     // console.log(testDrawable);
     // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
@@ -147,135 +148,14 @@ function testObjects() {
     }
 }
 
-function body(){
-    document.addEventListener('keyup', onKeyPressUp, false);
-    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera1.position.z = 5;
-
-    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
-
-    var snake = new SnakeBody(null, 0, 0);
-    console.log(snake);
-    var snake2 = new SnakeBody(snake);
-    var snake3 = new SnakeBody(snake2);
-
-    window.Handler = Handler;
-
-    // Key map
-    var keys = {
-        'KeyW': 'forward',
-        'KeyS': 'backward',
-        'KeyA': 'left',
-        'KeyD': 'right'
-    };
-
-    var keyActions = {
-        // Decrease speed?
-        'backward': {
-            enabled: true,
-            action: function () {
-                // snake.back();
-                console.log('mundur');
-                keyActions.forward.enabled = false;
-                keyActions.left.enabled = true;
-                keyActions.right.enabled = true;
-            }
-        },
-        // Increase speed
-        'forward': {
-            enabled: true,
-            action: function () {
-                // snake.forward();
-                console.log('maju');
-                keyActions.backward.enabled = false;
-                keyActions.left.enabled = true;
-                keyActions.right.enabled = true;
-            }
-        },
-        'right': {
-            enabled: true,
-            action: function () {
-                // snake.right();
-                console.log('kanan');
-                keyActions.left.enabled = false;
-                keyActions.forward.enabled = true;
-                keyActions.backward.enabled = true;
-            }
-        },
-        'left': {
-            enabled: true,
-            action: function () {
-                // snake.left();
-                console.log('kiri');
-                keyActions.right.enabled = false;
-                keyActions.backward.enabled = true;
-                keyActions.forward.enabled = true;
-            }
-        },
-    };
-
-    function onKeyPressUp(e) {
-        var keyAction = keyActions[keys[e.code]];
-        if (keyAction && keyAction.enabled) {
-            keyAction.action();
-        }
-    }
-
-    // Controller Camera
-    let control = new OrbitControls(camera1, Handler.renderer.domElement);
-    // TODO: pisah controller pake 2 canvas?
-    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
-    // Handler.controller = control;
-    window.control = control;
-
-    function rotate() {
-        testDrawable.rotateZ(20);
-    }
-
-    function remove() {
-        testDrawable = testDrawable.destroy();
-    }
-}
-
-function coba2(){
-
-}
-
-function coba3(){
-    
-}
-
-function test2() {
-    var floor = new Drawable(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({color: 0x0000ff}), true);
-    window.floor = floor;
-
-    var cube = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x00ff00}));
-
-    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera1.position.z = 5;
-    window.camera = camera1;
-
-    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
-
-    var a = function() {
-        console.log("refreshing");
-    }
-    window.a = a;
-    Handler.registerFrameCallback(a);
-    window.Handler = Handler;
-}
-
-function test3() {
+function contohMapDenganTembok() {
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.y = 1;
-    window.camera = camera;
+
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera));
     window.Handler = Handler;
-    var wall = new Wall(50, 50, X_AXIS);
-    // window.wall = wall;
-    window.camera = camera;
+    
+    Handler.drawWalls();
 }
 
-// testObjects();
-body();
-test3();
+testObjects();

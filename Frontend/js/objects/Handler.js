@@ -3,12 +3,14 @@ import Drawable from './Drawable';
 import Viewport from './Viewport';
 import Food from './Food';
 import Positioning from './Positioning';
+import Wall from './Wall';
+import { X_AXIS, Y_AXIS, Z_AXIS } from '../Constants';
 
 function removeArr(arr) {
     var what, a = arguments, L = a.length, ax;
     while (L > 1 && arr.length) {
         what = a[--L];
-        while ((ax= arr.indexOf(what)) !== -1) {
+        while ((ax = arr.indexOf(what)) !== -1) {
             arr.splice(ax, 1);
         }
     }
@@ -38,11 +40,13 @@ export default class Handler {
 
     static init() {
         this.scene = new THREE.Scene();
-
+        var light = new THREE.PointLight(0xffffff, 25, 50);
+        light.position.y = 25;
+        this.scene.add(light);
         this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize(window.innerWidth-10, window.innerHeight-2);
+        this.renderer.setSize(window.innerWidth - 10, window.innerHeight - 2);
         document.body.appendChild(this.renderer.domElement);
-        
+
         this.viewports = new Array();
         this.animate = this.animate.bind(this);
         this.lastAnimatedTimestamp = performance.now();
@@ -50,6 +54,22 @@ export default class Handler {
         /** @type {Function[]} */
         this.frameRefreshCallbacks = new Array();
         this.animate();
+    }
+
+    static drawWalls() {
+        var wallFloor = new Wall(50, 50, Y_AXIS);
+        var wallLeft = new Wall(2, 50, X_AXIS);
+        wallLeft.position.x = -25;
+        wallLeft.position.y = 1;
+        var wallRight = new Wall(2, 50, X_AXIS);
+        wallRight.position.x = 25;
+        wallRight.position.y = 1;
+        var wallFront = new Wall(50, 2, Z_AXIS);
+        wallFront.position.z = -25;
+        wallFront.position.y = 1;
+        var wallBack = new Wall(50, 2, Z_AXIS);
+        wallBack.position.z = 25;
+        wallBack.position.y = 1;
     }
 
     static animate() {
@@ -110,7 +130,7 @@ export default class Handler {
     static registerFrameCallback(callback) {
         if (callback instanceof Function) {
             this.frameRefreshCallbacks.push(callback);
-        }
+        } else throw Error("Wrong type");
     }
 
     static removeFrameCallback(callback) {
