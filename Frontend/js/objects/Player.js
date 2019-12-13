@@ -29,13 +29,15 @@ class Player {
     }
 
     left() {
-        this.snake.left();
+        this.positioning.x = 0.25;
+        var rotate = this.positioning.x * Math.PI;
+        this.snake.right(rotate);
     }
 
     right() {
-        this.positioning.x += 0.25;
+        this.positioning.x = -0.25;
         var rotate = this.positioning.x * Math.PI;
-        console.log(rotate);
+        // console.log(rotate);
         this.snake.right(rotate);
     }
 
