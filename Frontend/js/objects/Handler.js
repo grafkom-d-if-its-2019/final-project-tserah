@@ -38,10 +38,11 @@ export default class Handler {
 
     static init() {
         this.scene = new THREE.Scene();
+
         this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(window.innerWidth-10, window.innerHeight-2);
         document.body.appendChild(this.renderer.domElement);
-        this.collisionSemaphore = false;
+        
         this.viewports = new Array();
         this.animate = this.animate.bind(this);
         this.lastAnimatedTimestamp = performance.now();

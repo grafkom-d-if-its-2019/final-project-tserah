@@ -122,7 +122,7 @@ function testObjects() {
     // Controller Camera
     let control = new OrbitControls(camera1, Handler.renderer.domElement);
     // TODO: pisah controller pake 2 canvas?
-    let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
+    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
     // Handler.controller = control;
     window.control = control;
 
@@ -135,35 +135,15 @@ function testObjects() {
     }
 }
 
-function test2() {
-    var floor = new Drawable(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({color: 0x0000ff}), true);
-    window.floor = floor;
-
-    var cube = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x00ff00}));
-
-    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera1.position.z = 5;
-    window.camera = camera1;
-
-    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
-
-    var a = function() {
-        console.log("refreshing");
-    }
-    window.a = a;
-    Handler.registerFrameCallback(a);
-    window.Handler = Handler;
-}
-
 function test3() {
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.y = 1;
     window.camera = camera;
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera));
     window.Handler = Handler;
-
     var wall = new Wall(50, 50, X_AXIS);
-    window.wall = wall;
+    // window.wall = wall;
+    window.camera = camera;
 }
 
-testObjects();
+test3();
