@@ -14,10 +14,15 @@ class SnakeBody extends Drawable {
         // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
         var texture = new THREE.TextureLoader().load( '../assets/images.jpeg' );
         super(new THREE.SphereGeometry(0.5, 100, 100), new THREE.MeshBasicMaterial({ map: texture})); // TODO: implement
-
-
+        this.speedZ = 0;
+        this.orientation = 0;
+        this.prevSpeedZ = 0;
+        this.prevOrientation = 0;
         this.isInvisible = true;
-        
+        this.speedZ = 0;
+        this.speedX = 0;
+        this.prevSpeedZ = 0;
+        this.prevSpeedX = 0;
         if(snake == null){
             this.position.setX(0);
             this.position.setZ(0);
