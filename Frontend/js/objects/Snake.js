@@ -8,11 +8,11 @@ class Snake {
 	 *
 	 * @param {Player} player
 	 */
-	constructor(player, geometry, material) {
+	constructor(player) {
 		/** @type {SnakeBody[]} */
 		this.body = new Array();
 		this.player = player;
-		this.body.push(new SnakeBody(this, geometry, material));
+		this.body.push(new SnakeBody(this));
 		/** @type {Positioning[]} */
 		this._positioning_stack = new Array();
 		this._positioning_stack.push(this.player.positioning);
