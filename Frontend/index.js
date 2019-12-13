@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import Wall from './js/objects/Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import SnakeBody from './js/objects/SnakeBody';
 
 Handler.init();
 
@@ -42,6 +43,8 @@ function main() {// Flag ready
 function testObjects() {
     document.addEventListener('keyup', onKeyPressUp, false);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
     camera1.position.z = 5;
 
     var camera2 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -56,6 +59,7 @@ function testObjects() {
     var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
     objectB.position.x = -3;
     console.log(objectB);
+    
     
     window.Handler = Handler;
 
@@ -122,7 +126,7 @@ function testObjects() {
     // Controller Camera
     let control = new OrbitControls(camera1, Handler.renderer.domElement);
     // TODO: pisah controller pake 2 canvas?
-    let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
+    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
     // Handler.controller = control;
     window.control = control;
 
@@ -133,6 +137,104 @@ function testObjects() {
     function remove() {
         testDrawable = testDrawable.destroy();
     }
+}
+
+function body(){
+    document.addEventListener('keyup', onKeyPressUp, false);
+    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera1.position.z = 5;
+
+    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
+
+    var snake = new SnakeBody(null, 0, 0);
+    console.log(snake);
+    var snake2 = new SnakeBody(snake);
+    var snake3 = new SnakeBody(snake2);
+
+    window.Handler = Handler;
+
+    // Key map
+    var keys = {
+        'KeyW': 'forward',
+        'KeyS': 'backward',
+        'KeyA': 'left',
+        'KeyD': 'right'
+    };
+
+    var keyActions = {
+        // Decrease speed?
+        'backward': {
+            enabled: true,
+            action: function () {
+                // snake.back();
+                console.log('mundur');
+                keyActions.forward.enabled = false;
+                keyActions.left.enabled = true;
+                keyActions.right.enabled = true;
+            }
+        },
+        // Increase speed
+        'forward': {
+            enabled: true,
+            action: function () {
+                // snake.forward();
+                console.log('maju');
+                keyActions.backward.enabled = false;
+                keyActions.left.enabled = true;
+                keyActions.right.enabled = true;
+            }
+        },
+        'right': {
+            enabled: true,
+            action: function () {
+                // snake.right();
+                console.log('kanan');
+                keyActions.left.enabled = false;
+                keyActions.forward.enabled = true;
+                keyActions.backward.enabled = true;
+            }
+        },
+        'left': {
+            enabled: true,
+            action: function () {
+                // snake.left();
+                console.log('kiri');
+                keyActions.right.enabled = false;
+                keyActions.backward.enabled = true;
+                keyActions.forward.enabled = true;
+            }
+        },
+    };
+
+    function onKeyPressUp(e) {
+        var keyAction = keyActions[keys[e.code]];
+        if (keyAction && keyAction.enabled) {
+            keyAction.action();
+        }
+    }
+
+    // Controller Camera
+    let control = new OrbitControls(camera1, Handler.renderer.domElement);
+    // TODO: pisah controller pake 2 canvas?
+    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
+    // Handler.controller = control;
+    window.control = control;
+
+    function rotate() {
+        testDrawable.rotateZ(20);
+    }
+
+    function remove() {
+        testDrawable = testDrawable.destroy();
+    }
+}
+
+function coba2(){
+
+}
+
+function coba3(){
+    
 }
 
 function test2() {
@@ -166,4 +268,5 @@ function test3() {
     window.wall = wall;
 }
 
-testObjects();
+// testObjects();
+body();
