@@ -110,6 +110,7 @@ function onKeyPressDown(e) {
 
 
 function testObjects() {
+    window.THREE = THREE;
     document.addEventListener('keydown', onKeyPressDown, false);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -245,6 +246,7 @@ function coba(){
 function contohMapDenganTembok() {
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.y = 1;
+    window.camera = camera;
 
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera));
     window.Handler = Handler;
@@ -252,5 +254,6 @@ function contohMapDenganTembok() {
     Handler.drawWalls();
 }
 
-// testObjects();
-coba();
+testObjects();
+// coba();
+// contohMapDenganTembok();

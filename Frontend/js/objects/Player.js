@@ -18,10 +18,10 @@ class Player {
     // Mengatur movement
     move() {
         // X,Y baru
-        this.positioning.z += this.positioning.speed * Math.cos(this.positioning.orientation) * (1/Handler.framerate);
+        this.positioning.z += this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate);
         // this.positioning.x = this.positioning.speed * Math.sin(this.positioning.orientation) * (1 / Handler.framerate);
 
-        this.snake.forward(this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate));
+        this.snake.move(new Positioning(0, 0, 0, this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate)));
     }
 
     forward() {
@@ -31,14 +31,13 @@ class Player {
     left() {
         this.positioning.x = 0.25;
         var rotate = this.positioning.x * Math.PI;
-        this.snake.right(rotate);
+        this.snake.move(new Positioning(0, 0, rotate, 0));
     }
 
     right() {
         this.positioning.x = -0.25;
         var rotate = this.positioning.x * Math.PI;
-        // console.log(rotate);
-        this.snake.right(rotate);
+        this.snake.move(new Positioning(0, 0, rotate, 0));
     }
 
     backward() {

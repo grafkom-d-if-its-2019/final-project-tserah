@@ -20,20 +20,38 @@ export default class Drawable extends THREE.Mesh {
      * @param {Drawable} drawable 
      */
     collideWith(drawable) { // TODO: implement
-        this.geometry.computeBoundingBox();
-        drawable.geometry.computeBoundingBox();
-        this.updateMatrixWorld();
-        drawable.updateMatrixWorld();
-
-        var box1 = this.geometry.boundingBox.clone();
+        var box1;
+        if (this.geometry instanceof THREE.SphereGeometry) {
+            this.geometry.computeBoundingSphere();
+            box1 = this.geometry.boundingSphere.clone();
+        }
+        else {
+            this.geometry.computeBoundingBox();
+            box1 = this.geometry.boundingBox.clone();
+        }
         box1.applyMatrix4(this.matrixWorld);
-      
-        var box2 = drawable.geometry.boundingBox.clone();
+
+        var box2;
+        if (drawable.geometry instanceof THREE.SphereGeometry) {
+            drawable.geometry.computeBoundingSphere();
+            box2 = drawable.geometry.boundingSphere.clone();
+        }
+        else {
+            drawable.geometry.computeBoundingBox();
+            box2 = drawable.geometry.boundingBox.clone();
+        }
         box2.applyMatrix4(drawable.matrixWorld);
 
-        if (box1.intersectsBox(box2) && !this.isInvisible && !drawable.isInvisible) {
+        var collides;
+        if (drawable instanceof THREE.SphereGeometry)
+            collides = box1.intersectsSphere(box2);
+        else
+            collides = box1.intersectsBox(box2);
+        if (collides && !this.isInvisible && !drawable.isInvisible) {
             this.onCollide(drawable);
         }
+
+        return collides;
     }
 
     /**
