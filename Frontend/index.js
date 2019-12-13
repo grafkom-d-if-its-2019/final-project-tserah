@@ -55,6 +55,7 @@ function testObjects() {
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     var player = new Player('test', geometry, material);
+    window.player = player;
     // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
     // console.log(testDrawable);
     // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
@@ -154,4 +155,4 @@ function test3() {
     window.camera = camera;
 }
 
-test3();
+testObjects();

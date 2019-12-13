@@ -18,22 +18,22 @@ class Snake {
 		this._positioning_stack.push(this.player.positioning);
 	}
 
-	forward() {
-		this.body[0].translateZ(-1);
+	forward(steps=-1) {
+		this.body[0].translateZ(steps);
 	}
 
-	backward() {
-		this.body[0].translateZ(1);
+	backward(steps=1) {
+		this.body[0].translateZ(steps);
 	}
 
-	right() {
-		this.body[0].translateX(1);
-		this.body[0].rotateY(-1);
+	right(steps=1, rotate=-1) {
+		this.body[0].translateX(steps);
+		this.body[0].rotateY(rotate);
 	}
 
-	left() {
-		this.body[0].translateX(-1);
-		this.body[0].rotateY(1);
+	left(steps=-1, rotate=1) {
+		this.body[0].translateX(steps);
+		this.body[0].rotateY(rotate);
 	}
 
 
