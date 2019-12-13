@@ -10,7 +10,9 @@ class SnakeBody extends Drawable {
      */
 
     constructor(snake) {
-        var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
+        // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
+        var texture = new THREE.TextureLoader().load( '../assets/images.jpeg' );
+
 
         super(new THREE.SphereGeometry(0.5, 10, 10), new THREE.MeshBasicMaterial({ map: texture})); // TODO: implement
         
