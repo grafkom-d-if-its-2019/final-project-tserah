@@ -9,20 +9,21 @@ class SnakeBody extends Drawable {
      * @param {Snake} snake 
      */
 
-    constructor(snake, x=0, z=0) {
+    constructor(snake) {
         var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
-
 
         super(new THREE.SphereGeometry(0.5, 10, 10), new THREE.MeshBasicMaterial({ map: texture})); // TODO: implement
         
         if(snake == null){
-            this.position.setX(x);
-            this.position.setZ(z);            
+            this.position.setX(0);
+            this.position.setZ(0);            
         }
         else{
             this.snake = snake;
+            console.log(snake);
+            window.snake = snake;
             this.position.setX(0);
-            this.position.setZ(snake.position.z + 1);
+            this.position.setZ(this.snake.player.positioning.z + 1);
         }
 
     }
