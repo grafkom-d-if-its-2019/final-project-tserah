@@ -26,13 +26,13 @@ class Snake {
 		this.body[0].translateZ(steps);
 	}
 
-	right(steps=1, rotate=-1) {
-		this.body[0].translateX(steps);
+	right(rotate=-1) {
+		// this.body[0].translateX(steps);
 		this.body[0].rotateY(rotate);
 	}
 
-	left(steps=-1, rotate=1) {
-		this.body[0].translateX(steps);
+	left(rotate=1) {
+		// this.body[0].translateX(steps);
 		this.body[0].rotateY(rotate);
 	}
 

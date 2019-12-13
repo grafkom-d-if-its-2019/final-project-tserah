@@ -18,11 +18,10 @@ class SnakeBody extends Drawable {
         
         if(snake == null){
             this.position.setX(0);
-            this.position.setZ(0);            
+            this.position.setZ(0);
         }
         else{
             this.snake = snake;
-            console.log(snake);
             window.snake = snake;
             this.position.setX(0);
             this.position.setZ(this.snake.player.positioning.z + 1);
