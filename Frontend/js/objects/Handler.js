@@ -130,7 +130,7 @@ export default class Handler {
     static registerFrameCallback(callback) {
         if (callback instanceof Function) {
             this.frameRefreshCallbacks.push(callback);
-        }
+        } else throw Error("Wrong type");
     }
 
     static removeFrameCallback(callback) {
