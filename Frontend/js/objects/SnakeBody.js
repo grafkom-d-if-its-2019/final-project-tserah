@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import Drawable from './Drawable';
 import Snake from './Snake';
+import Food from './Food';
 
 class SnakeBody extends Drawable {
     /**
@@ -29,6 +30,7 @@ class SnakeBody extends Drawable {
         }
 
     }
+
 }
 
 export default SnakeBody;

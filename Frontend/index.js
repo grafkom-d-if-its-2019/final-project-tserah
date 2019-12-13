@@ -7,6 +7,7 @@ import Wall from './js/objects/Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import SnakeBody from './js/objects/SnakeBody';
+import Player from './js/objects/Player';
 
 Handler.init();
 
@@ -54,11 +55,14 @@ function testObjects() {
     Handler.registerViewport(new Viewport(0.5, 0, 0.5, 1, camera1));
     Handler.registerViewport(new Viewport(0, 0, 0.5, 1, camera2));
 
-    var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
-    console.log(testDrawable);
-    var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
-    objectB.position.x = -3;
-    console.log(objectB);
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    var player = new Player('test', geometry, material);
+    // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
+    // console.log(testDrawable);
+    // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
+    // objectB.position.x = -3;
+    // console.log(objectB);
     
     
     window.Handler = Handler;
@@ -81,6 +85,7 @@ function testObjects() {
                 keyActions.forward.enabled = false;
                 keyActions.left.enabled = true;
                 keyActions.right.enabled = true;
+                player.backward();
             }
         },
         // Increase speed
@@ -92,6 +97,7 @@ function testObjects() {
                 keyActions.backward.enabled = false;
                 keyActions.left.enabled = true;
                 keyActions.right.enabled = true;
+                player.forward();
             }
         },
         'right': {
@@ -102,6 +108,7 @@ function testObjects() {
                 keyActions.left.enabled = false;
                 keyActions.forward.enabled = true;
                 keyActions.backward.enabled = true;
+                player.right();
             }
         },
         'left': {
@@ -112,6 +119,7 @@ function testObjects() {
                 keyActions.right.enabled = false;
                 keyActions.backward.enabled = true;
                 keyActions.forward.enabled = true;
+                player.left();
             }
         },
     };
@@ -259,14 +267,15 @@ function test2() {
 
 function test3() {
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.y = 1;
     window.camera = camera;
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera));
     window.Handler = Handler;
-
     var wall = new Wall(50, 50, X_AXIS);
-    window.wall = wall;
+    // window.wall = wall;
+    window.camera = camera;
 }
 
 // testObjects();
 body();
+test3();
