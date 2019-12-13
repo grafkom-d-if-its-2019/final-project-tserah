@@ -5,7 +5,6 @@ import Food from './Food';
 import Positioning from './Positioning';
 import Wall from './Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from '../Constants';
-import FrameCallback from './FrameCallback';
 
 function removeArr(arr) {
     var what, a = arguments, L = a.length, ax;
@@ -34,8 +33,8 @@ export default class Handler {
 
     static lastAnimatedTimestamp;
 
-    /** @type {FrameCallback[]} */
-    static frameCallbacks;
+    /** @type {Function[]} */
+    static frameRefreshCallbacks;
 
     static controller;
 
@@ -53,7 +52,7 @@ export default class Handler {
         this.lastAnimatedTimestamp = performance.now();
         this.framerate = 0;
         /** @type {Function[]} */
-        this.frameCallbacks = new Array();
+        this.frameRefreshCallbacks = new Array();
         this.animate();
     }
 
@@ -78,8 +77,8 @@ export default class Handler {
         this.lastAnimatedTimestamp = performance.now();
         requestAnimationFrame(this.animate);
         this.checkCollision();
-        this.frameCallbacks.forEach(frameCallback => {
-            frameCallback.callback();
+        this.frameRefreshCallbacks.forEach(callback => {
+            callback();
         });
         this.viewports.forEach(drawer => {
             let left = Math.floor(window.innerWidth * drawer.viewport_left);
@@ -128,18 +127,14 @@ export default class Handler {
         this.viewports.push(drawer);
     }
 
-    /**
-     * 
-     * @param {FrameCallback} frameCallback 
-     */
-    static registerFrameCallback(frameCallback) {
-        if (frameCallback instanceof FrameCallback) {
-            this.frameCallbacks.push(frameCallback);
+    static registerFrameCallback(callback) {
+        if (callback instanceof Function) {
+            this.frameRefreshCallbacks.push(callback);
         }
     }
 
     static removeFrameCallback(callback) {
-        removeArr(this.frameCallbacks, callback);
+        removeArr(this.frameRefreshCallbacks, callback);
     }
 
     static generateFood() { // nunggu food
