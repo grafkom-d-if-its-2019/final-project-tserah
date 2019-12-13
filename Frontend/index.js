@@ -144,15 +144,14 @@ function testObjects() {
     }
 }
 
-function test3() {
+function contohMapDenganTembok() {
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.y = 1;
-    window.camera = camera;
+
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera));
     window.Handler = Handler;
-    var wall = new Wall(50, 50, X_AXIS);
-    // window.wall = wall;
-    window.camera = camera;
+    
+    Handler.drawWalls();
 }
 
 testObjects();
