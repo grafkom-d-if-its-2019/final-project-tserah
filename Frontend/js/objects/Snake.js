@@ -8,7 +8,7 @@ class Snake {
 	 *
 	 * @param {Player} player
 	 */
-	constructor(player, geometry, material) {
+	constructor(player) {
 		/** @type {SnakeBody[]} */
 		this.body = new Array();
 		this.player = player;

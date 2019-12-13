@@ -55,8 +55,6 @@ function testObjects() {
     Handler.registerViewport(new Viewport(0.5, 0, 0.5, 1, camera1));
     Handler.registerViewport(new Viewport(0, 0, 0.5, 1, camera2));
 
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     var player = new Player('test');
     window.player = player;
     // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
