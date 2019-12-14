@@ -16,36 +16,7 @@ Multiplayer.init();
  * Socket Client
  *****************************/
 
-// Flag ready
-let ready = false;
-let room = 'roomku'; // default room
-
-// Ask username
-// const username = window.prompt('Username');
-const username = 'test';
-
-// Listen to server
-// var socket = io('http://localhost:8000');
-
-// // Create session ID
-// var userID = 'abcd';
-
-// socket.on('connect', () => {
-//     console.log("User connected");
-//     userID = socket.id;
-//     console.log("User ID: " + userID);
-// });
-// // Ask room
-// // const room = window.alert('Enter room name');
-// socket.emit('getRoom', room);
-
-// socket.on('joined', (room, id) => {
-//     console.log(id + " has joined the room " + room);
-// });
-// socket.on('ready', () => {
-//     ready = true; // Set ready to play
-// });
-// TODO: Buat ready or not
+// empty
 
 /*********************************
  * Controller section
@@ -133,13 +104,13 @@ function append() {
 
 function testObjects() {
     window.THREE = THREE;
-    
+
     Handler.drawWalls();
 
     // var player;
     console.log("Loading map...");
 
-    Multiplayer.newPlayer(username);
+    // Multiplayer.newPlayer(username);
     // setTimeout(function () {
     //     player = new Player('test');
     //     player.positioning.speed = 3;

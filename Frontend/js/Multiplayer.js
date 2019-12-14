@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import Handler from "./objects/Handler";
 import Viewport from './objects/Viewport';
 import Player from './objects/Player';
+import io from 'socket.io-client';
 
 export default class Multiplayer {
 
@@ -16,6 +17,21 @@ export default class Multiplayer {
 		this.overviewCamera.position.y = 15;
 		Handler.registerViewport(new Viewport(0, 0.5, 1, 0.5, this.overviewCamera));
 		this.players = new Array();
+
+		// Initialize socket
+		console.log("Connecting...");
+		this.socket = io('http://localhost:8000');
+		var local_socket = this.socket;
+		this.socket.on('connect', (function () {
+			console.log("Connected.", this.socket);
+			this.socket.emit("iamhost");
+		}).bind(this));
+		this.socket.on('log', function (emission) {
+			console.log('Server Log:', emission);
+		});
+		this.socket.on('new_player', function(request){
+			console.log("Player " + request.name + ' tries to join');
+		});
 	}
 	/**
 	 * 
