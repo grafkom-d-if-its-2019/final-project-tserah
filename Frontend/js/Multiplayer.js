@@ -29,7 +29,7 @@ export default class Multiplayer {
 	static newPlayer(name) {
 		this.name = name;
 		this.players[name] = new Player(name);
-		this.players[name].positioning.speed = 1;
+		this.players[name].positioning.speed = 3;
 		this.position = this.players[name].positioning;
 		
 		window.camera = this.players[name].camera;
