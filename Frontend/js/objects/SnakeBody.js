@@ -36,7 +36,13 @@ class SnakeBody extends Drawable {
             this.snake.onCollideWithFood();
         }
         else if (drawable instanceof SnakeBody) {
-            this.snake.onCollideWithSnake(drawable);
+            let index1 =this.snake.body.indexOf(drawable);
+            let index2 =this.snake.body.indexOf(this);
+            let delta=index2-index1;
+            delta = delta*delta;
+            if((index1 == -1 || (delta != 1)) && index2 == 0){
+                this.snake.onCollideWithSnake(drawable, this);
+            }
         }
         else if (drawable instanceof Wall) {
             console.log("nabrak tembok");

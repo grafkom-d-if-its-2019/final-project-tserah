@@ -93,13 +93,8 @@ class Snake {
 	 * 
 	 * @param {SnakeBody} snakeBody 
 	 */
-	onCollideWithSnake(snakeBody) {
-        if (snakeBody.snake.player != this.player)
-        this.body.forEach((bodyMember, index) => {
-            bodyMember.destroy();
-		});
-        // if (snakeBody.snake != this)
-       
+	onCollideWithSnake(snakeBody, selfBody) {
+        bodyMember.destroy();
 			// this.player.onDie();
 	}
 }
