@@ -66,46 +66,30 @@ var keyActions = {
     'backward': {
         enabled: true,
         action: function () {
-            // snake.back();
             console.log('mundur');
-            // keyActions.forward.enabled = false;
-            // keyActions.left.enabled = true;
-            // keyActions.right.enabled = true;
-            backward();
+            player.backward();
         }
     },
     // Increase speed
     'forward': {
         enabled: true,
         action: function () {
-            // snake.forward();
             console.log('maju');
-            // keyActions.backward.enabled = false;
-            // keyActions.left.enabled = true;
-            // keyActions.right.enabled = true;
-            forward();
+            player.forward();
         }
     },
     'right': {
         enabled: true,
         action: function () {
-            // snake.right();
             console.log('kanan');
-            // keyActions.left.enabled = false;
-            // keyActions.forward.enabled = true;
-            // keyActions.backward.enabled = true;
-            right();
+            player.right();
         }
     },
     'left': {
         enabled: true,
         action: function () {
-            // snake.left();
             console.log('kiri');
-            // keyActions.right.enabled = false;
-            // keyActions.backward.enabled = true;
-            // keyActions.forward.enabled = true;
-            left();
+            player.left();
         }
     },
     'append': {
