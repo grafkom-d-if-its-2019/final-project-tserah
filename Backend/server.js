@@ -9,13 +9,25 @@ var app = http.createServer(function (req, res) {
 }).listen(8000);
 
 var io = socketIO.listen(app);
+function iolog(socket, item) {
+    socket.emit("log",item);
+}
+
+var gameHostSocket = null;
+
 io.sockets.on('connection', (socket) => {
-    function log() {
-        var array = ['[----From Server----]'];
-        array.push.apply(array, arguments);
-        socket.emit('log', array);
-    };
+    iolog(socket, true);
+    socket.on('join', function (request){
+        iolog(socket, "Join acknowledged");
+        gameHostSocket.emit("new_player", {name: request.name});
+    });
 
-    log("Hellow");
+    socket.on('iamhost', function(){
+        gameHostSocket = socket;
+        iolog(socket, "Host acknowledged");
+    });
 
+    socket.on('controller', control=>{
+        gameHostSocket.emit('controller', control);
+    });
 });

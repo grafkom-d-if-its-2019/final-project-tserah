@@ -16,36 +16,19 @@ Multiplayer.init();
  * Socket Client
  *****************************/
 
-// Flag ready
-let ready = false;
-let room = 'roomku'; // default room
-
-// Ask username
-// const username = window.prompt('Username');
-const username = 'test';
-
-// Listen to server
-// var socket = io('http://localhost:8000');
-
-// // Create session ID
-// var userID = 'abcd';
-
-// socket.on('connect', () => {
-//     console.log("User connected");
-//     userID = socket.id;
-//     console.log("User ID: " + userID);
-// });
-// // Ask room
-// // const room = window.alert('Enter room name');
-// socket.emit('getRoom', room);
-
-// socket.on('joined', (room, id) => {
-//     console.log(id + " has joined the room " + room);
-// });
-// socket.on('ready', () => {
-//     ready = true; // Set ready to play
-// });
-// TODO: Buat ready or not
+Multiplayer.socket.on('controller', control=>{
+    if(control.action == 'forward'){
+        Multiplayer.players[control.name].forward();
+    }else if(control.action == 'backward'){
+        Multiplayer.players[control.name].backward();
+    }else if(control.action == 'left'){
+        Multiplayer.players[control.name].left();
+    }else if(control.action == 'right'){
+        Multiplayer.players[control.name].right();
+    }else{
+        console.log('----ERROR CONTROLLER----');
+    }
+});
 
 /*********************************
  * Controller section
@@ -110,23 +93,23 @@ function onKeyPressDown(e) {
 document.addEventListener('keydown', onKeyPressDown, false);
 
 function forward() {
-    Multiplayer.players[username].forward();
+    Multiplayer.players[test_username].forward();
 }
 
 function backward() {
-    Multiplayer.players[username].backward();
+    Multiplayer.players[test_username].backward();
 }
 
 function left() {
-    Multiplayer.players[username].left();
+    Multiplayer.players[test_username].left();
 }
 
 function right() {
-    Multiplayer.players[username].right();
+    Multiplayer.players[test_username].right();
 }
 
 function append() {
-    Multiplayer.players[username].snake.appendBody();
+    Multiplayer.players[test_username].snake.appendBody();
 }
 
 /****************************************************************************************/
@@ -135,7 +118,7 @@ function testObjects() {
     Handler.drawWalls();
     console.log("Loading map...");
 
-    Multiplayer.newPlayer(username);
+    // Multiplayer.newPlayer(username);
 
     window.Handler = Handler;
 

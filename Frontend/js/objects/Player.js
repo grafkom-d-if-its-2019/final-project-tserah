@@ -11,14 +11,17 @@ class Player {
      */
     constructor(name) {
         this.name = name;
+
+        // Default position
+        this.positioning = new Positioning(0, 0, 0, 0.1);
+
+        // Default camera view
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // TODO: benerin
         this.camera.rotateX(-Math.PI / 4);
-        this.camera.position.y = 15;
+        this.camera.updateProjectionMatrix();
 
-        this.positioning = new Positioning(0, 0, 90, 0.1);
-        
+        // Player create snake
         this.snake = new Snake(this);
-        
 
         // Register animate di Handler
         Handler.registerFrameCallback(this.move.bind(this));
@@ -26,14 +29,17 @@ class Player {
 
     // Mengatur movement
     move() {
-        // X,Y baru
-        this.positioning.z += this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate);
-        // this.positioning.x = this.positioning.speed * Math.sin(this.positioning.orientation) * (1 / Handler.framerate);
+        var deltaRotate = this.positioning.orientation * (10/Handler.framerate)
+        this.snake.move(new Positioning(0, 0, deltaRotate, this.positioning.speed * Math.cos(90) * (1 / Handler.framerate)));
+        this.positioning.orientation-=deltaRotate;
 
-        this.snake.move(new Positioning(0, 0, 0, this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate)));
+        this.camera.position.set(this.snake.body[0].position.x, 2, this.snake.body[0].position.z);
+        this.camera.rotation.set(this.snake.body[0].rotation.x, this.snake.body[0].rotation.y, this.snake.body[0].rotation.z);
+        this.camera.translateZ(5);
 
-        // this.camera.z = this.positioning.z;
-        // this.camera.lookAt(this.positioning.z);
+        this.camera.lookAt(this.snake.body[0].position.x, -2, this.snake.body[0].position.z);
+
+        this.camera.updateProjectionMatrix();
     }
 
     forward() {
@@ -41,15 +47,15 @@ class Player {
     }
 
     left() {
-        this.positioning.x = 0.25;
-        var rotate = this.positioning.x * Math.PI;
-        this.snake.move(new Positioning(0, 0, rotate, 0));
+        var rotate = (1/16) * Math.PI;
+        this.positioning.orientation+=rotate;
+        // this.snake.move(new Positioning(0, 0, rotate, 0));
     }
 
     right() {
-        this.positioning.x = -0.25;
-        var rotate = this.positioning.x * Math.PI;
-        this.snake.move(new Positioning(0, 0, rotate, 0));
+        var rotate = -(1/16) * Math.PI;
+        this.positioning.orientation+=rotate;
+        // this.snake.move(new Positioning(0, 0, rotate, 0));
     }
 
     backward() {
