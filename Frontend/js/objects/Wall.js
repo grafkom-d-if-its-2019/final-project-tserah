@@ -13,7 +13,7 @@ export default class Wall extends Drawable {
      */
     constructor(width, height, faceAxis) {
         let texture = new THREE.TextureLoader().load('../assets/red-grid.svg');
-        let texture2 = new THREE.TextureLoader().load('../assets/1.jpg');
+        let texture2 = new THREE.TextureLoader().load('../assets/3.jpg');
 
         switch (faceAxis) {
             case X_AXIS:
