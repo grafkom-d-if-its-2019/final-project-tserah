@@ -147,9 +147,9 @@ export default class Handler {
     }
 
     static generateFood() {
-        var coor = Math.floor(Math.random() * 25);
+        var coor = Math.floor(Math.random() * 25)+1
         coor *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
-        var coor2 = Math.floor(Math.random() * 25);
+        var coor2 = Math.floor(Math.random() * 25)+1;
         coor2 *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
         console.log(coor)
         console.log(coor2)

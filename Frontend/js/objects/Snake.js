@@ -96,9 +96,9 @@ class Snake {
 	 */
 	onCollideWithSnake() {
         console.log("tabrakk");
-        this.body.forEach((bodyMember, index) => {
-            bodyMember.destroy();
-        });
+        // this.body.forEach((bodyMember, index) => {
+        //     bodyMember.destroy();
+        // });
     }
     onCollideWithWall() {
         console.log("tembok");

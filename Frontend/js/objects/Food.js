@@ -11,7 +11,7 @@ export default class Food extends Drawable {
      */
     constructor(positioning) {  
         var texture = new THREE.TextureLoader().load( '../assets/2.png' );
-        super(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({map : texture}));
+        super(new THREE.SphereGeometry(0.2, 32, 32), new THREE.MeshBasicMaterial({map : texture}));
         this.position.setX(positioning.x);
         this.position.setY(0.2);
         this.position.setZ(positioning.z);
