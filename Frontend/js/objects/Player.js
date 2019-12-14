@@ -29,9 +29,9 @@ class Player {
 
     // Mengatur movement
     move() {
-        var deltaRotate = this.positioning.orientation * (10/Handler.framerate)
+        var deltaRotate = this.positioning.orientation * (10 / Handler.framerate)
         this.snake.move(new Positioning(0, 0, deltaRotate, this.positioning.speed * Math.cos(90) * (1 / Handler.framerate)));
-        this.positioning.orientation-=deltaRotate;
+        this.positioning.orientation -= deltaRotate;
 
         this.camera.position.set(this.snake.body[0].position.x, 2, this.snake.body[0].position.z);
         this.camera.rotation.set(this.snake.body[0].rotation.x, this.snake.body[0].rotation.y, this.snake.body[0].rotation.z);
@@ -47,14 +47,14 @@ class Player {
     }
 
     left() {
-        var rotate = (1/16) * Math.PI;
-        this.positioning.orientation+=rotate;
+        var rotate = (1 / 16) * Math.PI;
+        this.positioning.orientation += rotate;
         // this.snake.move(new Positioning(0, 0, rotate, 0));
     }
 
     right() {
-        var rotate = -(1/16) * Math.PI;
-        this.positioning.orientation+=rotate;
+        var rotate = -(1 / 16) * Math.PI;
+        this.positioning.orientation += rotate;
         // this.snake.move(new Positioning(0, 0, rotate, 0));
     }
 
@@ -62,6 +62,14 @@ class Player {
         this.positioning.speed -= 0.2;
     }
 
+    // Freeze player
+    gameover(user) {
+        this.positioning.speed = 0;
+        this.positioning.x = 0;
+        this.positioning.z = 0;
+        this.positioning.orientation = 0;
+        console.log(user + ' GAME OVER');
+    }
 
 }
 
