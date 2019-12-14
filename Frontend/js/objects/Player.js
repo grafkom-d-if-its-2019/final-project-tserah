@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import Positioning from './Positioning';
 import Snake from './Snake';
 import Handler from './Handler';
+import Multiplayer from '../Multiplayer';
 
 class Player {
     /**
@@ -11,7 +12,11 @@ class Player {
     constructor(name) {
         this.name = name;
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // TODO: benerin
+        this.camera.rotateX(-Math.PI / 4);
+        this.camera.position.y = 15;
+
         this.positioning = new Positioning(0, 0, 90, 0.1);
+        
         this.snake = new Snake(this);
         
 
@@ -26,6 +31,9 @@ class Player {
         // this.positioning.x = this.positioning.speed * Math.sin(this.positioning.orientation) * (1 / Handler.framerate);
 
         this.snake.move(new Positioning(0, 0, 0, this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate)));
+
+        // this.camera.z = this.positioning.z;
+        // this.camera.lookAt(this.positioning.z);
     }
 
     forward() {
