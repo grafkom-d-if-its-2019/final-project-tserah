@@ -24,7 +24,7 @@ export default class Multiplayer {
 
 		// Initialize socket
 		console.log("Connecting...");
-		this.socket = io('http://localhost:8000');
+		this.socket = io('http://'+window.location.hostname+':8000');
 		var local_socket = this.socket;
 		this.socket.on('connect', (function () {
 			console.log("Connected.", this.socket);

@@ -10,19 +10,20 @@ var app = http.createServer(function (req, res) {
 
 var io = socketIO.listen(app);
 function iolog(socket, item) {
-    socket.emit("log",item);
+    socket.emit("log", item);
 }
 
 var gameHostSocket = null;
 
 io.sockets.on('connection', (socket) => {
     iolog(socket, true);
-    socket.on('join', function (request){
+    socket.on('join', function (request) {
         iolog(socket, "Join acknowledged");
-        gameHostSocket.emit("new_player", {name: request.name});
+        if (gameHostSocket)
+            gameHostSocket.emit("new_player", { name: request.name });
     });
 
-    socket.on('iamhost', function(){
+    socket.on('iamhost', function () {
         gameHostSocket = socket;
         iolog(socket, "Host acknowledged");
     });
