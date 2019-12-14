@@ -8,6 +8,7 @@ import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import SnakeBody from './js/objects/SnakeBody';
 import Player from './js/objects/Player';
+import Multiplayer from './js/Multiplayer';
 
 Handler.init();
 
@@ -202,19 +203,14 @@ function onKeyPressDown(e) {
 function testObjects() {
     window.THREE = THREE;
     document.addEventListener('keydown', onKeyPressDown, false);
-    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-    camera1.position.z = 5;
-
-    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
+    Multiplayer.init();
     Handler.drawWalls();
 
     var player;
     console.log("Loading map...");
     setTimeout(function () {
         player = new Player('test');
-        player.positioning.speed = 0.5;
+        player.positioning.speed = 3;
         window.player = player;
     },1000);
 
@@ -228,7 +224,7 @@ function testObjects() {
     window.Handler = Handler;
 
     // Controller Camera
-    let control = new OrbitControls(camera1, Handler.renderer.domElement);
+    let control = new OrbitControls(Multiplayer.overviewCamera, Handler.renderer.domElement);
     // TODO: pisah controller pake 2 canvas?
     // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
     // Handler.controller = control;
