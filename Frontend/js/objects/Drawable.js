@@ -1,7 +1,17 @@
 import * as THREE from 'three';
 import Handler from './Handler';
 
+{ // HELPER
+    THREE.Sphere.__closest = new THREE.Vector3();
+    THREE.Sphere.prototype.intersectsBox = function (box) {
+        // get box closest point to sphere center by clamping
+        THREE.Sphere.__closest.set(this.center.x, this.center.y, this.center.z);
+        THREE.Sphere.__closest.clamp(box.min, box.max);
 
+        var distance = this.center.distanceToSquared(THREE.Sphere.__closest);
+        return distance < (this.radius * this.radius);
+    };
+}
 export default class Drawable extends THREE.Mesh {
     /**
      * 
@@ -19,38 +29,42 @@ export default class Drawable extends THREE.Mesh {
      * 
      * @param {Drawable} drawable 
      */
-    collideWith(drawable) { // TODO: implement
-        var box1;
+    collideWith(drawable) {
+        var bounding1;
         if (this.geometry instanceof THREE.SphereGeometry) {
             this.geometry.computeBoundingSphere();
-            box1 = this.geometry.boundingSphere.clone();
+            bounding1 = this.geometry.boundingSphere.clone();
         }
         else {
             this.geometry.computeBoundingBox();
-            box1 = this.geometry.boundingBox.clone();
+            bounding1 = this.geometry.boundingBox.clone();
         }
-        box1.applyMatrix4(this.matrixWorld);
+        bounding1.applyMatrix4(this.matrixWorld);
 
-        var box2;
+        var bounding2;
         if (drawable.geometry instanceof THREE.SphereGeometry) {
             drawable.geometry.computeBoundingSphere();
-            box2 = drawable.geometry.boundingSphere.clone();
+            bounding2 = drawable.geometry.boundingSphere.clone();
         }
         else {
             drawable.geometry.computeBoundingBox();
-            box2 = drawable.geometry.boundingBox.clone();
+            bounding2 = drawable.geometry.boundingBox.clone();
         }
-        box2.applyMatrix4(drawable.matrixWorld);
-
-        var collides;
-        if (drawable instanceof THREE.SphereGeometry)
-            collides = box1.intersectsSphere(box2);
-        else
-            collides = box1.intersectsBox(box2);
+        bounding2.applyMatrix4(drawable.matrixWorld);
+        var collides = false;
+        if (this.geometry instanceof THREE.SphereGeometry) {
+            if (drawable.geometry instanceof THREE.SphereGeometry)
+                collides = bounding1.intersectsSphere(bounding2);
+            else
+                collides = bounding1.intersectsBox(bounding2);
+        }
+        else if (this.geometry instanceof THREE.BoxGeometry) {
+            if (drawable.geometry instanceof THREE.BoxGeometry)
+                collides = bounding1.intersectsBox(bounding2);
+        }
         if (collides && !this.isInvisible && !drawable.isInvisible) {
             this.onCollide(drawable);
         }
-
         return collides;
     }
 
