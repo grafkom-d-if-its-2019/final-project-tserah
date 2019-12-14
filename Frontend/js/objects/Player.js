@@ -13,41 +13,35 @@ class Player {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // TODO: benerin
         this.positioning = new Positioning(0, 0, 90, 0.05);
         this.snake = new Snake(this);
-        this.positioning.speedZ=0;
-        this.positioning.speedX=0;
     }
 
     // Mengatur movement
     move() {
-        // this.snake.move(this.positioning.speedZ, this.positioning.speedX);
-        // this.positioning.speedZ=0;
-        // this.positioning.speedX=0;
+        // X,Y baru
+        this.positioning.z += this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate);
+        // this.positioning.x = this.positioning.speed * Math.sin(this.positioning.orientation) * (1 / Handler.framerate);
+
+        this.snake.move(new Positioning(0, 0, 0, this.positioning.speed * Math.cos(this.positioning.orientation) * (1 / Handler.framerate)));
     }
 
     forward() {
-        this.positioning.speedZ = -0.5;
-        this.positioning.speedX = 0;
-        this.snake.moveKepala(this.positioning.speedZ, this.positioning.speedX);
+        this.positioning.speed += 0.2;
     }
 
     left() {
-        this.positioning.speedX = -0.25;
-        this.positioning.rotateX= -0.25;
-        this.positioning.speedZ = 0;
-        this.snake.moveKepala(this.positioning.speedZ, this.positioning.speedX);
+        this.positioning.x = 0.25;
+        var rotate = this.positioning.x * Math.PI;
+        this.snake.move(new Positioning(0, 0, rotate, 0));
     }
 
     right() {
-        this.positioning.speedX = 0.25;
-        this.positioning.rotateX= 0.25;
-        this.positioning.speedZ = 0;
-        this.snake.moveKepala(this.positioning.speedZ, this.positioning.speedX);
-    }   
+        this.positioning.x = -0.25;
+        var rotate = this.positioning.x * Math.PI;
+        this.snake.move(new Positioning(0, 0, rotate, 0));
+    }
 
     backward() {
-        this.positioning.speedZ = 0.05;
-        this.positioning.speedX = 0;
-        this.snake.moveKepala(this.positioning.speedZ, this.positioning.speedX);
+        this.positioning.speed -= 0.2;
     }
 
 
