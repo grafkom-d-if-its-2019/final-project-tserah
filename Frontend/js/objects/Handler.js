@@ -138,10 +138,17 @@ export default class Handler {
         removeArr(this.frameRefreshCallbacks, callback);
     }
 
-    static generateFood() { // nunggu food
-        this.drawables.push(new Food(new Positioning())); // TODO: implement
-
+    static generateFood() {
+        var coor = Math.floor(Math.random() * 25);
+        coor *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
+        var coor2 = Math.floor(Math.random() * 25);
+        coor2 *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
+        console.log(coor)
+        console.log(coor2)
+        new Food(new Positioning(coor,coor2,0,0)); // TODO: implement
     }
+
+
 
     static checkCollision() {
         this.getDrawables().forEach(drawable => {
