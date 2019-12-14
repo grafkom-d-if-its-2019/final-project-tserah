@@ -11,7 +11,7 @@ class SnakeBody extends Drawable {
      * @param {Snake} snake 
      * @param {Positioning} positioning 
      */
-    constructor(snake, positioning) {
+    constructor(snake, positioning, _delay) {
         // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
         var texture = new THREE.TextureLoader().load( '../assets/images.jpeg' );
         super(new THREE.SphereGeometry(0.5, 100, 100), new THREE.MeshBasicMaterial({ map: texture})); // TODO: implement
@@ -30,6 +30,7 @@ class SnakeBody extends Drawable {
             this.position.setZ(positioning.z);
         }
         this.position.setY(0.52);
+        this._delay = _delay;
 
     }
 

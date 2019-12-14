@@ -43,8 +43,8 @@ class Snake {
 				if (this._command_queue[index + 1] !== undefined)
 					this._command_queue[index + 1].push(cmd);
 			} else {
-				if (bodyMember._delay != 0) {
-					bodyMember._delay--;
+				if (this._delay != 0) {
+					this._delay--;
 				}
 				else {
 					if (bodyMember.isInvisible)
@@ -66,11 +66,11 @@ class Snake {
 		this.body.push(new SnakeBody(
 			this,
 			new Positioning(
-				this.body[this.body.length - 1].position.x,
-				this.body[this.body.length - 1].position.z,
+				this.body[this.body.length - 1].position.x -0.4,
+				this.body[this.body.length - 1].position.z - 0.4,
 				0,
 				0
-			), 35
+			)
 		));
 		this.body[this.body.length - 1].rotation.set(
 			this.body[this.body.length - 2].rotation.x,
@@ -78,7 +78,7 @@ class Snake {
 			this.body[this.body.length - 2].rotation.z
 		);
 		this._command_queue.push(new Array());
-		// bodyMember._delay = 120;
+		this._delay = 120;
 	}
 
 	onCollideWithFood() {
