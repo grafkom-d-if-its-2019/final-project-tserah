@@ -6,13 +6,8 @@ import io from 'socket.io-client';
 import Wall from './js/objects/Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-<<<<<<< HEAD
-import Food from './js/objects/Food';
-import Positioning from './js/objects/Positioning';
-=======
 import SnakeBody from './js/objects/SnakeBody';
 import Player from './js/objects/Player';
->>>>>>> 8183fcdf2a11e999689f2dcf2bcec57a19a631cc
 
 Handler.init();
 
@@ -228,19 +223,6 @@ function testObjects() {
     // objectB.position.x = -3;
     // console.log(objectB);
 
-<<<<<<< HEAD
-    // Handler.registerViewport(new Viewport(0, 0, 0.5, 1, camera1));
-    Handler.registerViewport(new Viewport(0.5, 0, 0.5, 1, camera2));
-
-    var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }), true  );
-    console.log(testDrawable);
-    var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }));
-    objectB.position.x = -3;
-    console.log(objectB);
-    
-=======
-
->>>>>>> 8183fcdf2a11e999689f2dcf2bcec57a19a631cc
     window.Handler = Handler;
 
     // Controller Camera
@@ -298,12 +280,6 @@ function contohMapDenganTembok() {
     Handler.drawWalls();
 }
 
-<<<<<<< HEAD
-// testObjects();
-new_food();
-// test2();
-=======
 testObjects();
 // coba();
 // contohMapDenganTembok();
->>>>>>> 8183fcdf2a11e999689f2dcf2bcec57a19a631cc
