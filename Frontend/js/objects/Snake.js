@@ -15,14 +15,14 @@ class Snake {
 		let head = new SnakeBody(this, new Positioning(0, 0, 0, 0)); // TODO: randomize
 		this.body.push(head); 
 		window.head = head;
-		this.body[0].isInvisible = false;
 
 		/** @type {Positioning[][]} */
 		this._command_queue = new Array();
 		this._command_queue.push(new Array());
 
 		/** @type {Number} */
-		this._delay = 0;
+        this._delay = 360
+        this.isDeath = false;
 	}
 
 	/**
@@ -33,7 +33,13 @@ class Snake {
 		let prevBodyMember = null;
 		this._command_queue[0].push(move_command);
 		this.body.forEach((bodyMember, index) => {
-			if (index == 0) {
+            if(this._delay <= 1 && this.isDeath == false) {
+                this.isDeath = true;
+                this.onCollideWithSnake();
+            }
+            this._delay--;
+
+            if (index == 0) {
 				var cmd = this._command_queue[index].shift();
 				bodyMember.translateZ(cmd.speed);
 				bodyMember.rotateY(cmd.orientation);
@@ -47,8 +53,6 @@ class Snake {
 					bodyMember._delay--;
 				}
 				else {
-					if (bodyMember.isInvisible)
-						bodyMember.isInvisible = false;
 					var cmd = this._command_queue[index].shift();
 					bodyMember.translateZ(cmd.speed);
 					bodyMember.rotateY(cmd.orientation);
@@ -90,8 +94,13 @@ class Snake {
 	 * @param {SnakeBody} snakeBody 
 	 */
 	onCollideWithSnake(snakeBody) {
-		if (snakeBody.snake != this)
-			this.player.onDie();
+        if (snakeBody.snake.player != this.player)
+        this.body.forEach((bodyMember, index) => {
+            bodyMember.destroy();
+		});
+        // if (snakeBody.snake != this)
+       
+			// this.player.onDie();
 	}
 }
 

@@ -15,9 +15,6 @@ class SnakeBody extends Drawable {
         // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
         var texture = new THREE.TextureLoader().load( '../assets/images.jpeg' );
         super(new THREE.SphereGeometry(0.5, 100, 100), new THREE.MeshBasicMaterial({ map: texture})); // TODO: implement
-
-
-        this.isInvisible = true;
         
         if(snake == null){
             this.position.setX(0);
