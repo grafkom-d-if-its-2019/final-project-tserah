@@ -23,6 +23,7 @@ class Snake {
 		/** @type {Number} */
         this._delay = 360
         this.isDeath = false;
+        this.nomor = 1;
 	}
 
 	/**
@@ -74,7 +75,7 @@ class Snake {
 				this.body[this.body.length - 1].position.z,
 				0,
 				0
-			), 35
+			), 35, this.body.length
 		));
 		this.body[this.body.length - 1].rotation.set(
 			this.body[this.body.length - 2].rotation.x,
@@ -93,9 +94,9 @@ class Snake {
 	 * 
 	 * @param {SnakeBody} snakeBody 
 	 */
-	onCollideWithSnake(snakeBody, selfBody) {
+	onCollideWithSnake() {
+        console.log("tabrakk");
         bodyMember.destroy();
-			// this.player.onDie();
 	}
 }
 

@@ -11,7 +11,7 @@ class SnakeBody extends Drawable {
      * @param {Snake} snake 
      * @param {Positioning} positioning 
      */
-    constructor(snake, positioning, _delay) {
+    constructor(snake, positioning, _delay, index = 0) {
         // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
         var texture = new THREE.TextureLoader().load( '../assets/images.jpeg' );
         super(new THREE.SphereGeometry(0.5, 100, 100), new THREE.MeshBasicMaterial({ map: texture})); // TODO: implement
@@ -28,6 +28,7 @@ class SnakeBody extends Drawable {
         }
         this.position.setY(0.52);
         this._delay = _delay;
+        this.index = index;
 
     }
 
@@ -36,12 +37,21 @@ class SnakeBody extends Drawable {
             this.snake.onCollideWithFood();
         }
         else if (drawable instanceof SnakeBody) {
-            let index1 =this.snake.body.indexOf(drawable);
-            let index2 =this.snake.body.indexOf(this);
-            let delta=index2-index1;
-            delta = delta*delta;
-            if((index1 == -1 || (delta != 1)) && index2 == 0){
-                this.snake.onCollideWithSnake(drawable, this);
+            // let index1 =this.snake.body.indexOf(drawable);
+            // let index2 =this.snake.body.indexOf(this);
+            // let delta=index2-index1;
+            // delta = delta*delta;
+            // if((index1 == -1 || (delta != 1)) && index2 == 0){
+            //     this.snake.onCollideWithSnake(drawable, this);
+            // }
+            
+            if(this.snake.nomor != drawable.snake.nomor){
+                this.snake.onCollideWithSnake();
+            }else {
+                let delta = (this.index - drawable.index) 
+                if(delta > 2 || delta < -2){
+                    this.snake.onCollideWithSnake();
+                }
             }
         }
         else if (drawable instanceof Wall) {

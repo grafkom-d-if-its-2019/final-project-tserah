@@ -23,7 +23,7 @@ export default class Multiplayer {
 	 */
 	static newPlayer(name) {
 		this.players[name] = new Player(name);
-		this.players[name].positioning.speed = 1;
+		this.players[name].positioning.speed = 3;
 		console.log(this.players[name].camera);
 		window.player = this.players[name];
 		Handler.registerViewport(new Viewport(0.5 * (this.players.length - 1), 0, 0.5, 0.5, this.players[name].camera));
