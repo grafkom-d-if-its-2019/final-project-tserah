@@ -34,11 +34,11 @@ class Snake {
 		let prevBodyMember = null;
 		this._command_queue[0].push(move_command);
 		this.body.forEach((bodyMember, index) => {
-            if(this._delay <= 1 && this.isDeath == false) {
-                this.isDeath = true;
-                this.onCollideWithSnake();
-            }
-            this._delay--;
+            // if(this._delay <= 1 && this.isDeath == false) {
+            //     this.isDeath = true;
+            //     this.onCollideWithSnake();
+            // }
+            // this._delay--;
 
             if (index == 0) {
 				var cmd = this._command_queue[index].shift();
@@ -96,7 +96,15 @@ class Snake {
 	 */
 	onCollideWithSnake() {
         console.log("tabrakk");
-        bodyMember.destroy();
+        this.body.forEach((bodyMember, index) => {
+            bodyMember.destroy();
+        });
+    }
+    onCollideWithWall() {
+        console.log("tembok");
+        this.body.forEach((bodyMember, index) => {
+            bodyMember.destroy();
+        });
 	}
 }
 

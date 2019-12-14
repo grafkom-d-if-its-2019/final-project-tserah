@@ -10,22 +10,24 @@ var app = http.createServer(function (req, res) {
 
 var io = socketIO.listen(app);
 function iolog(socket, item) {
-    socket.emit("log",item);
+    socket.emit("log", item);
 }
 
 var gameHostSocket = null;
 
 io.sockets.on('connection', (socket) => {
     iolog(socket, true);
-    socket.on('join', function (request){
+    socket.on('join', function (request) {
         iolog(socket, "Join acknowledged");
-        if(gameHostSocket==null){
-            alert('Game Host not connected. Refresh host page.');
+        if (gameHostSocket){
+            gameHostSocket.emit("new_player", { name: request.name });
         }
-        gameHostSocket.emit("new_player", {name: request.name});
+        else{
+            alert('GameHost is disconnect. Please refresh host page.');
+        }
     });
 
-    socket.on('iamhost', function(){
+    socket.on('iamhost', function () {
         gameHostSocket = socket;
         iolog(socket, "Host acknowledged");
     });
