@@ -30,6 +30,8 @@ Multiplayer.socket.on('controller', control=>{
     }
 });
 
+var test_username = "";
+
 /*********************************
  * Controller section
  *********************************/

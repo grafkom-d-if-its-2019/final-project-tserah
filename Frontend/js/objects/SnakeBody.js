@@ -33,6 +33,7 @@ class SnakeBody extends Drawable {
     }
 
     onCollide(drawable) {
+        console.log(drawable);
         if (drawable instanceof Food) {
             this.snake.onCollideWithFood();
         }
@@ -47,10 +48,12 @@ class SnakeBody extends Drawable {
             
             if(this.snake.nomor != drawable.snake.nomor){
                 this.snake.onCollideWithSnake();
+                console.log("r1");
             }else {
                 let delta = (this.index - drawable.index) 
                 if(delta > 2 || delta < -2){
                     this.snake.onCollideWithSnake();
+                    console.log("r2");
                 }
             }
         }

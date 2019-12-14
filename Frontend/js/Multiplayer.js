@@ -56,6 +56,8 @@ export default class Multiplayer {
 		window.player = this.players[name];
 		
 		Handler.registerViewport(new Viewport(0.5 * ((Object.keys(this.players).length - 1)), 0, 0.5, 0.5, this.players[name].camera));
+
+		Handler.generateFood();
 	}
 
 }
