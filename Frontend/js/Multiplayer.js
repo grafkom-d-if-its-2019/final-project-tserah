@@ -35,6 +35,10 @@ export default class Multiplayer {
 		});
 		this.socket.on('new_player', function(request){
 			console.log("Player " + request.name + ' tries to join');
+			Multiplayer.newPlayer(request.name);
+		});
+		this.socket.on("player_leave", function(id){
+			console.log("Socket id " + id + " left");
 		});
 	}
 	/**
