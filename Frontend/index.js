@@ -148,33 +148,21 @@ function append() {
 /****************************************************************************************/
 
 function testObjects() {
-    window.THREE = THREE;
-    
     Handler.drawWalls();
-
-    // var player;
     console.log("Loading map...");
 
     Multiplayer.newPlayer(username);
-    // setTimeout(function () {
-    //     player = new Player('test');
-    //     player.positioning.speed = 3;
-    //     window.player = player;
-    // },1000);
-    // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
-    // console.log(testDrawable);
-    // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
-    // objectB.position.x = -3;
-    // console.log(objectB);
 
     window.Handler = Handler;
 
     // Controller Camera
-    let control = new OrbitControls(Multiplayer.overviewCamera, Handler.renderer.domElement);
+    let controlOverview = new OrbitControls(Multiplayer.overviewCamera, Handler.renderer.domElement);
+    // let control1 = new OrbitCont
+    
     // TODO: pisah controller pake 2 canvas?
     // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
     // Handler.controller = control;
-    window.control = control;
+    window.controlOverview = controlOverview;
 
     function rotate() {
         testDrawable.rotateZ(20);
