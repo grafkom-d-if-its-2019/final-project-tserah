@@ -25,5 +25,5 @@ io.sockets.on('connection', (socket) => {
     socket.on('iamhost', function(){
         gameHostSocket = socket;
         iolog(socket, "Host acknowledged");
-    })
+    });
 });
