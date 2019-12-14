@@ -11,122 +11,46 @@ import Player from './js/objects/Player';
 import Multiplayer from './js/Multiplayer';
 
 Handler.init();
+Multiplayer.init();
+/*****************************
+ * Socket Client
+ *****************************/
 
-function main() {// Flag ready
-    let ready = false;
-    let room = 'roomku'; // default room
+// Flag ready
+let ready = false;
+let room = 'roomku'; // default room
 
-    // Listen to server
-    var socket = io('http://localhost:8000');
-    /*
-    ** Socket Function
-    */
-    // Create session ID
-    var userID = 'abcd';
-    socket.on('connect', () => {
-        console.log("User connected");
-        userID = socket.id;
-        console.log("User ID: " + userID);
-    });
-    // Ask room
-    // const room = window.alert('Enter room name');
-    socket.emit('getRoom', room);
+// Ask username
+// const username = window.prompt('Username');
+const username = 'test';
 
-    socket.on('joined', (room, id) => {
-        console.log(id + " has joined the room " + room);
-    });
-    socket.on('ready', () => {
-        ready = true; // Set ready to play
-    });
-    // TODO: Buat ready or not
-}
-function new_food(){
-    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
-    camera1.position.z = 5;
+// Listen to server
+// var socket = io('http://localhost:8000');
 
-    var pos = new Positioning(0,0);
-    var foods = new Food(pos);
-    console.log(foods);
+// // Create session ID
+// var userID = 'abcd';
 
-    window.Handler = Handler;
-    // Key map
-    var keys = {
-        'KeyW': 'forward',
-        'KeyS': 'backward',
-        'KeyA': 'left',
-        'KeyD': 'right'
-    };
+// socket.on('connect', () => {
+//     console.log("User connected");
+//     userID = socket.id;
+//     console.log("User ID: " + userID);
+// });
+// // Ask room
+// // const room = window.alert('Enter room name');
+// socket.emit('getRoom', room);
 
-    var keyActions = {
-        // Decrease speed?
-        'backward': {
-            enabled: true,
-            action: function () {
-                // snake.back();
-                console.log('mundur');
-                keyActions.forward.enabled = false;
-                keyActions.left.enabled = true;
-                keyActions.right.enabled = true;
-            }
-        },
-        // Increase speed
-        'forward': {
-            enabled: true,
-            action: function () {
-                // snake.forward();
-                console.log('maju');
-                keyActions.backward.enabled = false;
-                keyActions.left.enabled = true;
-                keyActions.right.enabled = true;
-            }
-        },
-        'right': {
-            enabled: true,
-            action: function () {
-                // snake.right();
-                console.log('kanan');
-                keyActions.left.enabled = false;
-                keyActions.forward.enabled = true;
-                keyActions.backward.enabled = true;
-            }
-        },
-        'left': {
-            enabled: true,
-            action: function () {
-                // snake.left();
-                console.log('kiri');
-                keyActions.right.enabled = false;
-                keyActions.backward.enabled = true;
-                keyActions.forward.enabled = true;
-            }
-        },
-    };
+// socket.on('joined', (room, id) => {
+//     console.log(id + " has joined the room " + room);
+// });
+// socket.on('ready', () => {
+//     ready = true; // Set ready to play
+// });
+// TODO: Buat ready or not
 
-    function onKeyPressUp(e) {
-        var keyAction = keyActions[keys[e.code]];
-        if (keyAction && keyAction.enabled) {
-            keyAction.action();
-        }
-    }
-
-    // Controller Camera
-    let control = new OrbitControls(camera1, Handler.renderer.domElement);
-    // TODO: pisah controller pake 2 canvas?
-    window.control = control;
-
-    function rotate() {
-        testDrawable.rotateZ(20);
-    }
-
-    function remove() {
-        testDrawable = testDrawable.destroy();
-    }
-}
-
-/**
+/*********************************
  * Controller section
- */
+ *********************************/
+
 // Key map
 var keys = {
     'KeyW': 'forward',
@@ -147,7 +71,7 @@ var keyActions = {
             // keyActions.forward.enabled = false;
             // keyActions.left.enabled = true;
             // keyActions.right.enabled = true;
-            player.backward();
+            backward();
         }
     },
     // Increase speed
@@ -159,7 +83,7 @@ var keyActions = {
             // keyActions.backward.enabled = false;
             // keyActions.left.enabled = true;
             // keyActions.right.enabled = true;
-            player.forward();
+            forward();
         }
     },
     'right': {
@@ -170,7 +94,7 @@ var keyActions = {
             // keyActions.left.enabled = false;
             // keyActions.forward.enabled = true;
             // keyActions.backward.enabled = true;
-            player.right();
+            right();
         }
     },
     'left': {
@@ -181,13 +105,13 @@ var keyActions = {
             // keyActions.right.enabled = false;
             // keyActions.backward.enabled = true;
             // keyActions.forward.enabled = true;
-            player.left();
+            left();
         }
     },
     'append': {
         enabled: true,
         action: function () {
-            player.snake.appendBody();
+            append();
         }
     }
 };
@@ -199,20 +123,44 @@ function onKeyPressDown(e) {
     }
 }
 
+document.addEventListener('keydown', onKeyPressDown, false);
+
+function forward() {
+    Multiplayer.players[username].forward();
+}
+
+function backward() {
+    Multiplayer.players[username].backward();
+}
+
+function left() {
+    Multiplayer.players[username].left();
+}
+
+function right() {
+    Multiplayer.players[username].right();
+}
+
+function append() {
+    Multiplayer.players[username].snake.appendBody();
+}
+
+/****************************************************************************************/
 
 function testObjects() {
     window.THREE = THREE;
-    document.addEventListener('keydown', onKeyPressDown, false);
-    Multiplayer.init();
+    
     Handler.drawWalls();
 
-    var player;
+    // var player;
     console.log("Loading map...");
-    setTimeout(function () {
-        player = new Player('test');
-        player.positioning.speed = 3;
-        window.player = player;
-    },1000);
+
+    Multiplayer.newPlayer(username);
+    // setTimeout(function () {
+    //     player = new Player('test');
+    //     player.positioning.speed = 3;
+    //     window.player = player;
+    // },1000);
     // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
     // console.log(testDrawable);
     // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
@@ -274,6 +222,31 @@ function contohMapDenganTembok() {
     window.Handler = Handler;
 
     Handler.drawWalls();
+}
+
+function new_food() {
+    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
+    camera1.position.z = 5;
+
+    var pos = new Positioning(0, 0);
+    var foods = new Food(pos);
+    console.log(foods);
+
+    window.Handler = Handler;
+
+    // Controller Camera
+    let control = new OrbitControls(camera1, Handler.renderer.domElement);
+    // TODO: pisah controller pake 2 canvas?
+    window.control = control;
+
+    function rotate() {
+        testDrawable.rotateZ(20);
+    }
+
+    function remove() {
+        testDrawable = testDrawable.destroy();
+    }
 }
 
 testObjects();
