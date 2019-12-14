@@ -6,8 +6,13 @@ import io from 'socket.io-client';
 import Wall from './js/objects/Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+<<<<<<< HEAD
 import Food from './js/objects/Food';
 import Positioning from './js/objects/Positioning';
+=======
+import SnakeBody from './js/objects/SnakeBody';
+import Player from './js/objects/Player';
+>>>>>>> 8183fcdf2a11e999689f2dcf2bcec57a19a631cc
 
 Handler.init();
 
@@ -123,16 +128,107 @@ function new_food(){
     }
 }
 
+/**
+ * Controller section
+ */
+// Key map
+var keys = {
+    'KeyW': 'forward',
+    'KeyS': 'backward',
+    'KeyA': 'left',
+    'KeyD': 'right',
+    'KeyB': 'append',
+};
+
+var keyActions = {
+    // TODO: delete on prod
+    // Decrease speed
+    'backward': {
+        enabled: true,
+        action: function () {
+            // snake.back();
+            console.log('mundur');
+            // keyActions.forward.enabled = false;
+            // keyActions.left.enabled = true;
+            // keyActions.right.enabled = true;
+            player.backward();
+        }
+    },
+    // Increase speed
+    'forward': {
+        enabled: true,
+        action: function () {
+            // snake.forward();
+            console.log('maju');
+            // keyActions.backward.enabled = false;
+            // keyActions.left.enabled = true;
+            // keyActions.right.enabled = true;
+            player.forward();
+        }
+    },
+    'right': {
+        enabled: true,
+        action: function () {
+            // snake.right();
+            console.log('kanan');
+            // keyActions.left.enabled = false;
+            // keyActions.forward.enabled = true;
+            // keyActions.backward.enabled = true;
+            player.right();
+        }
+    },
+    'left': {
+        enabled: true,
+        action: function () {
+            // snake.left();
+            console.log('kiri');
+            // keyActions.right.enabled = false;
+            // keyActions.backward.enabled = true;
+            // keyActions.forward.enabled = true;
+            player.left();
+        }
+    },
+    'append': {
+        enabled: true,
+        action: function () {
+            player.snake.appendBody();
+        }
+    }
+};
+
+function onKeyPressDown(e) {
+    var keyAction = keyActions[keys[e.code]];
+    if (keyAction && keyAction.enabled) {
+        keyAction.action();
+    }
+}
+
 
 function testObjects() {
-    document.addEventListener('keyup', onKeyPressUp, false);
+    window.THREE = THREE;
+    document.addEventListener('keydown', onKeyPressDown, false);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
     camera1.position.z = 5;
 
-    var camera2 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera2.position.z = 5;
-    camera2.position.x = 2;
+    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
+    Handler.drawWalls();
 
+    var player;
+    console.log("Loading map...");
+    setTimeout(function () {
+        player = new Player('test');
+        player.positioning.speed = 0.5;
+        window.player = player;
+    },1000);
+    // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
+    // console.log(testDrawable);
+    // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
+    // objectB.position.x = -3;
+    // console.log(objectB);
+
+<<<<<<< HEAD
     // Handler.registerViewport(new Viewport(0, 0, 0.5, 1, camera1));
     Handler.registerViewport(new Viewport(0.5, 0, 0.5, 1, camera2));
 
@@ -142,72 +238,15 @@ function testObjects() {
     objectB.position.x = -3;
     console.log(objectB);
     
+=======
+
+>>>>>>> 8183fcdf2a11e999689f2dcf2bcec57a19a631cc
     window.Handler = Handler;
-
-    // Key map
-    var keys = {
-        'KeyW': 'forward',
-        'KeyS': 'backward',
-        'KeyA': 'left',
-        'KeyD': 'right'
-    };
-
-    var keyActions = {
-        // Decrease speed?
-        'backward': {
-            enabled: true,
-            action: function () {
-                // snake.back();
-                console.log('mundur');
-                keyActions.forward.enabled = false;
-                keyActions.left.enabled = true;
-                keyActions.right.enabled = true;
-            }
-        },
-        // Increase speed
-        'forward': {
-            enabled: true,
-            action: function () {
-                // snake.forward();
-                console.log('maju');
-                keyActions.backward.enabled = false;
-                keyActions.left.enabled = true;
-                keyActions.right.enabled = true;
-            }
-        },
-        'right': {
-            enabled: true,
-            action: function () {
-                // snake.right();
-                console.log('kanan');
-                keyActions.left.enabled = false;
-                keyActions.forward.enabled = true;
-                keyActions.backward.enabled = true;
-            }
-        },
-        'left': {
-            enabled: true,
-            action: function () {
-                // snake.left();
-                console.log('kiri');
-                keyActions.right.enabled = false;
-                keyActions.backward.enabled = true;
-                keyActions.forward.enabled = true;
-            }
-        },
-    };
-
-    function onKeyPressUp(e) {
-        var keyAction = keyActions[keys[e.code]];
-        if (keyAction && keyAction.enabled) {
-            keyAction.action();
-        }
-    }
 
     // Controller Camera
     let control = new OrbitControls(camera1, Handler.renderer.domElement);
     // TODO: pisah controller pake 2 canvas?
-    let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
+    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
     // Handler.controller = control;
     window.control = control;
 
@@ -220,37 +259,51 @@ function testObjects() {
     }
 }
 
-function test2() {
-    var floor = new Drawable(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({color: 0x0000ff}), true);
-    window.floor = floor;
-
-    var cube = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({color: 0x00ff00}));
-
+function coba() {
+    document.addEventListener('keyup', onKeyPressUp, false);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
     camera1.position.z = 5;
-    window.camera = camera1;
 
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
 
-    var a = function() {
-        console.log("refreshing");
-    }
-    window.a = a;
-    Handler.registerFrameCallback(a);
+    var snake = new SnakeBody(null);
+
+    window.snake = snake;
+
+
     window.Handler = Handler;
+
+    // Controller Camera
+    let control = new OrbitControls(camera1, Handler.renderer.domElement);
+    window.control = control;
+
+    function rotate() {
+        testDrawable.rotateZ(20);
+    }
+
+    function remove() {
+        testDrawable = testDrawable.destroy();
+    }
 }
 
-function test3() {
+function contohMapDenganTembok() {
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.y = 1;
     window.camera = camera;
+
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera));
     window.Handler = Handler;
 
-    var wall = new Wall(50, 50, X_AXIS);
-    window.wall = wall;
+    Handler.drawWalls();
 }
 
+<<<<<<< HEAD
 // testObjects();
 new_food();
 // test2();
+=======
+testObjects();
+// coba();
+// contohMapDenganTembok();
+>>>>>>> 8183fcdf2a11e999689f2dcf2bcec57a19a631cc
