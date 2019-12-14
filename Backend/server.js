@@ -19,6 +19,9 @@ io.sockets.on('connection', (socket) => {
     iolog(socket, true);
     socket.on('join', function (request){
         iolog(socket, "Join acknowledged");
+        if(gameHostSocket==null){
+            alert('Game Host not connected. Refresh host page.');
+        }
         gameHostSocket.emit("new_player", {name: request.name});
     });
 
@@ -28,6 +31,9 @@ io.sockets.on('connection', (socket) => {
     });
 
     socket.on('controller', control=>{
+        if (gameHostSocket == null) {
+            alert('Game Host not connected. Refresh host page.');
+        }
         gameHostSocket.emit('controller', control);
     });
 });

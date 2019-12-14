@@ -22,7 +22,7 @@ function main() {
 	// Event emitters
 	document.getElementById('left').onclick = leftController;
 	document.getElementById('right').onclick = rightController;
-	// document.getElementById('forward').onclick = forwardController;
+	document.getElementById('forward').onclick = forwardController;
 	// document.getElementById('backward').onclick = backwardController;
 
 	console.log("Connecting...");
