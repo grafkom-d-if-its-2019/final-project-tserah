@@ -16,7 +16,8 @@ Multiplayer.init();
  * Socket Client
  *****************************/
 
-// empty
+
+ var test_username = "";
 
 /*********************************
  * Controller section
@@ -81,23 +82,23 @@ function onKeyPressDown(e) {
 document.addEventListener('keydown', onKeyPressDown, false);
 
 function forward() {
-    Multiplayer.players[username].forward();
+    Multiplayer.players[test_username].forward();
 }
 
 function backward() {
-    Multiplayer.players[username].backward();
+    Multiplayer.players[test_username].backward();
 }
 
 function left() {
-    Multiplayer.players[username].left();
+    Multiplayer.players[test_username].left();
 }
 
 function right() {
-    Multiplayer.players[username].right();
+    Multiplayer.players[test_username].right();
 }
 
 function append() {
-    Multiplayer.players[username].snake.appendBody();
+    Multiplayer.players[test_username].snake.appendBody();
 }
 
 /****************************************************************************************/
