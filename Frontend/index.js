@@ -103,13 +103,6 @@ function new_food(){
         },
     };
 
-    function onKeyPressUp(e) {
-        var keyAction = keyActions[keys[e.code]];
-        if (keyAction && keyAction.enabled) {
-            keyAction.action();
-        }
-    }
-
     // Controller Camera
     let control = new OrbitControls(camera1, Handler.renderer.domElement);
     // TODO: pisah controller pake 2 canvas?
@@ -142,11 +135,7 @@ var keyActions = {
     'backward': {
         enabled: true,
         action: function () {
-            // snake.back();
             console.log('mundur');
-            // keyActions.forward.enabled = false;
-            // keyActions.left.enabled = true;
-            // keyActions.right.enabled = true;
             player.backward();
         }
     },
@@ -154,33 +143,21 @@ var keyActions = {
     'forward': {
         enabled: true,
         action: function () {
-            // snake.forward();
             console.log('maju');
-            // keyActions.backward.enabled = false;
-            // keyActions.left.enabled = true;
-            // keyActions.right.enabled = true;
             player.forward();
         }
     },
     'right': {
         enabled: true,
         action: function () {
-            // snake.right();
             console.log('kanan');
-            // keyActions.left.enabled = false;
-            // keyActions.forward.enabled = true;
-            // keyActions.backward.enabled = true;
             player.right();
         }
     },
     'left': {
         enabled: true,
         action: function () {
-            // snake.left();
             console.log('kiri');
-            // keyActions.right.enabled = false;
-            // keyActions.backward.enabled = true;
-            // keyActions.forward.enabled = true;
             player.left();
         }
     },

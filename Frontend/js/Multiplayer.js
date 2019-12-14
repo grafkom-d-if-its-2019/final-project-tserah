@@ -21,6 +21,7 @@ export default class Multiplayer {
 	 * @param {String} name 
 	 */
 	static newPlayer(name) {
+		if (this.players.length == 2) throw new Error("Maximum player count exceeded");
 		this.players.push(new Player(name));
 		Handler.registerViewport(new Viewport(0.5 * (this.players.length - 1), 0, 0.5, 0.5, this.players[this.players.length - 1].camera));
 	}
