@@ -4,7 +4,10 @@ const WebpackBar = require('webpackbar');
 
 module.exports = {
     mode: 'development',
-    entry: './index.js',
+    entry: {
+        main: './index.js',
+        client: './client.js'
+    },
     module: {
         rules: [
             {
@@ -19,7 +22,7 @@ module.exports = {
         extensions: ['*', '.js']
     },
     output: {
-        filename: 'main.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
