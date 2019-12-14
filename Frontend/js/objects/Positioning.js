@@ -6,11 +6,11 @@ class Positioning {
      * @param {Number} orientation (degree)
      * @param {Number} speed 
      */
-    constructor(x, y, orientation, speed) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.orientation = orientation;
-        this.speed = speed;
+        // this.orientation = orientation;
+        // this.speed = speed;
     }
 }
 
