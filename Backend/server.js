@@ -9,8 +9,13 @@ var app = http.createServer(function (req, res) {
 }).listen(8000);
 
 var io = socketIO.listen(app);
+/**
+ * 
+ * @param {SocketIO.Socket} socket 
+ * @param {string} item 
+ */
 function iolog(socket, item) {
-    socket.emit("log", item);
+    socket.broadcast.emit("log", item);
 }
 
 var gameHostSocket = null;
@@ -19,10 +24,10 @@ io.sockets.on('connection', (socket) => {
     iolog(socket, true);
     socket.on('join', function (request) {
         iolog(socket, "Join acknowledged");
-        if (gameHostSocket){
+        if (gameHostSocket) {
             gameHostSocket.emit("new_player", { name: request.name });
         }
-        else{
+        else {
             alert('GameHost is disconnect. Please refresh host page.');
         }
     });
@@ -32,10 +37,21 @@ io.sockets.on('connection', (socket) => {
         iolog(socket, "Host acknowledged");
     });
 
-    socket.on('controller', control=>{
+    socket.on('controller', control => {
         if (gameHostSocket == null) {
             alert('Game Host not connected. Refresh host page.');
         }
         gameHostSocket.emit('controller', control);
     });
+
+    socket.on('log', log => {
+        console.log('Server Log:', log);
+    });
+
+    socket.on('close', emission => {
+        console.log('User ' + emission.name + ' close the game');
+        gameHostSocket.emit('close', emission);
+    });
+
+    // socket.on('disconnect')
 });

@@ -16,18 +16,23 @@ Multiplayer.init();
  * Socket Client
  *****************************/
 
-Multiplayer.socket.on('controller', control=>{
-    if(control.action == 'forward'){
+Multiplayer.socket.on('controller', control => {
+    if (control.action == 'forward') {
         Multiplayer.players[control.name].forward();
-    }else if(control.action == 'backward'){
+    } else if (control.action == 'backward') {
         Multiplayer.players[control.name].backward();
-    }else if(control.action == 'left'){
+    } else if (control.action == 'left') {
         Multiplayer.players[control.name].left();
-    }else if(control.action == 'right'){
+    } else if (control.action == 'right') {
         Multiplayer.players[control.name].right();
-    }else{
+    } else {
         console.log('----ERROR CONTROLLER----');
     }
+});
+
+Multiplayer.socket.on('close', emission=>{
+    console.log('User'+emission.name+' left the game');
+    Multiplayer.players[emission.name].gameover(emission.name);
 });
 
 var test_username = "";
@@ -52,7 +57,7 @@ var keyActions = {
         enabled: true,
         action: function () {
             console.log('mundur');
-            player.backward();
+            backward();
         }
     },
     // Increase speed
@@ -60,21 +65,21 @@ var keyActions = {
         enabled: true,
         action: function () {
             console.log('maju');
-            player.forward();
+            forward();
         }
     },
     'right': {
         enabled: true,
         action: function () {
             console.log('kanan');
-            player.right();
+            right();
         }
     },
     'left': {
         enabled: true,
         action: function () {
             console.log('kiri');
-            player.left();
+            left();
         }
     },
     'append': {
@@ -126,11 +131,6 @@ function testObjects() {
 
     // Controller Camera
     let controlOverview = new OrbitControls(Multiplayer.overviewCamera, Handler.renderer.domElement);
-    // let control1 = new OrbitCont
-    
-    // TODO: pisah controller pake 2 canvas?
-    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
-    // Handler.controller = control;
     window.controlOverview = controlOverview;
 
     function rotate() {
