@@ -26,7 +26,7 @@ Multiplayer.socket.on('controller', control=>{
     }else if(control.action == 'right'){
         Multiplayer.players[control.name].right();
     }else{
-        console.log('----ERROR CONTROLLER----');
+        // console.log('----ERROR CONTROLLER----');
     }
 });
 
@@ -51,7 +51,7 @@ var keyActions = {
     'backward': {
         enabled: true,
         action: function () {
-            console.log('mundur');
+            // console.log('mundur');
             player.backward();
         }
     },
@@ -59,21 +59,21 @@ var keyActions = {
     'forward': {
         enabled: true,
         action: function () {
-            console.log('maju');
+            // console.log('maju');
             player.forward();
         }
     },
     'right': {
         enabled: true,
         action: function () {
-            console.log('kanan');
+            // console.log('kanan');
             player.right();
         }
     },
     'left': {
         enabled: true,
         action: function () {
-            console.log('kiri');
+            // console.log('kiri');
             player.left();
         }
     },
@@ -118,7 +118,7 @@ function append() {
 
 function testObjects() {
     Handler.drawWalls();
-    console.log("Loading map...");
+    // console.log("Loading map...");
 
     // Multiplayer.newPlayer(username);
 
@@ -188,7 +188,7 @@ function new_food() {
 
     var pos = new Positioning(0, 0);
     var foods = new Food(pos);
-    console.log(foods);
+    // console.log(foods);
 
     window.Handler = Handler;
 

@@ -95,13 +95,13 @@ class Snake {
 	 * @param {SnakeBody} snakeBody 
 	 */
 	onCollideWithSnake() {
-        console.log("tabrakk");
+        // console.log("tabrakk");
         this.body.forEach((bodyMember, index) => {
             bodyMember.destroy();
         });
     }
     onCollideWithWall() {
-        console.log("tembok");
+        // console.log("tembok");
         this.body.forEach((bodyMember, index) => {
             bodyMember.destroy();
         });

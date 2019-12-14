@@ -23,24 +23,26 @@ export default class Multiplayer {
 		this.players = new Array();
 
 		// Initialize socket
-		console.log("Connecting...");
+		// console.log("Connecting...");
 		this.socket = io('http://'+window.location.hostname+':8000');
 		var local_socket = this.socket;
 		this.socket.on('connect', (function () {
-			console.log("Connected.", this.socket);
+			// console.log("Connected.", this.socket);
 			this.socket.emit("iamhost");
 		}).bind(this));
 		this.socket.on('log', function (emission) {
-			console.log('Server Log:', emission);
+			// console.log('Server Log:', emission);
 		});
 		this.socket.on('new_player', function(request){
-			console.log("Player " + request.name + ' tries to join');
+			// console.log("Player " + request.name + ' tries to join');
 			// this.name
 			Multiplayer.newPlayer(request.name);
 		});
 		this.socket.on("player_leave", function(id){
-			console.log("Socket id " + id + " left");
+			// console.log("Socket id " + id + " left");
 		});
+
+		window.Multiplayer = Multiplayer;
 	}
 	/**
 	 * 
@@ -57,7 +59,9 @@ export default class Multiplayer {
 		
 		Handler.registerViewport(new Viewport(0.5 * ((Object.keys(this.players).length - 1)), 0, 0.5, 0.5, this.players[name].camera));
 
-		Handler.generateFood();
+		setTimeout(function(){
+			Handler.generateFood();
+		}, 1000);
 	}
 
 }
