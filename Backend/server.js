@@ -27,7 +27,7 @@ io.sockets.on('connection', (socket) => {
             log('Client ID ' + socket.id + ' create room ' + room);
         } else if (numClients == 1) {
             // Broadcast to user in 'room'
-            io.sockets.in(room).emit('join', room);
+            socket.in(room).emit('join', room);
 
             // Join the room
             socket.join(room);
@@ -35,9 +35,9 @@ io.sockets.on('connection', (socket) => {
             socket.emit('joined', room, socket.id);
 
             // Tell the user in 'room' to ready
-            io.sockets.in(room).emit('ready');
+            socket.in(room).emit('ready');
         } else {
-            socket.emit('full', room);
+            socket.in(room).emit('ready');
             log('Room is full');
         }
     });
