@@ -16,8 +16,19 @@ Multiplayer.init();
  * Socket Client
  *****************************/
 
-
- var test_username = "";
+Multiplayer.socket.on('controller', control=>{
+    if(control.action == 'forward'){
+        Multiplayer.players[control.name].forward();
+    }else if(control.action == 'backward'){
+        Multiplayer.players[control.name].backward();
+    }else if(control.action == 'left'){
+        Multiplayer.players[control.name].left();
+    }else if(control.action == 'right'){
+        Multiplayer.players[control.name].right();
+    }else{
+        console.log('----ERROR CONTROLLER----');
+    }
+});
 
 /*********************************
  * Controller section

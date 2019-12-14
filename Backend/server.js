@@ -27,4 +27,8 @@ io.sockets.on('connection', (socket) => {
         gameHostSocket = socket;
         iolog(socket, "Host acknowledged");
     });
+
+    socket.on('controller', control=>{
+        gameHostSocket.emit('controller', control);
+    });
 });
