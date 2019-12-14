@@ -58,6 +58,7 @@ export default class Handler {
 
     static drawWalls() {
         var wallFloor = new Wall(50, 50, Y_AXIS);
+        wallFloor.isInvisible = true;
         var wallLeft = new Wall(2, 50, X_AXIS);
         wallLeft.position.x = -25;
         wallLeft.position.y = 1;

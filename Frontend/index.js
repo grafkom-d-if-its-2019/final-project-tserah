@@ -102,7 +102,7 @@ var keyActions = {
     },
     'append': {
         enabled: true,
-        action: function(){
+        action: function () {
             player.snake.appendBody();
         }
     }
@@ -124,23 +124,23 @@ function testObjects() {
 
     camera1.position.z = 5;
 
-    var camera2 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera2.position.z = 5;
-    camera2.position.x = 2;
+    Handler.registerViewport(new Viewport(0, 0, 1, 1, camera1));
+    Handler.drawWalls();
 
-    Handler.registerViewport(new Viewport(0.5, 0, 0.5, 1, camera1));
-    Handler.registerViewport(new Viewport(0, 0, 0.5, 1, camera2));
-
-    var player = new Player('test');
-    player.positioning.speed = 0.5;
-    window.player = player;
+    var player;
+    console.log("Loading map...");
+    setTimeout(function () {
+        player = new Player('test');
+        player.positioning.speed = 0.5;
+        window.player = player;
+    },1000);
     // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
     // console.log(testDrawable);
     // var objectB = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x0000ff }), true);
     // objectB.position.x = -3;
     // console.log(objectB);
-    
-    
+
+
     window.Handler = Handler;
 
     // Controller Camera
@@ -159,7 +159,7 @@ function testObjects() {
     }
 }
 
-function coba(){
+function coba() {
     document.addEventListener('keyup', onKeyPressUp, false);
     var camera1 = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -170,8 +170,8 @@ function coba(){
     var snake = new SnakeBody(null);
 
     window.snake = snake;
-    
-    
+
+
     window.Handler = Handler;
 
     // Key map
@@ -258,7 +258,7 @@ function contohMapDenganTembok() {
 
     Handler.registerViewport(new Viewport(0, 0, 1, 1, camera));
     window.Handler = Handler;
-    
+
     Handler.drawWalls();
 }
 

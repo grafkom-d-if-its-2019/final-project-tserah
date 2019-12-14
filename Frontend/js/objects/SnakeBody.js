@@ -3,6 +3,7 @@ import Drawable from './Drawable';
 import Snake from './Snake';
 import Food from './Food';
 import Positioning from './Positioning';
+import Wall from './Wall';
 
 class SnakeBody extends Drawable {
     /**
@@ -28,6 +29,7 @@ class SnakeBody extends Drawable {
             this.position.setX(positioning.x)
             this.position.setZ(positioning.z);
         }
+        this.position.setY(0.52);
 
     }
 
@@ -37,6 +39,9 @@ class SnakeBody extends Drawable {
         }
         else if (drawable instanceof SnakeBody) {
             this.snake.onCollideWithSnake(drawable);
+        }
+        else if (drawable instanceof Wall) {
+            console.log("nabrak tembok");
         }
     }
 

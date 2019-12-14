@@ -12,8 +12,8 @@ class Snake {
 		/** @type {SnakeBody[]} */
 		this.body = new Array();
 		this.player = player;
-		let head = new SnakeBody(this, new Positioning(0, 0, 0, 0));
-		this.body.push(head); // TODO: randomize
+		let head = new SnakeBody(this, new Positioning(0, 0, 0, 0)); // TODO: randomize
+		this.body.push(head); 
 		window.head = head;
 		this.body[0].isInvisible = false;
 
@@ -32,7 +32,6 @@ class Snake {
 	move(move_command) {
 		let prevBodyMember = null;
 		this._command_queue[0].push(move_command);
-		console.log(this.body[this.body.length-1].position);
 		this.body.forEach((bodyMember, index) => {
 			if (index == 0) {
 				var cmd = this._command_queue[index].shift();

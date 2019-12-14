@@ -26,6 +26,7 @@ export default class Wall extends Drawable {
             default:
                 super(new THREE.BoxBufferGeometry(.1, .1, .1), new THREE.MeshLambertMaterial({ color: 0xff0000}));
         }
+        this.axis = faceAxis;
     }
 
     onCollide() {
