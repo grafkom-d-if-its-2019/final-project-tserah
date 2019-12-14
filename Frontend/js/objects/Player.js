@@ -13,6 +13,7 @@ class Player {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // TODO: benerin
         this.positioning = new Positioning(0, 0, 90, 0.1);
         this.snake = new Snake(this);
+        
 
         // Register animate di Handler
         Handler.registerFrameCallback(this.move.bind(this));
