@@ -5,6 +5,7 @@ import Food from './Food';
 import Positioning from './Positioning';
 import Wall from './Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from '../Constants';
+import {ColladaLoader} from 'three/examples/jsm/loaders/ColladaLoader';
 
 function removeArr(arr) {
     var what, a = arguments, L = a.length, ax;
@@ -40,20 +41,27 @@ export default class Handler {
 
     static init() {
         this.scene = new THREE.Scene();
-        var light = new THREE.PointLight(0xffffff, 25, 50);
-        light.position.y = 25;
-        this.scene.add(light);
+        // var light = new THREE.PointLight(0xffffff, 25, 50);
+        // light.position.y = 25;
+        // this.scene.add(light);
+        
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(0, 50, 0);
+        spotLight.intensity = 2;
+        this.scene.add(spotLight);
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(window.innerWidth - 10, window.innerHeight - 2);
         document.body.appendChild(this.renderer.domElement);
 
         this.viewports = new Array();
         this.animate = this.animate.bind(this);
+        this.loadGTLF = this.loadGTLF.bind(this);
         this.lastAnimatedTimestamp = performance.now();
         this.framerate = 0;
         /** @type {Function[]} */
         this.frameRefreshCallbacks = new Array();
         this.animate();
+        // this.loadGTLF();
     }
 
     static drawWalls() {
@@ -148,8 +156,15 @@ export default class Handler {
         new Food(new Positioning(coor,coor2,0,0)); // TODO: implement
     }
 
-
-
+    static loadGTLF(){
+        var loader = new ColladaLoader();
+            loader.load("../assets/mountain.dae",  (result) => {
+                this.scene.add(result.scene);
+                // result.scene.position.y = 1.001;
+                // result.scene.scale.set(2,2,2);
+                window.gunung = result.scene;
+        });
+    };
     static checkCollision() {
         this.getDrawables().forEach(drawable => {
             this.getDrawables().forEach(against => {
