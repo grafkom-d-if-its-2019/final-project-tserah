@@ -1,4 +1,4 @@
 #!/bin/bash
 
-npx webpack --display-modules --watch
+npx webpack --watch
 
