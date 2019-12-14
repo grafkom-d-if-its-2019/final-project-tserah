@@ -9,8 +9,13 @@ var app = http.createServer(function (req, res) {
 }).listen(8000);
 
 var io = socketIO.listen(app);
+/**
+ * 
+ * @param {SocketIO.Socket} socket 
+ * @param {string} item 
+ */
 function iolog(socket, item) {
-    socket.emit("log", item);
+    socket.broadcast.emit("log", item);
 }
 
 var gameHostSocket = null;
@@ -38,4 +43,15 @@ io.sockets.on('connection', (socket) => {
         }
         gameHostSocket.emit('controller', control);
     });
+
+    socket.on('log', log=>{
+        console.log('Server Log:', log);
+    });
+
+    socket.on('close', emission=>{
+        console.log('User '+emission.name+' close the game');
+        gameHostSocket.emit('close', emission);
+    });
+
+    // socket.on('disconnect')
 });

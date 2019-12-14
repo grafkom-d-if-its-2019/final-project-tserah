@@ -62,6 +62,14 @@ class Player {
         this.positioning.speed -= 0.2;
     }
 
+    // Freeze player
+    gameover(user){
+        this.positioning.speed = 0;
+        this.positioning.x = 0;
+        this.positioning.z = 0;
+        this.positioning.orientation = 0;
+        console.log(user+' GAME OVER');
+    }
 
 }
 
