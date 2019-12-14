@@ -32,7 +32,7 @@ class Snake {
 	move(move_command) {
 		let prevBodyMember = null;
 		this._command_queue[0].push(move_command);
-		console.log(this.body[this.body.length-1].position);
+		// console.log(this.body[this.body.length-1].position);
 		this.body.forEach((bodyMember, index) => {
 			if (index == 0) {
 				var cmd = this._command_queue[index].shift();
