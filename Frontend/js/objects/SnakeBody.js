@@ -55,7 +55,7 @@ class SnakeBody extends Drawable {
             }
         }
         else if (drawable instanceof Wall) {
-            console.log("nabrak tembok");
+            this.snake.onCollideWithWall();
         }
     }
 
