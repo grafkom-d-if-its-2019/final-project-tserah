@@ -17,47 +17,47 @@ class Snake {
 		window.head = head;
 		this.body[0].isInvisible = false;
 
-		/** @type {Positioning[]} */
-		this._pivot_checkpoint = new Array();
+		/** @type {Positioning[][]} */
+		this._command_queue = new Array();
+		this._command_queue.push(new Array());
+
+		/** @type {Number} */
+		this._delay = 0;
 	}
 
 	/**
 	 * 
-	 * @param {Positioning} positioning 
+	 * @param {Positioning} move_command 
 	 */
-	move(positioning) {
+	move(move_command) {
 		let prevBodyMember = null;
+		this._command_queue[0].push(move_command);
+		console.log(this.body[this.body.length-1].position);
 		this.body.forEach((bodyMember, index) => {
 			if (index == 0) {
-				bodyMember.translateZ(positioning.speed);
-				bodyMember.rotateY(positioning.orientation);
-
-				if (positioning.orientation != 0) {
-					this.body.forEach((b, i) => {
-						if (i != 0) {
-							let item = new Positioning(bodyMember.position.x, bodyMember.position.z, positioning.orientation, );
-							this._pivot_checkpoint.push(item);
-							console.log(this._pivot_checkpoint);
-						}
-					});
-				}
+				var cmd = this._command_queue[index].shift();
+				bodyMember.translateZ(cmd.speed);
+				bodyMember.rotateY(cmd.orientation);
 
 				prevBodyMember = bodyMember;
+
+				if (this._command_queue[index + 1] !== undefined)
+					this._command_queue[index + 1].push(cmd);
 			} else {
-				if (bodyMember.isInvisible) {
-					if (!bodyMember.collideWith(prevBodyMember)) {
-						bodyMember.isInvisible = false;
-					}
+				if (this._delay != 0) {
+					this._delay--;
 				}
 				else {
-					if (this._pivot_checkpoint.length > 0 &&
-						bodyMember.position.x == this._pivot_checkpoint[this._pivot_checkpoint.length - 1].x &&
-						bodyMember.position.z == this._pivot_checkpoint[this._pivot_checkpoint.length - 1].z) {
-						bodyMember.rotateY(this._pivot_checkpoint.pop().orientation);
-					}
-					bodyMember.translateZ(positioning.speed);
+					if (bodyMember.isInvisible)
+						bodyMember.isInvisible = false;
+					var cmd = this._command_queue[index].shift();
+					bodyMember.translateZ(cmd.speed);
+					bodyMember.rotateY(cmd.orientation);
 
 					prevBodyMember = bodyMember;
+
+					if (this._command_queue[index + 1] !== undefined)
+						this._command_queue[index + 1].push(cmd);
 				}
 			}
 		});
@@ -73,7 +73,13 @@ class Snake {
 				0
 			)
 		));
-		window.bro = this.body[this.body.length - 1];
+		this.body[this.body.length - 1].rotation.set(
+			this.body[this.body.length - 2].rotation.x,
+			this.body[this.body.length - 2].rotation.y,
+			this.body[this.body.length - 2].rotation.z
+		);
+		this._command_queue.push(new Array());
+		this._delay = 60;
 	}
 
 	onCollideWithFood() {

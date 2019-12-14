@@ -48,7 +48,8 @@ var keys = {
     'KeyW': 'forward',
     'KeyS': 'backward',
     'KeyA': 'left',
-    'KeyD': 'right'
+    'KeyD': 'right',
+    'KeyB': 'append',
 };
 
 var keyActions = {
@@ -99,6 +100,12 @@ var keyActions = {
             player.left();
         }
     },
+    'append': {
+        enabled: true,
+        action: function(){
+            player.snake.appendBody();
+        }
+    }
 };
 
 function onKeyPressDown(e) {
@@ -125,6 +132,7 @@ function testObjects() {
     Handler.registerViewport(new Viewport(0, 0, 0.5, 1, camera2));
 
     var player = new Player('test');
+    player.positioning.speed = 0.5;
     window.player = player;
     // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
     // console.log(testDrawable);
