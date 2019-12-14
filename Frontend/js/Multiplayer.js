@@ -51,7 +51,6 @@ export default class Multiplayer {
 	static newPlayer(name) {
 		this.name = name;
 		this.players[name] = new Player(name);
-		// Default speed
 		this.players[name].positioning.speed = 3;
 		this.position = this.players[name].positioning;
 		

@@ -31,7 +31,7 @@ export default class Drawable extends THREE.Mesh {
      */
     collideWith(drawable) {
         var bounding1;
-        if (this.geometry instanceof THREE.SphereBufferGeometry) {
+        if (this.geometry instanceof THREE.SphereGeometry) {
             this.geometry.computeBoundingSphere();
             bounding1 = this.geometry.boundingSphere.clone();
         }
@@ -42,7 +42,7 @@ export default class Drawable extends THREE.Mesh {
         bounding1.applyMatrix4(this.matrixWorld);
 
         var bounding2;
-        if (drawable.geometry instanceof THREE.SphereBufferGeometry) {
+        if (drawable.geometry instanceof THREE.SphereGeometry) {
             drawable.geometry.computeBoundingSphere();
             bounding2 = drawable.geometry.boundingSphere.clone();
         }
@@ -52,14 +52,14 @@ export default class Drawable extends THREE.Mesh {
         }
         bounding2.applyMatrix4(drawable.matrixWorld);
         var collides = false;
-        if (this.geometry instanceof THREE.SphereBufferGeometry) {
-            if (drawable.geometry instanceof THREE.SphereBufferGeometry)
+        if (this.geometry instanceof THREE.SphereGeometry) {
+            if (drawable.geometry instanceof THREE.SphereGeometry)
                 collides = bounding1.intersectsSphere(bounding2);
             else
                 collides = bounding1.intersectsBox(bounding2);
         }
-        else if (this.geometry instanceof THREE.BoxBufferGeometry) {
-            if (drawable.geometry instanceof THREE.BoxBufferGeometry)
+        else if (this.geometry instanceof THREE.BoxGeometry) {
+            if (drawable.geometry instanceof THREE.BoxGeometry)
                 collides = bounding1.intersectsBox(bounding2);
         }
         if (collides && !this.isInvisible && !drawable.isInvisible) {

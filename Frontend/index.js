@@ -30,11 +30,6 @@ Multiplayer.socket.on('controller', control=>{
     }
 });
 
-Multiplayer.socket.on('close', emission=>{
-    console.log('Player '+emission.name+' left the game.');
-    Multiplayer.players[emission.name].gameover(emission.name);
-});
-
 var test_username = "";
 
 /*********************************
@@ -56,30 +51,30 @@ var keyActions = {
     'backward': {
         enabled: true,
         action: function () {
-            console.log('mundur');
-            backward();
+            // console.log('mundur');
+            player.backward();
         }
     },
     // Increase speed
     'forward': {
         enabled: true,
         action: function () {
-            console.log('maju');
-            forward();
+            // console.log('maju');
+            player.forward();
         }
     },
     'right': {
         enabled: true,
         action: function () {
-            console.log('kanan');
-            right();
+            // console.log('kanan');
+            player.right();
         }
     },
     'left': {
         enabled: true,
         action: function () {
-            console.log('kiri');
-            left();
+            // console.log('kiri');
+            player.left();
         }
     },
     'append': {
@@ -131,6 +126,11 @@ function testObjects() {
 
     // Controller Camera
     let controlOverview = new OrbitControls(Multiplayer.overviewCamera, Handler.renderer.domElement);
+    // let control1 = new OrbitCont
+    
+    // TODO: pisah controller pake 2 canvas?
+    // let control2 = new OrbitControls(camera2, Handler.renderer.domElement);
+    // Handler.controller = control;
     window.controlOverview = controlOverview;
 
     function rotate() {
