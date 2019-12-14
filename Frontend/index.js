@@ -214,7 +214,7 @@ function testObjects() {
     console.log("Loading map...");
     setTimeout(function () {
         player = new Player('test');
-        player.positioning.speed = 0.5;
+        player.positioning.speed = 3;
         window.player = player;
     },1000);
     // var testDrawable = new Drawable(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
