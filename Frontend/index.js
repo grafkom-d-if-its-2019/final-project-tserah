@@ -155,11 +155,17 @@ ready = true;
 /**************************************************************************************/
 
 var btn = document.getElementById('btn').onclick= function (){myPlay()}
-
+var btn2 = document.getElementById('btn2').onclick= function (){myPlay2()}
 function myPlay()
 {
     console.log("masuk")
     Handler.addBGM(1);
+}
+
+function myPlay2()
+{
+    console.log("keluar")
+    Handler.addBGM(2);
 }
 
 function testObjects() {

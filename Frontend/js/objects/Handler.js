@@ -169,12 +169,12 @@ export default class Handler {
   }
 
   static addBGM(input){
-    this.bgm = new Audio('../assets/gagak.mp3');
-    this.bgm.volume = 0.3;
-    this.bgm.loop = true;
-    this.bgm.muted = false;
     if(input==1){
+      this.bgm = new Audio('../assets/gagak.mp3');
+      this.bgm.volume = 0.3;
+      this.bgm.loop = true;
       this.bgm.play();
+      // this.bgm.muted = false;
     }
     else{
       this.bgm.pause();
