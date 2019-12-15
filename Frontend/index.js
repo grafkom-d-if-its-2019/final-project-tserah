@@ -123,8 +123,10 @@ function append() {
 
 function testObjects() {
     Handler.drawWalls();
+    Handler.loadGTLF();
+    Handler.loadSky();
     console.log("Loading map...");
-
+    // Handler.addBGM();
     // Multiplayer.newPlayer(username);
 
     window.Handler = Handler;

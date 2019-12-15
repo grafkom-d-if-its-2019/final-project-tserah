@@ -41,13 +41,13 @@ class SnakeBody extends Drawable {
       this.snake.onCollideWithFood();
       return true;
     } else if (drawable instanceof SnakeBody) {
-      let index1 =this.snake.body.indexOf(drawable);
-      let index2 =this.snake.body.indexOf(this);
-      let delta=index2-index1;
-      delta = delta*delta;
-      if((index1 == -1 || (delta != 1)) && index2 == 0){
-          this.snake.onCollideWithSnake(drawable, this);
-      }
+      // let index1 =this.snake.body.indexOf(drawable);
+      // let index2 =this.snake.body.indexOf(this);
+      // let delta=index2-index1;
+      // delta = delta*delta;
+      // if((index1 == -1 || (delta != 1)) && index2 == 0){
+      //     this.snake.onCollideWithSnake(drawable, this);
+      // }
 
       if (this.snake != drawable.snake && this == this.snake.body[0]) {
         this.snake.onCollideWithSnake();
