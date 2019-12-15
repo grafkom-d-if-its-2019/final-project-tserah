@@ -34,9 +34,9 @@ class Player {
         this.snake.move(new Positioning(0, 0, deltaRotate, this.positioning.speed * Math.cos(90) * (1 / Handler.framerate)));
         this.positioning.orientation -= deltaRotate;
 
-        this.camera.position.set(this.snake.body[0].position.x, 2, this.snake.body[0].position.z);
+        this.camera.position.set(this.snake.body[0].position.x, 5, this.snake.body[0].position.z);
         this.camera.rotation.set(this.snake.body[0].rotation.x, this.snake.body[0].rotation.y, this.snake.body[0].rotation.z);
-        this.camera.translateZ(5);
+        this.camera.translateZ(10);
 
         this.camera.lookAt(this.snake.body[0].position.x, -2, this.snake.body[0].position.z);
 
@@ -60,33 +60,34 @@ class Player {
     }
 
     backward() {
-        this.positioning.speed -= 0.5;
+        if (this.positioning.speed > 10)
+            this.positioning.speed -= 0.5;
     }
 
     // Freeze player
-    gameover(user="", finish=true) {
+    gameover(user = "", finish = true) {
         this.positioning.speed = 0;
         this.positioning.x = 0;
         this.positioning.z = 0;
         this.positioning.orientation = 0;
         this.finish = finish;
 
-        if(user!="" && finish)
+        if (user != "" && finish)
             console.log(user + ' GAME OVER');
-        else if(finish)
+        else if (finish)
             console.log("GAME OVER");
 
         // Remove player
         Multiplayer.gameOver(user);
-        
+
         // Set winner
-        Multiplayer.players.forEach((val, idx)=>{
-            console.log('winner '+ val);
+        Multiplayer.players.forEach((val, idx) => {
+            console.log('winner ' + val);
             this.winner(val);
         });
     }
 
-    winner(user=""){
+    winner(user = "") {
         this.positioning.speed = 0;
         this.positioning.x = 0;
         this.positioning.z = 0;
@@ -94,7 +95,7 @@ class Player {
 
         if (user != "" && this.finish)
             console.log(user + ' WIN');
-        
+
     }
 
 }

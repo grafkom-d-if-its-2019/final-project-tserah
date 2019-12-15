@@ -18,8 +18,8 @@ export default class Multiplayer {
 		// Default viewports
 		this.overviewCamera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.5, 1000);
 		this.overviewCamera.rotateX(-Math.PI / 2);
-		this.overviewCamera.position.y = 15;
-		Handler.registerViewport(new Viewport(0, 0.5, 1, 0.5, this.overviewCamera));
+		this.overviewCamera.position.y = 26;
+		Handler.registerViewport(new Viewport(0.375, 0, 0.225, 0.4, this.overviewCamera));
 		this.players = new Array();
 
 		// Initialize socket
@@ -48,13 +48,15 @@ export default class Multiplayer {
 		this.name = name;
 		this.players[name] = new Player(name);
 		// Default speed
-		this.players[name].positioning.speed = 3;
+		this.players[name].positioning.speed = 10;
 		this.position = this.players[name].positioning;
 
 		window.camera = this.players[name].camera;
 		window.player = this.players[name];
 
-		Handler.registerViewport(new Viewport(0.5 * ((Object.keys(this.players).length - 1)), 0, 0.5, 0.5, this.players[name].camera));
+		var overviewViewport = Handler.viewports.pop();
+		Handler.registerViewport(new Viewport(0.5 * ((Object.keys(this.players).length - 1)), 0, 0.5, 1, this.players[name].camera));
+		Handler.registerViewport(overviewViewport);
 
 		setTimeout(function(){
 			Handler.generateFood();
@@ -64,7 +66,7 @@ export default class Multiplayer {
 	static gameOver(name){
 		console.log('From player: [Game over] '+name);
 		this.socket.emit('gameover', name);
-		delete this.players[name];
+		this.players = new Array();
 	}
 
 }
