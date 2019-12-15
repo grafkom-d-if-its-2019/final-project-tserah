@@ -78,9 +78,9 @@ function main() {
 			window.alert('Game Over!');
 			socket.close();
 		}
-		console.log("resetting view");
-		document.getElementById('splash').style.display = "inherit";
-		document.getElementById('controller').style.display = "none";
+		// console.log("resetting view");
+		// document.getElementById('splash').style.display = "inherit";
+		// document.getElementById('controller').style.display = "none";
 		socket.close();
 	});
 

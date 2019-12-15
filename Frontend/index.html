@@ -27,6 +27,10 @@
 			<div class="modal-content ">
 				<div class="modal-header text-center">
 					<h5 class="modal-title" id="overlayTitle">Snake 3D</h5>
+					<div class="float-right">
+						<button class="btn btn-primary btn-sm" id="btn">Music On</button>
+						<button class="btn btn-secondary btn-sm" id="btn2">Music Off</button>
+					</div>
 				</div>
 				<div class="modal-body text-center text-justify">
 					<div class="container">
@@ -55,7 +59,7 @@
 	
 			<!-- Then put toasts within -->
 			<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-				<div class="toast-header">
+				<div class="toast-header bg-info">
 					<strong class="mr-auto">Snake 3D</strong>
 					<small class="text-muted">just now</small>
 					<button type="button" class="ml-2 mb-1 close" aria-label="Close">
@@ -74,8 +78,7 @@
 	<div id="player2"></div>
 	
 	<script type="module" src="dist/main.js"></script>
-	<!-- <button type="button" id="btn"></button>
-	<button type="button" id="btn2"></button> -->
+	
 </body>
 
 </html>

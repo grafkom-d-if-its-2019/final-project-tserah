@@ -15,7 +15,7 @@ import Multiplayer from './js/Multiplayer';
 Handler.init();
 Multiplayer.init();
 let finish = false;
-let ready = true;
+let ready = false;
 /*****************************
  * Socket Client
  *****************************/
@@ -154,20 +154,19 @@ const load = ()=>{
     }
 }
 window.onload = load;
+var btn = document.getElementById('btn').onclick= function (){myPlay()}
+var btn2 = document.getElementById('btn2').onclick= function (){myPlay2()}
 
 /**************************************************************************************/
 
-// var btn = document.getElementById('btn').onclick= function (){myPlay()}
-// var btn2 = document.getElementById('btn2').onclick= function (){myPlay2()}
+
 function myPlay()
 {
-    console.log("masuk")
     Handler.addBGM(1);
 }
 
 function myPlay2()
 {
-    console.log("keluar")
     Handler.addBGM(2);
 }
 
