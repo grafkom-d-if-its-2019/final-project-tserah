@@ -17,7 +17,7 @@ class SnakeBody extends Drawable {
     var texture = new THREE.TextureLoader().load("../assets/robot.jpeg");
     super(
       THREECache.get("SnakeBodyGeometry") || THREECache.set("SnakeBodyGeometry", new THREE.SphereBufferGeometry(0.5, 100, 100)),
-      THREECache.get("SnakeBodyMaterial") || THREECache.set("SnakeBodyMaterial", new THREE.MeshLambertMaterial({ map: texture }))
+      THREECache.get("SnakeBodyMaterial") || THREECache.set("SnakeBodyMaterial", new THREE.MeshPhongMaterial({ map: texture }))
     ); // TODO: implement
 
     if (snake == null) {
