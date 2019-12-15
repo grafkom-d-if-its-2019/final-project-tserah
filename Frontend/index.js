@@ -137,8 +137,8 @@ function testObjects() {
     Handler.drawWalls();
     Handler.loadGTLF();
     Handler.loadSky();
+    Handler.addBGM(1); 
     console.log("Loading map...");
-    // Handler.addBGM();
     // Multiplayer.newPlayer(username);
 
     window.Handler = Handler;
