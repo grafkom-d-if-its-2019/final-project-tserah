@@ -5,6 +5,7 @@ import Food from "./Food";
 import Positioning from "./Positioning";
 import Wall from "./Wall";
 import { X_AXIS, Y_AXIS, Z_AXIS } from "../Constants";
+import THREECache from "../THREECache"
 
 function removeArr(arr) {
   var what,
@@ -56,6 +57,8 @@ export default class Handler {
     /** @type {Function[]} */
     this.frameRefreshCallbacks = new Array();
     this.animate();
+
+    THREECache.init();
   }
 
   static drawWalls() {
