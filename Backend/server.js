@@ -29,7 +29,7 @@ io.sockets.on('connection', (socket) => {
         client[request.name] = {id: request.id, socket: request.socket};
         if (gameHostSocket) {
             gameHostSocket.emit("new_player", { name: request.name });
-            gameHostSocket.emit("ready", true);
+            gameHostSocket.emit("ready", {name: request.name, status: true});
         }
         else {
             console.log('GameHost is disconnect. Please refresh host page.');

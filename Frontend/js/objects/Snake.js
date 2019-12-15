@@ -12,7 +12,9 @@ class Snake {
     /** @type {SnakeBody[]} */
     this.body = new Array();
     this.player = player;
-    let head = new SnakeBody(this, new Positioning(0, 0, 0, 0)); // TODO: randomize
+    let coor = Math.floor(Math.random() * 23) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
+    let coor2 = Math.floor(Math.random() * 23) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
+    let head = new SnakeBody(this, new Positioning(coor, coor2, 0, 0)); // TODO: randomize
     this.body.push(head);
     window.head = head;
 
