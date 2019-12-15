@@ -42,9 +42,13 @@ Multiplayer.socket.on('close', emission=>{
 });
 
 Multiplayer.socket.on('ready', status=>{
-    ready = status;
-    console.log(status);
+    ready = status.status;
+    // console.log(Player.name + status);
     $('#overlay').modal('hide');
+
+    $('.toast-body').html(status.name + ' join the game.');
+    $('.toast').toast({delay: 5000});
+    $('.toast').toast('show');
 });
 
 var test_username = "";
@@ -151,13 +155,10 @@ const load = ()=>{
 }
 window.onload = load;
 
-ready = true;
-
-
 /**************************************************************************************/
 
-var btn = document.getElementById('btn').onclick= function (){myPlay()}
-var btn2 = document.getElementById('btn2').onclick= function (){myPlay2()}
+// var btn = document.getElementById('btn').onclick= function (){myPlay()}
+// var btn2 = document.getElementById('btn2').onclick= function (){myPlay2()}
 function myPlay()
 {
     console.log("masuk")
