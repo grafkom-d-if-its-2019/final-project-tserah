@@ -12,6 +12,7 @@ import Multiplayer from './js/Multiplayer';
 
 Handler.init();
 Multiplayer.init();
+let finish = false;
 /*****************************
  * Socket Client
  *****************************/
@@ -31,8 +32,10 @@ Multiplayer.socket.on('controller', control => {
 });
 
 Multiplayer.socket.on('close', emission=>{
-    console.log('User'+emission.name+' left the game');
-    Multiplayer.players[emission.name].gameover(emission.name);
+    console.log('User '+emission.name+' left the game');
+    Multiplayer.players[emission.name].gameover(emission.name, true);
+    finish = true;
+    delete Multiplayer.players[emission.name];
 });
 
 var test_username = "";
@@ -120,6 +123,15 @@ function append() {
 }
 
 /****************************************************************************************/
+
+/*******************************************
+ * HTML Section
+ *******************************************/
+
+if()
+ document.getElementById('overview').innerHTML();
+
+ /**************************************************************************************/
 
 function testObjects() {
     Handler.drawWalls();

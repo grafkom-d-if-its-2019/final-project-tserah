@@ -6,18 +6,18 @@ var name;
 function buttonhold(btn, action, delay) {
 	var t;
 
-    var repeat = function (e) {
-        action(e);
-        t = setTimeout(repeat, delay);
-    }
+	var repeat = function (e) {
+		action(e);
+		t = setTimeout(repeat, delay);
+	}
 
-    btn.ontouchstart = function(e) {
-        repeat(e);
-    }
+	btn.ontouchstart = function (e) {
+		repeat(e);
+	}
 
-    btn.ontouchend = function (e) {
-        clearTimeout(t);
-    }
+	btn.ontouchend = function (e) {
+		clearTimeout(t);
+	}
 };
 
 function leftController(e) {
@@ -38,13 +38,13 @@ function backwardController(e) {
 
 function main() {
 	// Event emitters
-	buttonhold(document.getElementById('left'), function(e){
+	buttonhold(document.getElementById('left'), function (e) {
 		leftController(e);
 	}, 100);
-	buttonhold(document.getElementById('right'), function(e){
+	buttonhold(document.getElementById('right'), function (e) {
 		rightController(e);
 	}, 100);
-	buttonhold(document.getElementById('forward'), function(e){
+	buttonhold(document.getElementById('forward'), function (e) {
 		forwardController(e);
 	}, 100);
 
@@ -54,16 +54,22 @@ function main() {
 		console.log("Connected.", socket);
 		name = prompt("Nama:");
 		socket.emit("join", { name: name });
-		socket.emit('log', socket.connected);
-		window.onbeforeunload = (e) => {
-			e.preventDefault();
-			socket.emit('close', { name: name, action: 'close' });
-			socket.close();
-		};
+		socket.emit('connected', socket.connected);
+		// window.addEventListener('beforeunload', (e) => {
+		// 	e.preventDefault();
+			
+		// 	e.returnValue = '';
+		// });
+		socket.on('disconnect', function() {
+			socket.emit('close', { name: name, action: 'close', id: socket.id, socket: socket });
+			// socket.close();
+		});
 	});
-	// socket.on('log', function (emission) {
-	// 	console.log('Server Log:', emission);
-	// });
+	
+	socket.on('disconnect', function (){
+		socket.emit('close', { name: name, action: 'close', id: socket.id, socket: socket });
+		// socket.close();
+	});
 
 }
 

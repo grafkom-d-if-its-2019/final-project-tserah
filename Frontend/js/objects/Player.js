@@ -11,12 +11,13 @@ class Player {
      */
     constructor(name) {
         this.name = name;
+        this.finish = false;
 
         // Default position
         this.positioning = new Positioning(0, 0, 0, 0.1);
 
         // Default camera view
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // TODO: benerin
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.camera.rotateX(-Math.PI / 4);
         this.camera.updateProjectionMatrix();
 
@@ -43,7 +44,7 @@ class Player {
     }
 
     forward() {
-        this.positioning.speed += 0.2;
+        this.positioning.speed += 0.5;
     }
 
     left() {
@@ -59,16 +60,36 @@ class Player {
     }
 
     backward() {
-        this.positioning.speed -= 0.2;
+        this.positioning.speed -= 0.5;
     }
 
     // Freeze player
-    gameover(user) {
+    gameover(user="", finish=true) {
         this.positioning.speed = 0;
         this.positioning.x = 0;
         this.positioning.z = 0;
         this.positioning.orientation = 0;
-        console.log(user + ' GAME OVER');
+        this.finish = finish;
+
+        if(user!="" && finish)
+            console.log(user + ' GAME OVER');
+        else if(finish)
+            console.log("GAME OVER");
+        
+        Multiplayer.players.forEach((val, idx)=>{
+            this.winner(val);
+        });
+    }
+
+    winner(user=""){
+        this.positioning.speed = 0;
+        this.positioning.x = 0;
+        this.positioning.z = 0;
+        this.positioning.orientation = 0;
+
+        if (user != "" && this.finish)
+            console.log(user + ' WIN');
+        
     }
 
 }

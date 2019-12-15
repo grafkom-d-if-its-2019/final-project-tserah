@@ -94,12 +94,14 @@ class Snake {
     this.body.forEach((bodyMember, index) => {
       bodyMember.destroy();
     });
+    this.player.gameover();
   }
   onCollideWithWall() {
     console.log("TABRAK TEMBOK snake.js");
     this.body.forEach((bodyMember, index) => {
       bodyMember.destroy();
     });
+    this.player.gameover();
   }
 }
 
