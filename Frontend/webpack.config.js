@@ -38,10 +38,10 @@ module.exports = {
     },
     plugins: [
         new WebpackBar(),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        })
+        // new webpack.ProvidePlugin({
+        //     $: "jquery",
+        //     jQuery: "jquery"
+        // })
     ],
     externals: {
         jquery: 'jQuery'
