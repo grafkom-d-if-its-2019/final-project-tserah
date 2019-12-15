@@ -67,7 +67,6 @@ var keys = {
 };
 
 var keyActions = {
-    // TODO: delete on prod
     // Decrease speed
     'backward': {
         enabled: true,
