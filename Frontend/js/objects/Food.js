@@ -3,6 +3,7 @@ import Drawable from "./Drawable";
 import Positioning from "./Positioning";
 import Handler from "./Handler";
 import SnakeBody from "./SnakeBody";
+import THREECache from "../THREECache";
 
 export default class Food extends Drawable {
   /**
@@ -12,8 +13,8 @@ export default class Food extends Drawable {
   constructor(positioning) {
     var texture = new THREE.TextureLoader().load("../assets/2.png");
     super(
-      new THREE.SphereBufferGeometry(0.3, 32, 32),
-      new THREE.MeshBasicMaterial({ map: texture })
+      THREECache.get("FoodGeometry") || THREECache.set("FoodGeometry", new THREE.SphereBufferGeometry(0.3, 32, 32)),
+      THREECache.get("FoodMaterial") || THREECache.set("FoodMaterial", new THREE.MeshLambertMaterial({ map: texture }))
     );
     this.position.setX(positioning.x);
     this.position.setY(0.2);
