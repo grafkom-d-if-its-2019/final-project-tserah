@@ -149,6 +149,7 @@ const load = ()=>{
 }
 window.onload = load;
 
+ready = true;
 
 
 /**************************************************************************************/
@@ -165,9 +166,6 @@ function testObjects() {
     Handler.drawWalls();
     Handler.loadGTLF();
     Handler.loadSky();
-    var btn = document.getElementById('btn');
-    document.addEventListener(btn,myPlay,false);
-    btn.click();
     console.log("Loading map...");
     // Multiplayer.newPlayer(username);
     
