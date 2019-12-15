@@ -131,16 +131,26 @@ function append() {
 // // if()
 //  document.getElementById('overview').innerHTML();
 
- /**************************************************************************************/
+/**************************************************************************************/
+
+var btn = document.getElementById('btn').onclick= function (){myPlay()}
+
+function myPlay()
+{
+    console.log("masuk")
+    Handler.addBGM(1);
+}
 
 function testObjects() {
     Handler.drawWalls();
     Handler.loadGTLF();
     Handler.loadSky();
-    Handler.addBGM(1); 
+    var btn = document.getElementById('btn');
+    document.addEventListener(btn,myPlay,false);
+    btn.click();
     console.log("Loading map...");
     // Multiplayer.newPlayer(username);
-
+    
     window.Handler = Handler;
 
     // Controller Camera
