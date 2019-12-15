@@ -144,6 +144,10 @@ export default class Handler {
     this.viewports.push(drawer);
   }
 
+  static resetViewport() {
+    this.viewports = new Array();
+  }
+
   static registerFrameCallback(callback) {
     if (callback instanceof Function) {
       this.frameRefreshCallbacks.push(callback);
