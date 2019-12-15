@@ -61,4 +61,10 @@ export default class Multiplayer {
 		}, 1000);
 	}
 
+	static gameOver(name){
+		console.log('From player: [Game over] '+name);
+		this.socket.emit('gameover', name);
+		delete this.players[name];
+	}
+
 }

@@ -31,11 +31,11 @@ Multiplayer.socket.on('controller', control => {
     }
 });
 
+// User left the game
 Multiplayer.socket.on('close', emission=>{
     console.log('User '+emission.name+' left the game');
-    Multiplayer.players[emission.name].gameover(emission.name, true);
     finish = true;
-    delete Multiplayer.players[emission.name];
+    Multiplayer.players[emission.name].gameover(emission.name, finish);
 });
 
 var test_username = "";

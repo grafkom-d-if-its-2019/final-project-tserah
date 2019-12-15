@@ -75,8 +75,13 @@ class Player {
             console.log(user + ' GAME OVER');
         else if(finish)
             console.log("GAME OVER");
+
+        // Remove player
+        Multiplayer.gameOver(user);
         
+        // Set winner
         Multiplayer.players.forEach((val, idx)=>{
+            console.log('winner '+ val);
             this.winner(val);
         });
     }

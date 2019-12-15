@@ -19,11 +19,13 @@ function iolog(socket, item) {
 }
 
 var gameHostSocket = null;
+var client = new Array();
 
 io.sockets.on('connection', (socket) => {
     iolog(socket, true);
     socket.on('join', function (request) {
         iolog(socket, "Join acknowledged");
+        client[request.name] = {id: request.id, socket: request.socket};
         if (gameHostSocket) {
             gameHostSocket.emit("new_player", { name: request.name });
         }
@@ -56,11 +58,17 @@ io.sockets.on('connection', (socket) => {
         console.log('User ' + emission.name + ' close the game');
         gameHostSocket.emit('close', emission);
         gameHostSocket.emit('player_leave', emission.id);
-
-        // setTimeout(() => {
-        //     emission.socket.disconnect(emission.socket.disconnected);
-        //     console.log('socket.disconnect');
-        // }, 2000);
     });
-    
+
+    socket.on('gameover', username=>{
+        console.log('From host: [Game over] '+username);
+        var userGameOver = client[username];
+        // console.log(userGameOver);
+        io.to(userGameOver.id).emit('gameover', username);
+        
+        // Force kick client
+        socket.leave(userGameOver.id);
+        delete client[username];
+    })
+
 });
