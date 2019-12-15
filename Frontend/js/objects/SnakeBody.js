@@ -4,6 +4,7 @@ import Snake from "./Snake";
 import Food from "./Food";
 import Positioning from "./Positioning";
 import Wall from "./Wall";
+import THREECache from "../THREECache";
 
 class SnakeBody extends Drawable {
   /**
@@ -15,8 +16,8 @@ class SnakeBody extends Drawable {
     // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
     var texture = new THREE.TextureLoader().load("../assets/images.jpeg");
     super(
-      new THREE.SphereBufferGeometry(0.5, 100, 100),
-      new THREE.MeshBasicMaterial({ map: texture })
+      THREECache.get("SnakeBodyGeometry") || THREECache.set("SnakeBodyGeometry", new THREE.SphereBufferGeometry(0.5, 100, 100)),
+      THREECache.get("SnakeBodyMaterial") || THREECache.set("SnakeBodyMaterial", new THREE.MeshLambertMaterial({ map: texture }))
     ); // TODO: implement
 
     if (snake == null) {
@@ -40,13 +41,13 @@ class SnakeBody extends Drawable {
       this.snake.onCollideWithFood();
       return true;
     } else if (drawable instanceof SnakeBody) {
-      // let index1 =this.snake.body.indexOf(drawable);
-      // let index2 =this.snake.body.indexOf(this);
-      // let delta=index2-index1;
-      // delta = delta*delta;
-      // if((index1 == -1 || (delta != 1)) && index2 == 0){
-      //     this.snake.onCollideWithSnake(drawable, this);
-      // }
+      let index1 =this.snake.body.indexOf(drawable);
+      let index2 =this.snake.body.indexOf(this);
+      let delta=index2-index1;
+      delta = delta*delta;
+      if((index1 == -1 || (delta != 1)) && index2 == 0){
+          this.snake.onCollideWithSnake(drawable, this);
+      }
 
       if (this.snake != drawable.snake && this == this.snake.body[0]) {
         this.snake.onCollideWithSnake();
