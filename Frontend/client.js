@@ -54,6 +54,7 @@ function main() {
 		backwardController(e);
 	}, 100);
 
+	// Handle credits
 	$('#btnCredits').click(()=>{
 		$('#credits').modal({
 			keyboard: false,
@@ -97,8 +98,17 @@ function main() {
 		socket.close();
 	});
 
+	// Limit user
 	socket.on('full', msg=>{
-		window.alert(msg);
+		// window.alert(msg);
+		$('#fullModal').modal({
+			keyboard: false,
+			focus: true,
+			backdrop: 'static',
+		})
+		$('#fullModal').html = msg;
+		$('#fullModal').modal('show');
+		
 		socket.close();
 	});
 
