@@ -79,6 +79,7 @@ class Player {
         // Remove player
         Multiplayer.gameOver(user);
         
+        console.log(Multiplayer.players);
         // Set winner
         Multiplayer.players.forEach((val, idx)=>{
             console.log('winner '+ val);
