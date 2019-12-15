@@ -15,7 +15,7 @@ import Multiplayer from './js/Multiplayer';
 Handler.init();
 Multiplayer.init();
 let finish = false;
-let ready = false;
+let ready = true;
 /*****************************
  * Socket Client
  *****************************/

@@ -6,7 +6,7 @@ import Positioning from "./Positioning";
 import Wall from "./Wall";
 import { X_AXIS, Y_AXIS, Z_AXIS } from "../Constants";
 import THREECache from "../THREECache"
-import {ColladaLoader} from 'three/examples/jsm/loaders/ColladaLoader';
+import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader';
 
 
 function removeArr(arr) {
@@ -45,17 +45,21 @@ export default class Handler {
 
   static init() {
     this.scene = new THREE.Scene();
-    // var light = new THREE.PointLight(0xffffff, 25, 50);
-    // light.position.y = 25;
-    // this.scene.add(light);
+    var pointLight = new THREE.PointLight(0xffffff, 3, 50);
+    pointLight.position.y = 25;
+    this.scene.add(pointLight);
+    var directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    this.scene.add(directionalLight);
+    var ambientLight = new THREE.AmbientLight(0x999999); // soft white light
+    this.scene.add(ambientLight);
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(window.innerWidth - 10, window.innerHeight - 2);
     document.body.appendChild(this.renderer.domElement);
 
-    var spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.position.set(0, 50, 0);
-    spotLight.intensity = 3;
-    this.scene.add(spotLight);
+    // var spotLight = new THREE.SpotLight(0xffffff);
+    // spotLight.position.set(0, 50, 0);
+    // spotLight.intensity = 3;
+    // this.scene.add(spotLight);
 
     this.viewports = new Array();
     // this.addBGM = this.addBGM.bind(this);
@@ -168,42 +172,42 @@ export default class Handler {
     new Food(new Positioning(coor, coor2, 0, 0)); // TODO: implement
   }
 
-  static addBGM(input){
-    if(input==1){
+  static addBGM(input) {
+    if (input == 1) {
       this.bgm = new Audio('../assets/gagak.mp3');
       this.bgm.volume = 0.3;
       this.bgm.loop = true;
       this.bgm.play();
       // this.bgm.muted = false;
     }
-    else{
+    else {
       this.bgm.pause();
     }
   }
-  static loadGTLF(){
+  static loadGTLF() {
     var loader = new ColladaLoader();
-        loader.load("../assets/SpaceShip.dae",  (result) => {
-          this.scene.add(result.scene);
-          result.scene.position.y = 10;
-          result.scene.position.z = 30;
-          result.scene.position.x = 5;  
-          result.scene.rotation.z = 2;
-          result.scene.scale.set(1,1,1);
-          window.space = result.scene;
+    loader.load("../assets/SpaceShip.dae", (result) => {
+      this.scene.add(result.scene);
+      result.scene.position.y = 10;
+      result.scene.position.z = 30;
+      result.scene.position.x = 5;
+      result.scene.rotation.z = 2;
+      result.scene.scale.set(1, 1, 1);
+      window.space = result.scene;
 
     });
   };
 
-  static loadSky(){
-    var loader  = new THREE.TextureLoader(),
-    texture = loader.load( "../assets/sky.jpg" );
-    var geometry = new THREE.SphereGeometry( 100, 32, 32 );
-    var material = new THREE.MeshBasicMaterial( {map: texture, side: THREE.DoubleSide} );
-    var plane = new THREE.Mesh( geometry, material );
-    this.scene.add( plane );
+  static loadSky() {
+    var loader = new THREE.TextureLoader(),
+      texture = loader.load("../assets/sky.jpg");
+    var geometry = new THREE.SphereGeometry(100, 32, 32);
+    var material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
+    var plane = new THREE.Mesh(geometry, material);
+    this.scene.add(plane);
     plane.position.y = 10;
   };
-  
+
 
   static checkCollision() {
     this.getDrawables().forEach(drawable => {
