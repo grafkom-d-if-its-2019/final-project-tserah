@@ -30,9 +30,7 @@ export default class Multiplayer {
 			console.log("Connected.", this.socket);
 			this.socket.emit("iamhost");
 		}).bind(this));
-		this.socket.on('log', function (emission) {
-			console.log('Server Log:', emission);
-		});
+
 		this.socket.on('new_player', function (request) {
 			console.log("Player " + request.name + ' tries to join');
 			// this.name
@@ -49,6 +47,7 @@ export default class Multiplayer {
 	static newPlayer(name) {
 		this.name = name;
 		this.players[name] = new Player(name);
+		// Default speed
 		this.players[name].positioning.speed = 3;
 		this.position = this.players[name].positioning;
 
@@ -60,6 +59,12 @@ export default class Multiplayer {
 		setTimeout(function(){
 			Handler.generateFood();
 		}, 1000);
+	}
+
+	static gameOver(name){
+		console.log('From player: [Game over] '+name);
+		this.socket.emit('gameover', name);
+		delete this.players[name];
 	}
 
 }
