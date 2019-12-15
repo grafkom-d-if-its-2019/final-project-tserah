@@ -42,7 +42,8 @@ Multiplayer.socket.on('close', emission=>{
 });
 
 Multiplayer.socket.on('ready', status=>{
-    ready = true;
+    ready = status;
+    console.log(status);
     $('#overlay').modal('hide');
 });
 
@@ -136,6 +137,7 @@ function append() {
  * HTML Section
  *******************************************/
 const load = ()=>{
+    $('#ipaddr').html(window.location.hostname+'/client');
     if(!ready){
         $('#overlay').modal({
             keyboard: false,
@@ -157,7 +159,7 @@ function testObjects() {
     Handler.drawWalls();
     Handler.loadGTLF();
     Handler.loadSky();
-    Handler.addBGM(1); 
+    // Handler.addBGM(1); 
     console.log("Loading map...");
     // Multiplayer.newPlayer(username);
 
