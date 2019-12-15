@@ -4,6 +4,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Snake 3D | FP GRAFKOM</title>
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<style>
 		body {
 			margin: 0;
@@ -16,7 +19,38 @@
 	</style>
 </head>
 
-<body> 
+<body>
+	<div class="modal fade" id="overlay" tabindex="-1" role="dialog" aria-labelledby="overlayTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content ">
+				<div class="modal-header text-center">
+					<h5 class="modal-title" id="overlayTitle">Snake 3D</h5>
+				</div>
+				<div class="modal-body text-center text-justify">
+					<div class="container">
+						<h2>How to Play:</h2>
+						<ul class="list-group">
+							<li class="list-group-item bg-dark text-white my-2">Visit <b>{IP Address}:5000/client</b></li>
+							<li class="list-group-item bg-dark text-white">Enter your name</li>
+							<li class="list-group-item bg-dark text-white my-2">Enjoy the game</li>
+						</ul>
+					</div>
+				</div>
+				<div class="text-center my-4">
+					<button class="btn btn-primary" type="button" disabled>
+						<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						Waiting Player...
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="overview"></div>
+	<div id="player1"></div>
+	<div id="player2"></div>
+	
 	<script type="module" src="dist/main.js"></script>
 	<button type="button" id="btn"></button>
 </body>

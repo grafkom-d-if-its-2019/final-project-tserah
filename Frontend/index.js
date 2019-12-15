@@ -1,8 +1,10 @@
+import $ from 'jquery';
+import 'popper.js';
+import 'bootstrap';
 import * as THREE from 'three';
 import Handler from './js/objects/Handler';
 import Drawable from './js/objects/Drawable';
 import Viewport from './js/objects/Viewport';
-import io from 'socket.io-client';
 import Wall from './js/objects/Wall';
 import { X_AXIS, Y_AXIS, Z_AXIS } from './js/Constants';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -13,6 +15,7 @@ import Multiplayer from './js/Multiplayer';
 Handler.init();
 Multiplayer.init();
 let finish = false;
+let ready = false;
 /*****************************
  * Socket Client
  *****************************/
@@ -36,6 +39,11 @@ Multiplayer.socket.on('close', emission=>{
     console.log('User '+emission.name+' left the game');
     finish = true;
     Multiplayer.players[emission.name].gameover(emission.name, finish);
+});
+
+Multiplayer.socket.on('ready', status=>{
+    ready = true;
+    $('#overlay').modal('hide');
 });
 
 var test_username = "";
@@ -127,9 +135,21 @@ function append() {
 /*******************************************
  * HTML Section
  *******************************************/
+const load = ()=>{
+    if(!ready){
+        $('#overlay').modal({
+            keyboard: false,
+            focus: true,
+            backdrop: 'static',
+        })
+        $('#overlay').modal('show');
+    }else{
+        $('#overlay').modal('hide');
+    }
+}
+window.onload = load;
 
-// // if()
-//  document.getElementById('overview').innerHTML();
+
 
 /**************************************************************************************/
 

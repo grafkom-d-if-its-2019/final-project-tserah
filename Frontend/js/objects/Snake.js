@@ -68,7 +68,7 @@ class Snake {
           0,
           0
         ),
-        35,
+        10,
         this.body.length
       )
     );
