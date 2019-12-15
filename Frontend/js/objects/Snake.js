@@ -12,8 +12,8 @@ class Snake {
     /** @type {SnakeBody[]} */
     this.body = new Array();
     this.player = player;
-    let coor = Math.floor(Math.random() * 23) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
-    let coor2 = Math.floor(Math.random() * 23) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
+    let coor = Math.floor(Math.random() * 10) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
+    let coor2 = Math.floor(Math.random() * 10) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
     let head = new SnakeBody(this, new Positioning(coor, coor2, 0, 0)); // TODO: randomize
     this.body.push(head);
     window.head = head;
