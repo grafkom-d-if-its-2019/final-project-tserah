@@ -1,6 +1,8 @@
 const path = require('path');
 
 const WebpackBar = require('webpackbar');
+const webpack = require('webpack');
+const jquery = require('jquery');
 
 module.exports = {
     mode: 'development',
@@ -38,12 +40,12 @@ module.exports = {
     },
     plugins: [
         new WebpackBar(),
-        // new webpack.ProvidePlugin({
-        //     $: "jquery",
-        //     jQuery: "jquery"
-        // })
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ],
-    externals: {
-        jquery: 'jQuery'
-    }
+    // externals: {
+    //     jquery: 'jQuery'
+    // }
 };
