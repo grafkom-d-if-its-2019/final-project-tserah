@@ -65,9 +65,6 @@ function main() {
 
 	socket.on('connect', function () {
 		console.log("Connected.", socket);
-		name = prompt("Nama:");
-		socket.emit("join", { name: name, id: socket.id });
-		socket.emit('connected', socket.connected);
 		// window.addEventListener('beforeunload', (e) => {
 		// 	e.preventDefault();
 
