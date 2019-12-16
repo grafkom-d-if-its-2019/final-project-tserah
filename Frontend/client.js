@@ -111,7 +111,7 @@ function main() {
 			focus: true,
 			backdrop: 'static',
 		})
-		$('#fullModal').html = msg;
+		$('#fullInfo').html = msg;
 		$('#fullModal').modal('show');
 		
 		socket.close();
