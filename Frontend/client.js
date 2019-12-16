@@ -112,10 +112,10 @@ function main() {
 		socket.close();
 	});
 
-	// socket.on('disconnect', function () {
-	// 	// socket.emit('close', { name: name, action: 'close', id: socket.id, socket: socket });
-	// 	// socket.close();
-	// });
+	socket.on('disconnect', function () {
+		socket.emit('close', { name: name, action: 'close', id: socket.id, socket: socket });
+		socket.close();
+	});
 
 }
 

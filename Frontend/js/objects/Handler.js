@@ -187,13 +187,53 @@ export default class Handler {
     var loader = new ColladaLoader();
     loader.load("../assets/SpaceShip.dae", (result) => {
       this.scene.add(result.scene);
-      result.scene.position.y = 10;
-      result.scene.position.z = 30;
-      result.scene.position.x = 5;
+      result.scene.position.y = -15;
+      result.scene.position.z = 0;
+      result.scene.position.x = 0;
       result.scene.rotation.z = 2;
       result.scene.scale.set(1, 1, 1);
       window.space = result.scene;
 
+    });
+
+    loader.load("../assets/SpaceShip.dae", (result) => {
+      this.scene.add(result.scene);
+      result.scene.position.y = 5;
+      result.scene.position.z =30;
+      result.scene.position.x = 30;
+      result.scene.rotation.z = 2;
+      result.scene.scale.set(1, 1, 1);
+      window.space2 = result.scene;
+    });
+
+    loader.load("../assets/SpaceShip.dae", (result) => {
+      this.scene.add(result.scene);
+      result.scene.position.y = 5;
+      result.scene.position.z = -30;
+      result.scene.position.x = 30;
+      result.scene.rotation.z = 2;
+      result.scene.scale.set(1, 1, 1);
+      window.space2 = result.scene;
+    });
+
+    loader.load("../assets/SpaceShip.dae", (result) => {
+      this.scene.add(result.scene);
+      result.scene.position.y = 5;
+      result.scene.position.z = 30;
+      result.scene.position.x = -30;
+      result.scene.rotation.z = 2;
+      result.scene.scale.set(1, 1, 1);
+      window.space2 = result.scene;
+    });
+
+    loader.load("../assets/SpaceShip.dae", (result) => {
+      this.scene.add(result.scene);
+      result.scene.position.y = 5;
+      result.scene.position.z = -30;
+      result.scene.position.x = -30;
+      result.scene.rotation.z = 2;
+      result.scene.scale.set(1, 1, 1);
+      window.space2 = result.scene;
     });
   };
 

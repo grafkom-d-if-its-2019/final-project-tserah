@@ -12,15 +12,18 @@ export default class Wall extends Drawable {
      * @param {Number} height 
      */
     constructor(width, height, faceAxis) {
-        let texture = new THREE.TextureLoader().load('../assets/metal.jfif');
+        let texture = new THREE.TextureLoader().load('../assets/red-grid.svg');
         let texture2 = new THREE.TextureLoader().load('../assets/3.jpg');
+        let material = new THREE.MeshStandardMaterial({ map : texture });
+        material.transparent = true;
+        material.opacity = 0.7;
 
         switch (faceAxis) {
             case X_AXIS:
                 super(new THREE.BoxBufferGeometry(.1, width, height), new THREE.MeshLambertMaterial({ map : texture2 }));
                 break;
             case Y_AXIS:
-                super(new THREE.BoxBufferGeometry(width, .1, height), new THREE.MeshLambertMaterial({ map : texture }));
+                super(new THREE.BoxBufferGeometry(width, .1, height), material);
                 break;
             case Z_AXIS:
                 super(new THREE.BoxBufferGeometry(width, height, .1), new THREE.MeshLambertMaterial({ map : texture2 }));

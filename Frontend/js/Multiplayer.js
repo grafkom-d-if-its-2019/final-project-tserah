@@ -71,7 +71,6 @@ export default class Multiplayer {
 	static gameOver(name) {
 		console.log('From player: [Game over] ' + name);
 		this.socket.emit('gameover', name);
-		this.players = new Array();
 	}
 
 }
