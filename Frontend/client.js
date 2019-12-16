@@ -89,6 +89,11 @@ function main() {
 	socket.on('gameover', username => {
 		if (name == username) {
 			// window.alert('Game Over!');
+			$('#overlay').modal({
+				keyboard: false,
+				focus: true,
+				backdrop: 'static',
+			});
 			$('#overlay').modal('show');
 			socket.close();
 		}
