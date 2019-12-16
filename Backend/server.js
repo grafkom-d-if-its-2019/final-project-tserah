@@ -25,9 +25,18 @@ io.sockets.on('connection', (socket) => {
     iolog(socket, true);
     socket.on('join', function (request) {
         iolog(socket, "Join acknowledged");
+
+        // Save client
         client[request.name] = {id: request.id, socket: request.socket};
-        if (gameHostSocket) {
+        let countClient = Object.keys(client).length;
+
+        if (gameHostSocket && countClient <= 2) {
             gameHostSocket.emit("new_player", { name: request.name });
+            gameHostSocket.emit("ready", {name: request.name, status: true});
+        } else if (gameHostSocket && countClient > 2){ // Limit user
+            var user = client[request.name];
+            io.to(user.id).emit('full', 'Sorry, room is full. Currently, only 2 players can play the game.');
+            console.log('Room is full');
         }
         else {
             console.log('GameHost is disconnect. Please refresh host page.');

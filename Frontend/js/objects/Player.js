@@ -14,7 +14,9 @@ class Player {
         this.finish = false;
 
         // Default position
-        this.positioning = new Positioning(0, 0, 0, 0.1);
+        let coor = Math.floor(Math.random() * 23) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
+        let coor2 = Math.floor(Math.random() * 23) * (Math.floor(Math.random() * 2) == 1 ? 1 : -1);
+        this.positioning = new Positioning(coor, 0, coor2, 0.1);
 
         // Default camera view
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -61,7 +63,7 @@ class Player {
 
     backward() {
         if (this.positioning.speed > 10)
-            this.positioning.speed -= 0.5;
+            this.positioning.speed -= 1;
     }
 
     // Freeze player

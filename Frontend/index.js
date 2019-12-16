@@ -35,15 +35,20 @@ Multiplayer.socket.on('controller', control => {
 });
 
 // User left the game
-Multiplayer.socket.on('close', emission=>{
-    console.log('User '+emission.name+' left the game');
+Multiplayer.socket.on('close', emission => {
+    console.log('User ' + emission.name + ' left the game');
     finish = true;
     Multiplayer.players[emission.name].gameover(emission.name, finish);
 });
 
-Multiplayer.socket.on('ready', status=>{
-    ready = true;
+Multiplayer.socket.on('ready', status => {
+    ready = status.status;
+    // console.log(Player.name + status);
     $('#overlay').modal('hide');
+
+    $('.toast-body').html(status.name + ' join the game.');
+    $('.toast').toast({ delay: 5000 });
+    $('.toast').toast('show');
 });
 
 var test_username = "";
@@ -62,7 +67,6 @@ var keys = {
 };
 
 var keyActions = {
-    // TODO: delete on prod
     // Decrease speed
     'backward': {
         enabled: true,
@@ -135,36 +139,31 @@ function append() {
 /*******************************************
  * HTML Section
  *******************************************/
-const load = ()=>{
-    if(!ready){
+const load = () => {
+    $('#ipaddr').html(window.location.hostname + '/client');
+    if (!ready) {
         $('#overlay').modal({
             keyboard: false,
             focus: true,
             backdrop: 'static',
         })
         $('#overlay').modal('show');
-    }else{
+    } else {
         $('#overlay').modal('hide');
     }
 }
 window.onload = load;
-
-ready = true;
-
+document.getElementById('btn').onclick = function () { myPlay() }
+document.getElementById('btn2').onclick = function () { myPlay2() }
 
 /**************************************************************************************/
 
-var btn = document.getElementById('btn').onclick= function (){myPlay()}
-var btn2 = document.getElementById('btn2').onclick= function (){myPlay2()}
-function myPlay()
-{
-    console.log("masuk")
+
+function myPlay() {
     Handler.addBGM(1);
 }
 
-function myPlay2()
-{
-    console.log("keluar")
+function myPlay2() {
     Handler.addBGM(2);
 }
 
@@ -174,7 +173,7 @@ function testObjects() {
     Handler.loadSky();
     console.log("Loading map...");
     // Multiplayer.newPlayer(username);
-    
+
     window.Handler = Handler;
 
     // Controller Camera

@@ -14,10 +14,10 @@ class SnakeBody extends Drawable {
    */
   constructor(snake, positioning, _delay, index = 0) {
     // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
-    var texture = new THREE.TextureLoader().load("../assets/images.jpeg");
+    var texture = new THREE.TextureLoader().load("../assets/robot.jpeg");
     super(
       THREECache.get("SnakeBodyGeometry") || THREECache.set("SnakeBodyGeometry", new THREE.SphereBufferGeometry(0.5, 100, 100)),
-      THREECache.get("SnakeBodyMaterial") || THREECache.set("SnakeBodyMaterial", new THREE.MeshLambertMaterial({ map: texture }))
+      THREECache.get("SnakeBodyMaterial") || THREECache.set("SnakeBodyMaterial", new THREE.MeshPhongMaterial({ map: texture }))
     ); // TODO: implement
 
     if (snake == null) {
