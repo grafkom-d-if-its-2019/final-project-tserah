@@ -14,7 +14,7 @@ class SnakeBody extends Drawable {
    */
   constructor(snake, positioning, _delay, index = 0) {
     // var texture = new THREE.TextureLoader().load( '../assets/skinn3.png' );
-    var texture = new THREE.TextureLoader().load("../assets/robot.jpeg");
+    var texture = new THREE.TextureLoader().load("../assets/jijik.jpg");
     super(
       THREECache.get("SnakeBodyGeometry") || THREECache.set("SnakeBodyGeometry", new THREE.SphereBufferGeometry(0.5, 100, 100)),
       THREECache.get("SnakeBodyMaterial") || THREECache.set("SnakeBodyMaterial", new THREE.MeshPhongMaterial({ map: texture }))
