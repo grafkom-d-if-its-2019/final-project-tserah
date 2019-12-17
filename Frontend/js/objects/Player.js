@@ -82,9 +82,8 @@ class Player {
         // Remove player
         Multiplayer.gameOver(user);
         // Set winner
-        Multiplayer.players.forEach((val, idx) => {
-            console.log('winner ' + val);
-            this.winner(val);
+        Object.keys(Multiplayer.players).forEach((name) => {
+            if (name != user) player.winner(Multiplayer.players[name].winner(name));
         });
     }
 
@@ -94,8 +93,11 @@ class Player {
         this.positioning.z = 0;
         this.positioning.orientation = 0;
 
-        if (user != "" && this.finish)
+        if (user != "") {
             console.log(user + ' WIN');
+            window.document.getElementById('winner').innerHTML = user;
+            window.document.getElementById('overlaywinner').style.display = "inherit";
+        }
 
     }
 

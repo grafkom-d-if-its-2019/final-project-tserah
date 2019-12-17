@@ -1,4 +1,7 @@
 import io from 'socket.io-client';
+import $ from 'jquery';
+import 'popper.js';
+import 'bootstrap';
 
 var socket = io('http://' + window.location.hostname + ':8000');
 var name;
@@ -51,6 +54,16 @@ function main() {
 		backwardController(e);
 	}, 100);
 
+	// Handle credits
+	$('#btnCredits').click(()=>{
+		$('#credits').modal({
+			keyboard: false,
+			focus: true,
+			backdrop: 'static',
+		})
+		$('#credits').modal('show');
+	});
+
 	document.getElementById('joinbtn').onclick = function () {
 		name = prompt("Nama:");
 		if (name != null) {
@@ -75,7 +88,13 @@ function main() {
 	// Kalau nabrak dan mati
 	socket.on('gameover', username => {
 		if (name == username) {
-			window.alert('Game Over!');
+			// window.alert('Game Over!');
+			$('#overlay').modal({
+				keyboard: false,
+				focus: true,
+				backdrop: 'static',
+			});
+			$('#overlay').modal('show');
 			socket.close();
 		}
 		// console.log("resetting view");
@@ -84,10 +103,24 @@ function main() {
 		socket.close();
 	});
 
-	// socket.on('disconnect', function () {
-	// 	// socket.emit('close', { name: name, action: 'close', id: socket.id, socket: socket });
-	// 	// socket.close();
-	// });
+	// Limit user
+	socket.on('full', msg=>{
+		// window.alert(msg);
+		$('#fullModal').modal({
+			keyboard: false,
+			focus: true,
+			backdrop: 'static',
+		})
+		$('#fullInfo').html = msg;
+		$('#fullModal').modal('show');
+		
+		socket.close();
+	});
+
+	socket.on('disconnect', function () {
+		socket.emit('close', { name: name, action: 'close', id: socket.id, socket: socket });
+		socket.close();
+	});
 
 }
 
